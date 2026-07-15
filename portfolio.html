@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<title>RASTCAR · Portfólio</title>
+<style>
+  :root{ --w:297mm; --h:210mm; --pp:70px; --ink:#141209; --mut:#5f5a4f; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  html,body{background:#000;}
+  @page{ size:297mm 210mm; margin:0; }
+  .page{position:relative;width:var(--w);height:var(--h);overflow:hidden;
+    page-break-after:always;break-after:page;background:#EDEAE2;color:var(--ink);font-family:'Archivo',sans-serif;}
+  .page:last-child{page-break-after:auto;break-after:auto;}
+
+  .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+  /* light scrims keep ink text crisp over bright photos (no panels, no seams) */
+  .scrim{position:absolute;inset:0;}
+  .scrim.tl{background:linear-gradient(160deg,rgba(247,245,239,.94) 0%,rgba(247,245,239,.55) 30%,rgba(247,245,239,0) 58%);}
+  .scrim.bl{background:linear-gradient(20deg,rgba(247,245,239,.94) 0%,rgba(247,245,239,.5) 32%,rgba(247,245,239,0) 60%);}
+  .scrim.ctr{background:radial-gradient(110% 90% at 50% 46%,rgba(247,245,239,.66) 0%,rgba(247,245,239,.1) 60%);}
+  .scrim.top{background:linear-gradient(180deg,rgba(247,245,239,.9) 0%,rgba(247,245,239,.3) 26%,rgba(247,245,239,0) 50%);}
+
+  .layer{position:absolute;inset:60px var(--pp);display:flex;flex-direction:column;z-index:5;}
+  .bottom{justify-content:flex-end;} .top{justify-content:flex-start;} .mid{justify-content:center;}
+  .ctr{align-items:center;text-align:center;}
+
+  .ey{font-family:'Roboto Mono',monospace;font-weight:500;font-size:16px;letter-spacing:.34em;text-transform:uppercase;color:var(--mut);}
+  .disp{font-family:'D-DIN',sans-serif;font-weight:700;line-height:.98;letter-spacing:-.6px;text-shadow:0 1px 16px rgba(247,245,239,.55);}
+  .h{font-size:70px;} .hbig{font-size:92px;}
+  .sub{margin-top:14px;font-family:'D-DIN';font-weight:700;font-size:34px;letter-spacing:-.3px;color:#2a271f;}
+  .lede{margin-top:16px;font-family:'Archivo';font-weight:500;font-size:23px;line-height:1.42;color:#332f26;max-width:54%;text-shadow:0 1px 12px rgba(247,245,239,.6);}
+
+  .runhead,.runfoot{position:absolute;left:var(--pp);right:var(--pp);display:flex;justify-content:space-between;z-index:6;}
+  .runhead{top:40px;} .runfoot{bottom:36px;}
+  .kic{font-family:'Roboto Mono',monospace;font-weight:500;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--mut);}
+
+  .specs{margin-top:22px;display:flex;gap:34px;flex-wrap:wrap;}
+  .specs .s{font-family:'Roboto Mono',monospace;font-size:16px;color:#2c2920;display:flex;align-items:center;gap:11px;}
+  .specs .s::before{content:"";width:20px;height:2px;background:var(--ink);opacity:.7;}
+
+  /* product hero over stage */
+  .phero{position:absolute;left:0;right:0;top:8%;bottom:0;display:flex;align-items:center;justify-content:center;z-index:3;}
+  .phero img{max-height:56%;max-width:56%;object-fit:contain;filter:drop-shadow(0 36px 44px rgba(0,0,0,.32));}
+  .pshadow{position:absolute;left:50%;top:63%;transform:translateX(-50%);width:360px;height:48px;background:radial-gradient(ellipse,rgba(0,0,0,.22),transparent 70%);filter:blur(8px);z-index:2;}
+
+  .nums{margin-top:30px;display:flex;gap:80px;}
+  .n .nv{font-family:'D-DIN';font-weight:700;font-size:98px;line-height:.84;letter-spacing:-2px;}
+  .n .nv small{font-size:36px;color:var(--mut);}
+  .n .nl{margin-top:12px;font-family:'Roboto Mono';font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--mut);}
+
+  .cv-mark{height:74px;}
+  .cv-tag{margin-top:26px;font-family:'D-DIN';font-weight:700;font-size:40px;letter-spacing:-.4px;line-height:1.02;color:var(--ink);}
+  .price{font-family:'D-DIN';font-weight:700;font-size:124px;line-height:.84;letter-spacing:-3px;}
+  .price small{font-size:40px;color:var(--mut);}
+  .incl{margin-top:24px;display:flex;gap:14px 32px;flex-wrap:wrap;max-width:66%;}
+  .incl span{font-family:'Roboto Mono';font-size:16px;color:#2c2920;}
+  .emblem{height:208px;filter:drop-shadow(0 16px 40px rgba(120,90,20,.28));}
+  .letter{margin-top:24px;font-family:'Archivo';font-weight:500;font-size:23px;line-height:1.5;color:#2f2c23;max-width:62%;text-shadow:0 1px 12px rgba(247,245,239,.6);}
+  .letter b{font-weight:700;color:var(--ink);}
+  .sign{margin-top:26px;font-family:'Roboto Mono';font-size:14px;letter-spacing:.26em;text-transform:uppercase;color:var(--mut);}
+</style>
+</head>
+<body>
+
+<!-- 01 CAPA -->
+<section class="page">
+  <img class="bg" src="assets/pf/L-cover.jpg" alt="">
+  <div class="scrim ctr"></div>
+  <div class="runhead"><span class="kic">RASTCAR · PORTFÓLIO</span><span class="kic">DESDE 2004</span></div>
+  <div class="layer mid ctr">
+    <img class="cv-mark" src="assets/wordmark-red.png" alt="RASTCAR">
+    <div class="cv-tag">Para quem não aceita<br>perder o que construiu.</div>
+  </div>
+  <div class="runfoot"><span class="kic">RASTREAMENTO · SEGURANÇA · DADOS</span><span class="kic">BRASIL E AMÉRICA LATINA</span></div>
+</section>
+
+<!-- 02 MANIFESTO -->
+<section class="page">
+  <img class="bg" src="assets/pf/L-fleet.jpg" alt="">
+  <div class="scrim bl"></div>
+  <div class="layer bottom">
+    <div class="ey">Quem somos</div>
+    <h1 class="disp hbig" style="margin-top:16px;">Dados.<br>O ativo mais valioso do mundo.</h1>
+    <p class="lede">Há 20 anos protegemos frotas e veículos no Brasil e em toda a América Latina.</p>
+  </div>
+  <div class="runfoot"><span class="kic">RASTCAR</span><span class="kic">02</span></div>
+</section>
+
+<!-- 03 RASTREADOR -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-a.jpg" alt="">
+  <div class="phero"><img src="assets/equip/cut/01-rastreador-4g.png" alt=""></div>
+  <div class="scrim top"></div>
+  <div class="runhead"><span class="kic">Equipamento · 01</span><span class="kic">RASTCAR · 03</span></div>
+  <div class="layer top">
+    <div class="ey">Rastreador 4G</div>
+    <h2 class="disp h" style="margin-top:12px;">Rastreador 4G.</h2>
+    <div class="sub">O coração do sistema.</div>
+    <div class="specs"><div class="s">Tempo real</div><div class="s">Bloqueio remoto</div><div class="s">Base da cerca virtual</div></div>
+  </div>
+</section>
+
+<!-- 04 CÂMERA -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-c.jpg" alt="">
+  <div class="phero"><img src="assets/equip/cut/11-camera-ia.png" alt=""></div>
+  <div class="scrim top"></div>
+  <div class="runhead"><span class="kic">Equipamento · 02</span><span class="kic">RASTCAR · 04</span></div>
+  <div class="layer top">
+    <div class="ey">Câmera com IA</div>
+    <h2 class="disp h" style="margin-top:12px;">Câmera com IA.</h2>
+    <div class="sub">Olhos que pensam.</div>
+    <div class="specs"><div class="s">Imagem do trajeto</div><div class="s">Eventos de condução</div><div class="s">Com rastreador integrado</div></div>
+  </div>
+</section>
+
+<!-- 05 ISCA -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-b.jpg" alt="">
+  <div class="phero"><img src="assets/equip/cut/04-isca.png" alt=""></div>
+  <div class="scrim top"></div>
+  <div class="runhead"><span class="kic">Equipamento · 03</span><span class="kic">RASTCAR · 05</span></div>
+  <div class="layer top">
+    <div class="ey">Isca</div>
+    <h2 class="disp h" style="margin-top:12px;">Isca.</h2>
+    <div class="sub">Rastreador oculto.</div>
+    <div class="specs"><div class="s">Instalação independente</div><div class="s">Redundância contra o furto</div><div class="s">Bateria de longa duração</div></div>
+  </div>
+</section>
+
+<!-- 06 BOTÃO DE PÂNICO -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-a.jpg" alt="">
+  <div class="phero"><img src="assets/equip/cut/05-panico.png" alt=""></div>
+  <div class="scrim top"></div>
+  <div class="runhead"><span class="kic">Equipamento · 04</span><span class="kic">RASTCAR · 06</span></div>
+  <div class="layer top">
+    <div class="ey">Botão de pânico</div>
+    <h2 class="disp h" style="margin-top:12px;">Botão de pânico.</h2>
+    <div class="sub">Discreto. Na hora certa.</div>
+    <div class="specs"><div class="s">Acionamento silencioso</div><div class="s">Alerta imediato à central</div></div>
+  </div>
+</section>
+
+<!-- 07 TRAVA DE BAÚ -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-b.jpg" alt="">
+  <div class="phero"><img src="assets/equip/cut/09-tic-tac.png" alt=""></div>
+  <div class="scrim top"></div>
+  <div class="runhead"><span class="kic">Equipamento · 05</span><span class="kic">RASTCAR · 07</span></div>
+  <div class="layer top">
+    <div class="ey">Trava de baú</div>
+    <h2 class="disp h" style="margin-top:12px;">Trava de baú.</h2>
+    <div class="sub">A carga não sai sem ordem.</div>
+    <div class="specs"><div class="s">Botão Tic Tac na cabine</div><div class="s">Trava e destrava o baú</div><div class="s">Controle com o motorista</div></div>
+  </div>
+</section>
+
+<!-- 08 TECLADO RFID -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-c.jpg" alt="">
+  <div class="phero"><img src="assets/equip/cut/06-teclado.png" alt=""></div>
+  <div class="scrim top"></div>
+  <div class="runhead"><span class="kic">Equipamento · 06</span><span class="kic">RASTCAR · 08</span></div>
+  <div class="layer top">
+    <div class="ey">Teclado RFID</div>
+    <h2 class="disp h" style="margin-top:12px;">Teclado RFID.</h2>
+    <div class="sub">Só quem é autorizado dirige.</div>
+    <div class="specs"><div class="s">Cartão identifica o motorista</div><div class="s">Liberação por usuário</div></div>
+  </div>
+</section>
+
+<!-- 09 SENSOR DE PORTA -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-a.jpg" alt="">
+  <div class="phero"><img src="assets/equip/cut/10-sensor-porta.png" alt=""></div>
+  <div class="scrim top"></div>
+  <div class="runhead"><span class="kic">Equipamento · 07</span><span class="kic">RASTCAR · 09</span></div>
+  <div class="layer top">
+    <div class="ey">Sensor de porta</div>
+    <h2 class="disp h" style="margin-top:12px;">Sensor de porta.</h2>
+    <div class="sub">Nada abre sem você saber.</div>
+    <div class="specs"><div class="s">Alerta de abertura não autorizada</div><div class="s">Porta e baú</div></div>
+  </div>
+</section>
+
+<!-- 10 MUITO MAIS -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-c.jpg" alt="">
+  <div class="scrim ctr"></div>
+  <div class="layer mid ctr">
+    <div class="ey">A linha completa</div>
+    <h2 class="disp hbig" style="margin-top:16px;">E tem muito mais.</h2>
+    <p class="lede" style="max-width:60%;text-align:center;">Estes são alguns. Nossa linha homologada vai além. Montamos o conjunto ideal para a sua operação.</p>
+  </div>
+  <div class="runfoot"><span class="kic">EQUIPAMENTOS</span><span class="kic">10</span></div>
+</section>
+
+<!-- 11 APP E PLATAFORMA -->
+<section class="page">
+  <img class="bg" src="assets/pf/L-control.jpg" alt="">
+  <div class="scrim bl"></div>
+  <div class="layer bottom">
+    <div class="ey">App e plataforma</div>
+    <h2 class="disp h" style="margin-top:14px;">Tudo na palma da mão.</h2>
+    <p class="lede">Acompanhe, bloqueie e gerencie a frota pelo app e pela plataforma web. 40+ relatórios.</p>
+  </div>
+  <div class="runfoot"><span class="kic">PLATAFORMA</span><span class="kic">11</span></div>
+</section>
+
+<!-- 12 CENTRAL 24H -->
+<section class="page">
+  <img class="bg" src="assets/pf/L-central.jpg" alt="">
+  <div class="scrim tl"></div>
+  <div class="layer top">
+    <div class="ey">Central 24h</div>
+    <h2 class="disp h" style="margin-top:14px;">Vigiando sem pausa.</h2>
+    <p class="lede">Central própria, equipe treinada, pronta resposta. 24 horas, sete dias por semana.</p>
+  </div>
+  <div class="runfoot"><span class="kic">MONITORAMENTO</span><span class="kic">12</span></div>
+</section>
+
+<!-- 13 TELEMETRIA -->
+<section class="page">
+  <img class="bg" src="assets/pf/L-telemetria.jpg" alt="">
+  <div class="scrim bl"></div>
+  <div class="layer bottom">
+    <div class="ey">Telemetria</div>
+    <h2 class="disp h" style="margin-top:14px;">Cada quilômetro vira dado.</h2>
+    <p class="lede">Consumo, condução e desempenho da frota. Para cortar custo e elevar a performance.</p>
+  </div>
+  <div class="runfoot"><span class="kic">INTELIGÊNCIA DE FROTA</span><span class="kic">13</span></div>
+</section>
+
+<!-- 14 COBERTURA -->
+<section class="page">
+  <img class="bg" src="assets/pf/L-cobertura.jpg" alt="">
+  <div class="scrim bl"></div>
+  <div class="layer bottom">
+    <div class="ey">Cobertura</div>
+    <h2 class="disp hbig" style="margin-top:14px;">Do Brasil à América Latina.</h2>
+    <p class="lede">Cobertura nacional em todo o Brasil e operação em toda a América Latina, com a Rastrack.</p>
+  </div>
+  <div class="runfoot"><span class="kic">ALCANCE</span><span class="kic">14</span></div>
+</section>
+
+<!-- 15 PLANOS -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-b.jpg" alt="">
+  <div class="scrim bl"></div>
+  <div class="layer bottom">
+    <div class="ey">Comece hoje</div>
+    <div class="price" style="margin-top:14px;font-size:74px;">Plano sob medida</div>
+    <div class="incl">
+      <span>· Tempo real</span><span>· Bloqueio remoto</span><span>· Cerca virtual</span>
+      <span>· Central 24h</span><span>· App e plataforma</span><span>· 40+ relatórios</span>
+    </div>
+    <p class="lede" style="margin-top:18px;max-width:60%;">O valor varia conforme o pacote ideal para o seu veículo ou frota. Fale com a gente e receba uma proposta personalizada.</p>
+  </div>
+  <div class="runfoot"><span class="kic">PROPOSTA</span><span class="kic">15</span></div>
+</section>
+
+<!-- 16 CARTA -->
+<section class="page">
+  <img class="bg" src="assets/pf/S-a.jpg" alt="">
+  <div class="scrim ctr"></div>
+  <div class="layer mid ctr">
+    <img class="emblem" src="assets/pf/emblem-R-t.png" alt="Rastcar">
+    <p class="letter" style="margin-top:24px;text-align:center;max-width:70%;">
+      Não vendemos rastreadores. Vendemos a certeza de que, no pior dia, você não estará sozinho.
+      <b>Tratamos cada patrimônio como se fosse nosso.</b> Escolher a Rastcar é colocar duas décadas
+      de obsessão por proteção ao seu lado.
+    </p>
+    <div class="sign">Rastcar · (12) 3157-9090 · rastcar.com.br</div>
+  </div>
+  <div class="runfoot"><span class="kic">DESDE 2004 · BRASIL E AMÉRICA LATINA</span><span class="kic">16</span></div>
+</section>
+
+</body>
+</html>

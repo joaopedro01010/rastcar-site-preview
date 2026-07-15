@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<title>RASTCAR · Equipamento</title>
+<meta name="description" content="Equipamento Rastcar · página dedicada com tudo sobre o produto.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rastcar">
+<meta property="og:title" content="RASTCAR · Equipamentos">
+<meta property="og:description" content="Equipamentos Rastcar com página dedicada para cada um. Rastreamento e segurança veicular desde 2004.">
+<meta property="og:image" content="https://www.rastcar.com.br/assets/og-rastcar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta property="og:url" content="https://www.rastcar.com.br/produto.html">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="RASTCAR · Equipamentos">
+<meta name="twitter:description" content="Equipamentos Rastcar com página dedicada para cada um. Rastreamento e segurança veicular desde 2004.">
+<meta name="twitter:image" content="https://www.rastcar.com.br/assets/og-rastcar.jpg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{
+    --ink:#0A0A0A;--paper:#F4F4F2;--paper2:#EBEBE8;
+    --mut:rgba(10,10,10,.62);--mut2:rgba(10,10,10,.42);--ln:rgba(10,10,10,.12);
+    --line:rgba(255,255,255,.16);--soft:rgba(255,255,255,.62);--soft2:rgba(255,255,255,.42);
+    --head:'Archivo',system-ui,sans-serif;--title:'D-DIN','D-DIN Exp',system-ui,sans-serif;--mono:'Roboto Mono',ui-monospace,Menlo,monospace;
+    --maxw:1340px;--hdr-h:62px;--tsh:0 1px 18px rgba(0,0,0,.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--head);font-size:16px;font-weight:500;line-height:1.55;text-rendering:optimizeLegibility;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}::selection{background:rgba(10,10,10,.16)}img{max-width:100%}
+
+  header#hdr{position:absolute;top:0;left:0;width:100%;z-index:200;height:var(--hdr-h);display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 clamp(16px,3vw,40px);background:transparent}
+  body.nav-open{overflow:hidden}
+  .brand{grid-column:2;display:flex;align-items:center;justify-self:center}
+  .brand .wm{height:19px;display:block;filter:drop-shadow(0 1px 10px rgba(0,0,0,.5))}
+  .nav-left{grid-column:1;justify-self:start;display:flex;align-items:center;gap:clamp(16px,1.8vw,28px)}
+  .nav-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:clamp(14px,1.6vw,22px)}
+  .navlink{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.86);text-shadow:var(--tsh);background:none;border:0;cursor:pointer;transition:color .25s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+  .navlink:hover{color:#fff}
+  .navlink .chev{width:6px;height:6px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(45deg) translateY(-1px)}
+  .mega-wrap{position:static}
+  .mega{position:absolute;left:0;top:var(--hdr-h);width:100%;background:rgba(10,11,13,.5);-webkit-backdrop-filter:blur(30px) saturate(1.2);backdrop-filter:blur(30px) saturate(1.2);border-top:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.4);opacity:0;visibility:hidden;transform:translateY(-8px);transition:.26s cubic-bezier(.2,.7,.2,1);z-index:190}
+  .mega-wrap:hover .mega,.mega.open{opacity:1;visibility:visible;transform:none}
+  .mega-inner{max-width:var(--maxw);margin:0 auto;padding:36px clamp(16px,3vw,40px) 44px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto;gap:0 clamp(34px,6vw,96px)}
+  .mega-col{display:flex;flex-direction:column}
+  .mega-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft2);margin-bottom:14px}
+  .mega-col a{font-family:var(--title);text-transform:uppercase;letter-spacing:.02em;font-size:16px;color:rgba(255,255,255,.8);padding:9px 0;transition:color .18s}
+  .mega-col a:hover{color:#fff}
+  .mega-end .all{font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-top:30px;white-space:nowrap}
+  .lang{position:relative}
+  .lang-cur{display:flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:rgba(255,255,255,.86);text-shadow:var(--tsh);font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:color .25s;padding:6px 2px}
+  .lang-cur:hover{color:#fff}.lang-cur svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .menu-pop{position:absolute;top:calc(100% + 12px);right:0;background:rgba(10,11,13,.5);-webkit-backdrop-filter:blur(28px) saturate(1.2);backdrop-filter:blur(28px) saturate(1.2);border:1px solid var(--line);border-radius:9px;padding:6px;box-shadow:0 18px 50px rgba(0,0,0,.4);opacity:0;visibility:hidden;transform:translateY(-6px);transition:.22s;z-index:210}
+  .lang-menu{min-width:152px}.lang.open .lang-menu{opacity:1;visibility:visible;transform:none}
+  .menu-pop button{display:block;width:100%;background:none;border:0;cursor:pointer;color:rgba(255,255,255,.82);font-family:var(--head);font-size:13px;letter-spacing:.03em;text-align:left;padding:10px 12px;border-radius:6px;transition:.18s}
+  .menu-pop button:hover{background:rgba(255,255,255,.07);color:#fff}.menu-pop button.active{color:#fff}
+  .btn{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border:1px solid;padding:11px 22px;border-radius:2px;transition:all .25s;white-space:nowrap;background:transparent;cursor:pointer}
+  .btn.light{border-color:rgba(255,255,255,.6);color:#fff}.btn.light:hover{background:#fff;color:var(--ink)}.btn.light.solid{background:#fff;color:var(--ink)}
+  .btn.dark{border-color:var(--ink);color:var(--ink)}.btn.dark:hover{background:var(--ink);color:#fff}.btn.dark.solid{background:var(--ink);color:#fff}
+  .menu-toggle{display:none;grid-column:3;justify-self:end;background:none;border:0;color:#fff;cursor:pointer;width:24px;height:16px;position:relative;z-index:220;filter:drop-shadow(0 1px 8px rgba(0,0,0,.5))}
+  .menu-toggle span{position:absolute;left:0;width:100%;height:2px;background:currentColor;transition:.3s;border-radius:2px}
+  /* area de toque de 44x44 (minimo acessivel) sem alterar o visual das barras */
+  .menu-toggle::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px}
+  .menu-toggle span:nth-child(1){top:0}.menu-toggle span:nth-child(2){top:7px}.menu-toggle span:nth-child(3){top:14px}
+
+  /* HERO dedicado (full-bleed cinematográfico) */
+  .phero{position:relative;height:100vh;height:100svh;min-height:560px;display:flex;align-items:flex-end;padding:0 clamp(20px,5vw,76px);overflow:hidden;color:#fff;background:#0A0A0A}
+  .phero .bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;filter:brightness(1.03) saturate(1.03)}
+  .phero .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(0,0,0,.66),transparent 52%),linear-gradient(90deg,rgba(0,0,0,.5),transparent 60%),linear-gradient(180deg,rgba(0,0,0,.5),transparent 20%)}
+  .phero .inner{position:relative;z-index:2;width:100%;max-width:var(--maxw);margin:0 auto;padding-bottom:clamp(60px,12vh,120px)}
+  .phero .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.85);display:flex;align-items:center;gap:11px;margin-bottom:14px;text-shadow:var(--tsh)}
+  .phero .eyebrow::before{content:"";width:22px;height:1px;background:rgba(255,255,255,.6)}
+  .phero h1{font-family:var(--title);font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:1.02;font-size:clamp(34px,5.4vw,74px);text-shadow:0 2px 26px rgba(0,0,0,.45)}
+  .phero .lede{font-size:clamp(16px,1.3vw,20px);color:rgba(255,255,255,.94);max-width:46ch;margin-top:16px;text-shadow:0 1px 16px rgba(0,0,0,.5)}
+  .phero .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+  .cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.78);display:flex;flex-direction:column;align-items:center;gap:8px}
+  .cue .ln{width:1px;height:30px;background:linear-gradient(#fff,transparent);animation:cue 2.4s ease-in-out infinite}
+  @keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* DETALHE (claro) */
+  .pdet{position:relative;min-height:100vh;min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:clamp(26px,5vw,72px);padding:clamp(70px,12vh,130px) clamp(20px,6vw,88px);background:var(--paper)}
+  .pdet .txt{max-width:560px}
+  .pdet .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut);margin-bottom:14px}
+  .pdet h2{font-family:var(--title);font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:1.05;font-size:clamp(24px,3vw,40px);margin-bottom:16px}
+  .pdet .desc{font-size:clamp(15px,1.1vw,17px);line-height:1.65;color:var(--mut)}
+  .pdet .specs{display:flex;flex-wrap:wrap;gap:7px;margin-top:24px}
+  .pdet .specs span{font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);border:1px solid var(--ln);border-radius:999px;padding:6px 11px}
+  .pdet .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;align-items:center}
+  .pdet .back{font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)}
+  .pdet .back:hover{color:var(--ink)}
+  .pdet .vis{position:relative;display:flex;align-items:center;justify-content:center;height:100%}
+  .pdet .vis::before{content:"";position:absolute;width:76%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(10,10,10,.08),transparent 66%)}
+  .pdet .vis img{position:relative;z-index:1;max-height:60vh;max-width:100%;object-fit:contain;filter:drop-shadow(0 36px 60px rgba(0,0,0,.28))}
+
+  /* FOOTER */
+  footer{background:var(--paper);color:var(--mut);padding:clamp(48px,7vh,76px) clamp(20px,5vw,72px) 42px;text-align:center;border-top:1px solid var(--ln)}
+  .foot-inner{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px}
+  .socials{display:flex;gap:24px;justify-content:center}
+  .socials a{color:var(--mut);transition:color .2s}.socials a:hover{color:var(--ink)}.socials svg{width:22px;height:22px;fill:currentColor;display:block}
+  .foot-meta{font-size:12px;letter-spacing:.06em;color:var(--mut2);line-height:2.1}
+  .foot-meta a{color:var(--mut)}.foot-meta a:hover{color:var(--ink)}
+  footer .brand .wm{filter:none}
+
+  [dir="rtl"] .menu-pop{right:auto;left:0}
+  @media(max-width:1080px){.nav-left .navlink:not(.mega-trigger){display:none}}
+  @media(max-width:860px){
+    .nav-left,.nav-right{display:none}.menu-toggle{display:block}
+    nav#mobnav{position:fixed;inset:0;background:rgba(8,9,11,.96);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);z-index:195;flex-direction:column;justify-content:center;gap:6px;padding:84px 26px 40px;overflow:auto;display:none}
+    nav#mobnav.open{display:flex}
+    nav#mobnav a,nav#mobnav button{font-family:var(--title);text-transform:uppercase;letter-spacing:.02em;font-size:20px;color:#fff;background:none;border:0;text-align:left;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+    nav#mobnav .mob-lang{display:flex;gap:10px;margin-top:16px}nav#mobnav .mob-lang button{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 15px}
+    .pdet{grid-template-columns:1fr;gap:18px}.pdet .vis{order:-1;height:auto}.pdet .vis img{max-height:34vh}
+  }
+  @media(min-width:861px){nav#mobnav{display:none}}
+  @media(max-width:560px){.phero h1{font-size:36px}.pdet h2{font-size:25px}.foot-meta{line-height:2}}
+
+  /* ===== fallbacks p/ navegadores antigos (cross-device) ===== */
+  @supports not (aspect-ratio:1/1){.card{height:0;padding-bottom:75%}}
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.mega,.menu-pop{background:rgba(10,11,13,.95)}nav#mobnav{background:rgba(8,9,11,.98)}}
+
+  /* ===== menu mobile reformulado (pratico, rolavel, ancorado no topo) ===== */
+  @media(max-width:860px){
+    nav#mobnav{justify-content:flex-start;align-items:stretch;gap:0;padding:calc(var(--hdr-h) + 20px) 26px 40px}
+    nav#mobnav a,nav#mobnav>button{font-family:var(--title);text-transform:uppercase;letter-spacing:.02em;font-size:19px;color:#fff;text-align:left;padding:15px 2px;border-bottom:1px solid var(--line);width:100%}
+    nav#mobnav .mob-sub{display:flex;flex-direction:column;padding:2px 0 6px}
+    nav#mobnav #mobList{display:flex;flex-direction:column}
+    nav#mobnav .mob-sub a{font-family:var(--head);font-size:14.5px;letter-spacing:.03em;text-transform:none;color:var(--soft);padding:11px 0 11px 16px;border-bottom:0}
+    nav#mobnav .mob-lang{display:flex;gap:9px;margin-top:24px;padding:0;border:0}
+    nav#mobnav .mob-lang button{width:auto;font-family:var(--head);font-size:14px;border:1px solid var(--line);border-radius:999px;padding:9px 18px;color:#fff;text-transform:uppercase}
+    nav#mobnav .btn{width:100%;text-align:center;margin-top:22px;background:#fff;color:var(--ink);border-color:#fff;font-size:13px;letter-spacing:.14em;padding:16px;border-bottom:1px solid #fff}
+  }
+  /* hamburguer -> X quando aberto */
+  body.nav-open .menu-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  body.nav-open .menu-toggle span:nth-child(2){opacity:0}
+  body.nav-open .menu-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <nav class="nav-left">
+    <div class="mega-wrap">
+      <a class="navlink mega-trigger" href="equipamentos.html"><span data-i18n="nav.equip">Equipamentos</span><i class="chev"></i></a>
+      <div class="mega" id="mega">
+        <div class="mega-inner">
+          <div class="mega-col" id="megaList">
+            <div class="mega-h" data-i18n="mm.t">Equipamentos Rastcar</div>
+          </div>
+          <div class="mega-col" id="megaListMore">
+            <div class="mega-h" data-i18n="mm.more">Mais equipamentos</div>
+          </div>
+          <div class="mega-col mega-end"><a class="all" href="equipamentos.html" data-i18n="mm.all">Ver todos →</a></div>
+        </div>
+      </div>
+    </div>
+    <a class="navlink" href="index.html#cobertura" data-i18n="nav.coverage">Cobertura</a>
+    <a class="navlink" href="index.html#frota" data-i18n="nav.fleet">Frota</a>
+  </nav>
+  <a class="brand" href="index.html" aria-label="Rastcar"><img class="wm" src="assets/wordmark-white.png" alt="RASTCAR"></a>
+  <div class="nav-right">
+    <div class="lang" id="lang">
+      <button class="lang-cur" type="button" aria-label="Idioma"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span id="langCur">PT</span></button>
+      <div class="menu-pop lang-menu">
+        <button type="button" data-lang="pt">Português</button>
+        <button type="button" data-lang="es">Español</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="he" lang="he">עברית</button>
+      </div>
+    </div>
+    <a class="btn light" id="ctaTop" data-cta-wa href="https://wa.me/551231579090" target="_blank" rel="noopener" data-i18n="nav.cta">Falar agora</a>
+  </div>
+  <button class="menu-toggle" id="mt" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<nav id="mobnav"><div id="mobList"></div>
+  <a href="index.html#cobertura" data-i18n="nav.coverage">Cobertura</a>
+  <a href="index.html#frota" data-i18n="nav.fleet">Frota</a>
+  <a href="equipamentos.html" data-i18n="mm.all">Ver todos →</a>
+  <a href="index.html" data-i18n="mm.home">← Início</a>
+  <div class="mob-lang"><button type="button" data-lang="pt">PT</button><button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="he" lang="he">עב</button></div>
+  <a class="btn" data-cta-wa href="https://wa.me/551231579090?text=Quero%20um%20or%C3%A7amento%20da%20Rastcar" target="_blank" rel="noopener" data-i18n="nav.cta">Falar agora</a>
+</nav>
+
+<section class="phero" id="top">
+  <div class="bg" id="pbg"></div>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="eyebrow" id="pcat">Localização</div>
+    <h1 id="pname">Rastreador 4G</h1>
+    <p class="lede" id="phead">Rastreamento 4G. Sem ponto cego.</p>
+    <div class="cta-row">
+      <a class="btn light solid" id="pcta" data-cta-wa href="#" target="_blank" rel="noopener" data-i18n="p.cta1">Pedir orçamento</a>
+      <a class="btn light" href="equipamentos.html" data-i18n="mm.all">Ver todos →</a>
+    </div>
+  </div>
+  <div class="cue"><span data-i18n="eq.cue">Role</span><span class="ln"></span></div>
+</section>
+
+<section class="pdet" id="det">
+  <div class="txt">
+    <div class="eyebrow" data-i18n="pdet.spec">Especificações</div>
+    <h2 id="pdh">Tudo dedicado a este equipamento</h2>
+    <p class="desc" id="pdesc"></p>
+    <div class="specs" id="pspecs"></div>
+    <div class="cta-row">
+      <a class="btn dark solid" id="pcta2" data-cta-wa href="#" target="_blank" rel="noopener" data-i18n="p.cta1">Pedir orçamento</a>
+      <a class="back" href="equipamentos.html" data-i18n="pdet.back">← Ver todos os equipamentos</a>
+    </div>
+  </div>
+  <div class="vis"><img id="ppng" src="assets/equip/cut/01-rastreador-4g.png" alt=""></div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <a class="brand" href="index.html" aria-label="Rastcar"><img class="wm" src="assets/wordmark-red.png" alt="RASTCAR" style="height:20px"></a>
+    <div class="socials">
+      <a href="https://wa.me/551231579090" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.485 3.488"/></svg></a>
+      <a href="https://www.instagram.com/rastcar" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    </div>
+    <div class="foot-meta">
+      <a href="mailto:vendas@rastcar.com.br">vendas@rastcar.com.br</a> · (12) 3157-9090<br>
+      © 2026 Rastcar · CNPJ 10.142.559/0001-00 · <span data-i18n="f.cob">Cobertura nacional + América Latina</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ---------- catálogo de produtos destaque ----------
+  const P={
+    rastreador:{cat:"Localização",name:"Rastreador 4G",head:"Rastreamento 4G. Sem ponto cego.",bg:"assets/cine/eq-rastreador.jpg",png:"assets/equip/cut/01-rastreador-4g.png",
+      desc:"Posição em tempo real, baixa latência e bloqueio remoto na palma da mão. Pronto para o desligamento do 2G, com queda automática para a rede antiga onde ainda precisar. Nenhum ponto cego, no Brasil inteiro e na América Latina.",
+      specs:["4G LTE Cat 1","GPS + GLONASS + LBS","Fallback 2G automático","Homologado Anatel","Detecção de jammer","Bateria reserva interna"],wa:"Quero o rastreador 4G da Rastcar"},
+    camera:{cat:"Carga e frota",name:"Câmera com IA",head:"Avisa antes do acidente.",bg:"assets/cine/eq-camera.jpg",png:"assets/equip/cut/11-camera-ia.png",
+      desc:"O DMS detecta fadiga, sonolência, distração e uso de celular e alerta o motorista em tempo real, antes do acidente. O ADAS antecipa colisão frontal e saída de faixa. Evento crítico vira clipe automático na nuvem: a prova que inocenta o seu motorista quando o culpado é o outro. Alguns modelos já vêm com rastreador integrado: câmera e localização no mesmo equipamento.",
+      specs:["DMS fadiga e distração","ADAS colisão e faixa","Dupla câmera via e cabine","Clipes em nuvem","Alerta sonoro em cabine","4G integrado","Modelos com rastreador integrado"],wa:"Quero a câmera com IA da Rastcar"},
+    isca:{cat:"Localização",name:"Isca oculta",head:"Sempre transmitindo.",bg:"assets/cine/eq-isca.jpg",png:"assets/equip/cut/04-isca.png",
+      desc:"Sua segunda linha de defesa. Arrancaram o rastreador principal? A isca continua transmitindo, escondida onde ninguém procura. É a peça que mais recupera veículo depois do roubo. Podemos fornecer modelos de isca com bateria própria de longa duração, independente da elétrica do veículo.",
+      specs:["Transmissão por evento","Instalação oculta","Modelos com bateria própria","Independente da elétrica"],wa:"Quero a isca oculta da Rastcar"},
+    panico:{cat:"Controle e resposta",name:"Botão de pânico",head:"Um toque, e a central assume.",bg:"assets/cine/eq-panico.jpg",png:"assets/equip/cut/05-panico.png",
+      desc:"Um botão bem pequeno e discreto. Ao toque, dispara alerta imediato para a central 24 horas: nesse instante a central assume o monitoramento ao vivo do veículo e segue o protocolo de emergência. Socorro a um botão de distância, para o motorista e para a família.",
+      specs:["Bem pequeno e discreto","Alerta instantâneo","Protocolo SOS 24h","Com ou sem fio"],wa:"Quero o botão de pânico da Rastcar"},
+    trava:{cat:"Carga e frota",name:"Trava de baú",head:"O baú destrava por dentro da cabine.",bg:"assets/cine/eq-trava.jpg",png:"assets/equip/cut/09-tic-tac.png",
+      desc:"Um botão 'Tic Tac' instalado na cabine, junto do motorista. Ele move para cima ou para baixo e destrava o baú lá atrás, na hora. Sem celular e sem central no meio: o controle da carga fica na mão de quem está dirigindo, simples e imediato.",
+      specs:["Botão Tic Tac na cabine","Move para cima ou para baixo","Destrava o baú atrás","Operado pelo motorista","Sem depender de celular"],wa:"Quero a trava de baú Tic Tac da Rastcar"},
+    teclado:{cat:"Controle e resposta",name:"Teclado e identificação",head:"Você sabe quem dirigiu cada quilômetro.",bg:"assets/cine/eq-teclado.jpg",png:"assets/equip/cut/06-teclado.png",
+      desc:"Cada motorista recebe o seu cartão de identificação RFID. Sem encostar o cartão cadastrado, o veículo não dá partida: nada de carro rodando sem dono. A partir daí, toda a telemetria passa a ter nome, base objetiva para ranking de condução, bonificação e responsabilização em multas e sinistros. O teclado de cabine completa o conjunto, com mensageria direta entre central e motorista.",
+      specs:["Cartão RFID por motorista","Sem cartão, sem partida","Vincula telemetria ao condutor","Mensageria cabine-central","Motoristas ilimitados"],wa:"Quero o teclado e cartão de identificação da Rastcar"},
+    "sensor-porta":{cat:"Carga e frota",name:"Sensor de porta",head:"Toda abertura vira alerta.",bg:"assets/cine/eq-sensorporta.jpg",png:null,
+      desc:"Avisa na hora quando a porta ou o baú abre fora do previsto, em parada não autorizada. Cruza com a cerca virtual e guarda o histórico completo de aberturas por viagem. Sensor simples, robusto, com ganho enorme de visibilidade.",
+      specs:["Sensor magnético","Alerta em tempo real","Cruza com geofence","Histórico por viagem","Baixo custo"],wa:"Quero o sensor de porta da Rastcar"},
+    temperatura:{cat:"Carga e frota",name:"Sensor de temperatura",head:"Carga fria sob controle.",bg:"assets/cine/eq-temperatura.jpg",png:null,
+      desc:"Temperatura do baú refrigerado monitorada em tempo real, com alerta imediato quando sai da faixa segura. Registro contínuo que comprova a conformidade ao cliente e à fiscalização, sem planilha manual. Para cadeia fria crítica, conectamos você ao monitoramento especializado da.",
+      specs:["Sensor de temperatura","Alerta fora de faixa","Registro contínuo","Multissonda por compartimento","Integra ao rastreador"],wa:"Quero o sensor de temperatura da Rastcar"},
+    telemetria:{cat:"Carga e frota",name:"Telemetria",head:"Os dados viram decisão.",bg:"assets/cine/eq-telemetria.jpg",png:null,
+      desc:"Leitura direta do barramento: rotação, horímetro, velocidade e consumo médio em km/l para enxergar a eficiência real da frota. Comportamento de condução medido com precisão, manutenção guiada pelo uso real e não por chute. A frota deixa de ser custo opaco e vira dados acionáveis.",
+      specs:["Leitura direta do barramento","km/l e horímetro","Frenagem e aceleração","Excesso de velocidade","Manutenção por uso real"],wa:"Quero telemetria de frota da Rastcar"},
+    central:{cat:"Inteligência e operação",name:"Central 24h",head:"Pessoas de verdade vigiando, dia e noite.",bg:"assets/cine/eq-central.jpg",png:null,
+      desc:"Operadores acompanhando alertas críticos 24 horas por dia, todos os dias. Protocolo de pronta resposta no roubo: bloqueio, rastreamento ao vivo e acionamento de apoio para recuperar o veículo. Cobertura nacional e na América Latina, sustentada por mais de 20 anos desde 2004.",
+      specs:["24h / 7 dias","Pronta resposta a roubo","Protocolo de pânico","Brasil e América Latina","Desde 2004"],wa:"Quero falar com a central 24h da Rastcar"},
+    app:{cat:"Inteligência e operação",name:"App e plataforma",head:"Sua frota inteira na palma da mão.",bg:"assets/cine/eq-app.jpg",png:null,
+      desc:"Veja onde está cada veículo agora, com histórico de trajeto e velocidade, direto do celular ou do computador. Bloqueie, crie cerca virtual e acione o pânico sem sair da tela. Mais de 40 relatórios prontos, push instantâneo a cada evento e o mapa ao vivo de toda a operação, no Brasil inteiro e na América Latina.",
+      specs:["iOS e Android","Mapa ao vivo","40+ relatórios","Push de eventos","Cerca virtual","Multiusuário e multiveículo"],wa:"Quero conhecer o app e a plataforma da Rastcar"}
+  };
+  let curLang=localStorage.getItem('rc_lang')||'pt';
+  const LOC={
+   es:{
+    rastreador:{cat:"Localización",name:"Rastreador 4G",head:"Rastreo 4G. Sin punto ciego.",desc:"Posición en tiempo real, baja latencia y bloqueo remoto en la palma de la mano. Listo para el apagado del 2G, con caída automática a la red antigua donde aún haga falta. Ningún punto ciego, en Brasil y en toda América Latina.",specs:["4G LTE Cat 1","GPS + GLONASS + LBS","Fallback 2G automático","Homologado Anatel","Detección de jammer","Batería de respaldo interna"]},
+    camera:{cat:"Carga y flota",name:"Cámara con IA",head:"Avisa antes del accidente.",desc:"El DMS detecta fatiga, somnolencia, distracción y uso del celular y alerta al conductor en tiempo real, antes del accidente. El ADAS anticipa colisión frontal y salida de carril. Cada evento crítico se convierte en un clip automático en la nube: la prueba que defiende a tu conductor cuando el culpable es el otro. Algunos modelos ya vienen con rastreador integrado: cámara y localización en el mismo equipo.",specs:["DMS fatiga y distracción","ADAS colisión y carril","Cámara doble vía y cabina","Clips en la nube","Alerta sonora en cabina","4G integrado","Modelos con rastreador integrado"]},
+    isca:{cat:"Localización",name:"Baliza oculta",head:"Siempre transmitiendo.",desc:"Tu segunda línea de defensa. Arrancaron el rastreador principal? La baliza sigue transmitiendo, escondida donde nadie busca. Es la pieza que más recupera vehículos después del robo. Podemos ofrecer modelos de baliza con batería propia de larga duración, independiente de la eléctrica del vehículo.",specs:["Transmisión por evento","Instalación oculta","Modelos con batería propia","Independiente de la eléctrica"]},
+    panico:{cat:"Control y respuesta",name:"Botón de pánico",head:"Un toque, y la central asume.",desc:"Un botón muy pequeño y discreto. Al toque, dispara una alerta inmediata a la central 24 horas: en ese instante la central asume el monitoreo en vivo del vehículo y sigue el protocolo de emergencia. Auxilio a un botón de distancia, para el conductor y para la familia.",specs:["Muy pequeño y discreto","Alerta instantánea","Protocolo SOS 24h","Con o sin cable"]},
+    trava:{cat:"Carga y flota",name:"Traba de baúl",head:"El baúl se destraba desde la cabina.",desc:"Un botón Tic Tac instalado en la cabina, junto al conductor. Lo mueve hacia arriba o hacia abajo y destraba el baúl de atrás, al instante. Sin celular y sin central de por medio: el control de la carga queda en manos de quien conduce, simple e inmediato.",specs:["Botón Tic Tac en la cabina","Mueve arriba o abajo","Destraba el baúl atrás","Operado por el conductor","Sin depender del celular"]},
+    teclado:{cat:"Control y respuesta",name:"Teclado e identificación",head:"Sabes quién condujo cada kilómetro.",desc:"Cada conductor recibe su tarjeta de identificación RFID. Sin acercar la tarjeta registrada, el vehículo no arranca: nada de autos rodando sin dueño. A partir de ahí, toda la telemetría tiene nombre, base objetiva para ranking de conducción, bonificación y responsabilización en multas y siniestros. El teclado de cabina completa el conjunto, con mensajería directa entre central y conductor.",specs:["Tarjeta RFID por conductor","Sin tarjeta, no arranca","Vincula la telemetría al conductor","Mensajería cabina-central","Conductores ilimitados"]},
+    "sensor-porta":{cat:"Carga y flota",name:"Sensor de puerta",head:"Toda apertura se vuelve alerta.",desc:"Avisa al instante cuando la puerta o el baúl se abre fuera de lo previsto, en una parada no autorizada. Cruza con la cerca virtual y guarda el historial completo de aperturas por viaje. Sensor simple, robusto, con enorme ganancia de visibilidad.",specs:["Sensor magnético","Alerta en tiempo real","Cruza con geocerca","Historial por viaje","Bajo costo"]},
+    temperatura:{cat:"Carga y flota",name:"Sensor de temperatura",head:"Carga fría bajo control.",desc:"Temperatura del baúl refrigerado monitoreada en tiempo real, con alerta inmediata cuando sale del rango seguro. Registro continuo que comprueba el cumplimiento ante el cliente y la fiscalización, sin planilla manual. Para cadena fría crítica, te conectamos al monitoreo especializado de.",specs:["Sensor de temperatura","Alerta fuera de rango","Registro continuo","Multisonda por compartimento","Integra ao rastreador"]},
+    telemetria:{cat:"Carga y flota",name:"Telemetría",head:"Los datos se vuelven decisión.",desc:"Lectura directa del bus del vehículo: revoluciones, horímetro, velocidad y consumo medio en km/l para ver la eficiencia real de la flota. Comportamiento de conducción medido con precisión, mantenimiento guiado por el uso real y no por suposición. La flota deja de ser un costo opaco y se vuelve datos accionables.",specs:["Lectura directa del bus","km/l y horímetro","Frenado y aceleración","Exceso de velocidad","Mantenimiento por uso real"]},
+    app:{cat:"Inteligencia y operación",name:"App y plataforma",head:"Toda tu flota en la palma de la mano.",desc:"Ve dónde está cada vehículo ahora, con historial de trayecto y velocidad, desde el celular o la computadora. Bloquea, crea cerca virtual y acciona el pánico sin salir de la pantalla. Más de 40 informes listos, push instantáneo en cada evento y el mapa en vivo de toda la operación, en Brasil y en toda América Latina.",specs:["iOS y Android","Mapa en vivo","40+ informes","Push de eventos","Cerca virtual","Multiusuario y multivehículo"]},
+    central:{cat:"Inteligencia y operación",name:"Central 24h",head:"Personas de verdad vigilando, día y noche.",desc:"Operadores siguiendo alertas críticas 24 horas al día, todos los días. Protocolo de pronta respuesta ante el robo: bloqueo, rastreo en vivo y activación de apoyo para recuperar el vehículo. Cobertura nacional y en América Latina, sostenida por más de 20 años desde 2004.",specs:["24h / 7 días","Pronta respuesta ante robo","Protocolo de pánico","Brasil y América Latina","Desde 2004"]}
+   },
+   en:{
+    rastreador:{cat:"Location",name:"4G Tracker",head:"4G tracking. No blind spot.",desc:"Real time position, low latency and remote immobilization in the palm of your hand. Ready for the 2G shutdown, with automatic fallback to the old network where still needed. No blind spots, across Brazil and Latin America.",specs:["4G LTE Cat 1","GPS + GLONASS + LBS","Automatic 2G fallback","Anatel certified","Jammer detection","Internal backup battery"]},
+    camera:{cat:"Cargo & fleet",name:"AI Camera",head:"Warns before the crash.",desc:"The DMS detects fatigue, drowsiness, distraction and phone use and alerts the driver in real time, before the crash. The ADAS anticipates forward collision and lane departure. Every critical event becomes an automatic cloud clip: the proof that clears your driver when the other one is at fault. Some models already come with an integrated tracker: camera and location in one device.",specs:["DMS fatigue & distraction","ADAS collision & lane","Dual road and cabin camera","Cloud clips","In cabin audio alert","4G integrated","Models with built in tracker"]},
+    isca:{cat:"Location",name:"Hidden beacon",head:"Always transmitting.",desc:"Your second line of defense. They ripped out the main tracker? The beacon keeps transmitting, hidden where no one looks. It is the part that recovers the most vehicles after a theft. We can supply beacon models with their own long life battery, independent of the vehicle electrics.",specs:["Transmits on event","Hidden install","Models with own battery","Independent of vehicle power"]},
+    panico:{cat:"Control & response",name:"Panic button",head:"One tap, and the center takes over.",desc:"A very small, discreet button. On tap, it fires an immediate alert to the 24h control center: at that instant the center takes over live monitoring of the vehicle and follows the emergency protocol. Help one button away, for the driver and the family.",specs:["Very small & discreet","Instant alert","24h SOS protocol","Wired or wireless"]},
+    trava:{cat:"Cargo & fleet",name:"Cargo lock",head:"The box unlocks from the cab.",desc:"A Tic Tac button fitted in the cab, next to the driver. They move it up or down and the rear cargo box unlocks, instantly. No phone and no control center in between: control of the cargo stays with whoever is driving, simple and immediate.",specs:["Tic Tac button in the cab","Move up or down","Unlocks the rear box","Driver operated","No phone needed"]},
+    teclado:{cat:"Control & response",name:"Keypad & ID",head:"You know who drove every mile.",desc:"Each driver gets their own RFID ID card. Without tapping the registered card, the vehicle will not start: no cars running with no owner. From then on, all telemetry has a name, an objective basis for driver scoring, bonuses and accountability for fines and claims. The cab keypad completes the set, with direct messaging between center and driver.",specs:["RFID card per driver","No card, no start","Links telemetry to the driver","Cab to center messaging","Unlimited drivers"]},
+    "sensor-porta":{cat:"Cargo & fleet",name:"Door sensor",head:"Every opening becomes an alert.",desc:"It warns instantly when the door or cargo box opens off plan, at an unauthorized stop. It cross checks with the geofence and keeps the full history of openings per trip. A simple, robust sensor with a huge gain in visibility.",specs:["Magnetic sensor","Real time alert","Cross checks geofence","History per trip","Low cost"]},
+    temperatura:{cat:"Cargo & fleet",name:"Temperature sensor",head:"Cold cargo under control.",desc:"Refrigerated box temperature monitored in real time, with an immediate alert when it leaves the safe range. Continuous logging that proves compliance to the client and to inspection, with no manual spreadsheet. For critical cold chain, we connect you to specialized monitoring.",specs:["Temperature sensor","Out of range alert","Continuous logging","Multi probe per compartment","Integrates"]},
+    telemetria:{cat:"Cargo & fleet",name:"Telemetry",head:"Data turns into decision.",desc:"Direct reading from the vehicle bus: rpm, hour meter, speed and average km/l to see the real efficiency of the fleet. Driving behavior measured precisely, maintenance guided by real use and not by guesswork. The fleet stops being an opaque cost and becomes actionable data.",specs:["Direct bus reading","km/l & hour meter","Braking & acceleration","Speeding","Maintenance by real use"]},
+    app:{cat:"Intelligence & operations",name:"App & platform",head:"Your whole fleet in your hand.",desc:"See where each vehicle is now, with route and speed history, from phone or computer. Immobilize, create a geofence and trigger panic without leaving the screen. Over 40 ready reports, instant push on every event and the live map of the whole operation, across Brazil and Latin America.",specs:["iOS & Android","Live map","40+ reports","Event push","Geofence","Multi-user & multi-vehicle"]},
+    central:{cat:"Intelligence & operations",name:"24h center",head:"Real people watching, day and night.",desc:"Operators tracking critical alerts 24 hours a day, every day. Rapid-response protocol on theft: immobilization, live tracking and dispatch of support to recover the vehicle. Nationwide coverage plus Latin America, backed by over 20 years since 2004.",specs:["24h / 7 days","Rapid theft response","Panic protocol","Brazil & Latin America","Since 2004"]}
+   },
+   he:{
+    rastreador:{cat:"מיקום",name:"משדר 4G",head:"איתור 4G. בלי שטח מת.",desc:"מיקום בזמן אמת, זמן תגובה קצר וחסימה מרחוק בכף היד. מוכן לכיבוי ה-2G, עם מעבר אוטומטי לרשת הישנה היכן שעדיין צריך. בלי שטחים מתים, בכל ברזיל ובאמריקה הלטינית.",specs:["4G LTE Cat 1","GPS + GLONASS + LBS","מעבר אוטומטי ל-2G","מאושר Anatel","זיהוי משבש","סוללת גיבוי פנימית"]},
+    camera:{cat:"מטען וצי",name:"מצלמת AI",head:"מתריעה לפני התאונה.",desc:"מערכת ה-DMS מזהה עייפות, נמנום, הסחת דעת ושימוש בטלפון ומתריעה לנהג בזמן אמת, לפני התאונה. ה-ADAS צופה מראש התנגשות חזיתית וסטייה מנתיב. כל אירוע קריטי הופך לקליפ אוטומטי בענן: ההוכחה שמזכה את הנהג שלך כשהאשם הוא הצד השני. חלק מהדגמים כבר מגיעים עם משדר מובנה: מצלמה ואיתור באותו מכשיר.",specs:["DMS עייפות והסחה","ADAS התנגשות ונתיב","מצלמה כפולה כביש ותא","קליפים בענן","התראה קולית בתא","4G מובנה","דגמים עם משדר מובנה"]},
+    isca:{cat:"מיקום",name:"משדר נסתר",head:"תמיד משדר.",desc:"קו ההגנה השני שלך. עקרו את המשדר הראשי? המשדר הנסתר ממשיך לשדר, מוסתר היכן שאף אחד לא מחפש. זה הרכיב שמשחזר הכי הרבה רכבים אחרי גניבה. אנחנו יכולים לספק דגמי משדר עם סוללה עצמאית לאורך זמן, ללא תלות בחשמל הרכב.",specs:["שידור לפי אירוע","התקנה נסתרת","דגמים עם סוללה עצמאית","ללא תלות בחשמל הרכב"]},
+    panico:{cat:"שליטה ותגובה",name:"לחצן מצוקה",head:"נגיעה אחת, והמוקד משתלט.",desc:"לחצן קטן ודיסקרטי מאוד. בנגיעה הוא שולח התראה מיידית למוקד 24 שעות: באותו רגע המוקד משתלט על מעקב חי אחר הרכב ופועל לפי נוהל החירום. עזרה במרחק לחצן, לנהג ולמשפחה.",specs:["קטן ודיסקרטי מאוד","התראה מיידית","נוהל SOS 24 שעות","חוטי או אלחוטי"]},
+    trava:{cat:"מטען וצי",name:"נעילת מטען",head:"התא נפתח מתוך תא הנהג.",desc:"לחצן Tic Tac מותקן בתא הנהג, לצד הנהג. הוא מזיז אותו למעלה או למטה והתא מאחור נפתח, מיד. בלי טלפון ובלי מוקד באמצע: השליטה על המטען נשארת בידי מי שנוהג, פשוט ומיידי.",specs:["לחצן Tic Tac בתא","הזזה למעלה או למטה","פותח את התא מאחור","מופעל בידי הנהג","ללא תלות בטלפון"]},
+    teclado:{cat:"שליטה ותגובה",name:"מקלדת וזיהוי",head:"אתם יודעים מי נהג כל קילומטר.",desc:"כל נהג מקבל כרטיס זיהוי RFID משלו. בלי להצמיד את הכרטיס הרשום, הרכב לא מותנע: אין רכבים שנוסעים בלי בעלים. מכאן והלאה, לכל הטלמטריה יש שם, בסיס אובייקטיבי לדירוג נהיגה, תגמול ואחריות בקנסות ותביעות. מקלדת התא משלימה את המערך, עם תקשורת ישירה בין המוקד לנהג.",specs:["כרטיס RFID לכל נהג","בלי כרטיס, אין התנעה","מקשר טלמטריה לנהג","תקשורת תא-מוקד","נהגים ללא הגבלה"]},
+    "sensor-porta":{cat:"מטען וצי",name:"חיישן דלת",head:"כל פתיחה הופכת להתראה.",desc:"מתריע מיד כשהדלת או התא נפתחים שלא כמתוכנן, בעצירה לא מורשית. מצליב עם הגדר הווירטואלית ושומר היסטוריה מלאה של פתיחות לכל נסיעה. חיישן פשוט ועמיד, עם רווח עצום בנראות.",specs:["חיישן מגנטי","התראה בזמן אמת","מצליב עם גדר וירטואלית","היסטוריה לכל נסיעה","עלות נמוכה"]},
+    temperatura:{cat:"מטען וצי",name:"חיישן טמפרטורה",head:"מטען קר בשליטה.",desc:"טמפרטורת התא המקורר מנוטרת בזמן אמת, עם התראה מיידית כשהיא יוצאת מהטווח הבטוח. תיעוד רציף שמוכיח עמידה בדרישות מול הלקוח והפיקוח, בלי טבלה ידנית. לשרשרת קור קריטית, אנחנו מחברים אתכם לניטור המתמחה של.",specs:["חיישן טמפרטורה","התראה מחוץ לטווח","תיעוד רציף","ריבוי חיישנים לכל תא","משולב עם"]},
+    telemetria:{cat:"מטען וצי",name:"טלמטריה",head:"הנתונים הופכים להחלטה.",desc:"קריאה ישירה ממערכת הרכב: סיבובי מנוע, שעון מנוע, מהירות וצריכה ממוצעת בקילומטרים לליטר כדי לראות את היעילות האמיתית של הצי. התנהגות נהיגה נמדדת בדיוק, תחזוקה מונחית שימוש אמיתי ולא ניחוש. הצי מפסיק להיות עלות עמומה והופך לנתונים מעשיים.",specs:["קריאה ישירה מהמערכת","קילומטר לליטר ושעון מנוע","בלימה והאצה","חריגת מהירות","תחזוקה לפי שימוש אמיתי"]},
+    app:{cat:"מודיעין ותפעול",name:"אפליקציה ופלטפורמה",head:"כל הצי בכף היד.",desc:"ראו איפה כל רכב נמצא עכשיו, עם היסטוריית מסלול ומהירות, מהטלפון או מהמחשב. חסמו, צרו גדר וירטואלית והפעילו מצוקה בלי לצאת מהמסך. יותר מ-40 דוחות מוכנים, התראת push מיידית בכל אירוע והמפה החיה של כל התפעול, בכל ברזיל ובאמריקה הלטינית.",specs:["iOS ו-Android","מפה חיה","40+ דוחות","push של אירועים","גדר וירטואלית","ריבוי משתמשים ורכבים"]},
+    central:{cat:"מודיעין ותפעול",name:"מוקד 24 שעות",head:"אנשים אמיתיים שומרים, יום ולילה.",desc:"מוקדנים עוקבים אחר התראות קריטיות 24 שעות ביממה, כל יום. נוהל תגובה מהירה בגניבה: חסימה, מעקב חי והפעלת סיוע לשחזור הרכב. כיסוי ארצי ובאמריקה הלטינית, מגובה ביותר מ-20 שנה משנת 2004.",specs:["24 שעות / 7 ימים","תגובה מהירה לגניבה","נוהל מצוקה","ברזיל ואמריקה הלטינית","משנת 2004"]}
+   }
+  };
+  function field(slug,k){const l=curLang;if(l!=='pt'&&LOC[l]&&LOC[l][slug]&&LOC[l][slug][k]!=null)return LOC[l][slug][k];return P[slug][k];}
+  const ORDER=["rastreador","camera","isca","panico","trava","teclado"];
+  const MORE=["sensor-porta","temperatura","telemetria","app","central"];
+  const qs=new URLSearchParams(location.search);
+  let slug=qs.get('p'); if(!P[slug]) slug='rastreador';
+  const d=P[slug];
+  const waUrl=(t)=>'https://wa.me/551231579090?text='+encodeURIComponent(t);
+
+  // monta menu (cada um -> sua página dedicada)
+  const megaList=document.getElementById('megaList'),megaMore=document.getElementById('megaListMore'),mobList=document.getElementById('mobList');
+  function mk(s,parent){const a=document.createElement('a');a.href='produto.html?p='+s;a.textContent=field(s,'name');if(s===slug)a.style.color='#fff';parent.appendChild(a);mobList.appendChild(a.cloneNode(true));}
+  function buildMenu(){megaList.querySelectorAll('a').forEach(a=>a.remove());megaMore.querySelectorAll('a').forEach(a=>a.remove());mobList.innerHTML='';ORDER.forEach(s=>mk(s,megaList));MORE.forEach(s=>mk(s,megaMore));}
+  buildMenu();
+
+  function render(){
+    const name=field(slug,'name');
+    document.title='RASTCAR · '+name;
+    document.getElementById('pbg').style.backgroundImage="url('"+d.bg+"')";
+    document.getElementById('pcat').textContent=field(slug,'cat');
+    document.getElementById('pname').textContent=name;
+    document.getElementById('phead').textContent=field(slug,'head');
+    document.getElementById('pdh').textContent=name;
+    document.getElementById('pdesc').textContent=field(slug,'desc');
+    const sp=document.getElementById('pspecs');sp.innerHTML='';
+    field(slug,'specs').forEach(x=>{const s=document.createElement('span');s.textContent=x;sp.appendChild(s);});
+    const vis=document.querySelector('.pdet .vis'),det=document.getElementById('det');
+    if(d.png){vis.style.display='';det.style.gridTemplateColumns='';const ppng=document.getElementById('ppng');ppng.src=d.png;ppng.alt=name;}
+    else{vis.style.display='none';det.style.gridTemplateColumns='1fr';det.style.maxWidth='820px';det.style.margin='0 auto';}
+    document.getElementById('pcta').href=waUrl(d.wa);
+    document.getElementById('pcta2').href=waUrl(d.wa);
+    document.getElementById('ctaTop').href=waUrl(d.wa);
+  }
+  render();
+
+  // menu mobile + idioma (chrome)
+  const mt=document.getElementById('mt'),mob=document.getElementById('mobnav');
+  function syncMenu(){const o=mob.classList.contains('open');document.body.classList.toggle('nav-open',o);}
+  mt.addEventListener('click',()=>{mob.classList.toggle('open');syncMenu();});
+
+  const I18N={
+    pt:{"nav.equip":"Equipamentos","nav.coverage":"Cobertura","nav.fleet":"Frota","nav.cta":"Falar agora","mm.t":"Equipamentos Rastcar","mm.all":"Ver todos →","mm.more":"Mais equipamentos","mm.home":"← Início","p.cta1":"Pedir orçamento","eq.cue":"Role","pdet.spec":"Especificações","pdet.back":"← Ver todos os equipamentos","f.cob":"Cobertura nacional + América Latina"},
+    es:{"nav.equip":"Equipos","nav.coverage":"Cobertura","nav.fleet":"Flota","nav.cta":"Hablar ahora","mm.t":"Equipos Rastcar","mm.all":"Ver todos →","mm.more":"Más equipos","mm.home":"← Inicio","p.cta1":"Pedir presupuesto","eq.cue":"Desliza","pdet.spec":"Especificaciones","pdet.back":"← Ver todos los equipos","f.cob":"Cobertura nacional + América Latina"},
+    en:{"nav.equip":"Equipment","nav.coverage":"Coverage","nav.fleet":"Fleet","nav.cta":"Talk now","mm.t":"Rastcar equipment","mm.all":"See all →","mm.more":"More equipment","mm.home":"← Home","p.cta1":"Request a quote","eq.cue":"Scroll","pdet.spec":"Specifications","pdet.back":"← See all equipment","f.cob":"Nationwide coverage + Latin America"},
+    he:{"nav.equip":"ציוד","nav.coverage":"כיסוי","nav.fleet":"צי","nav.cta":"דברו איתנו","mm.t":"ציוד Rastcar","mm.all":"לכל הציוד →","mm.more":"עוד ציוד","mm.home":"← דף הבית","p.cta1":"הצעת מחיר","eq.cue":"גלול","pdet.spec":"מפרט","pdet.back":"← לכל הציוד","f.cob":"כיסוי ארצי + אמריקה הלטינית"}
+  };
+  const ABBR={pt:"PT",es:"ES",en:"EN",he:"עב"};
+  function applyLang(l){curLang=l;const t=I18N[l]||I18N.pt;
+    document.documentElement.lang=(l==='pt'?'pt-BR':l);document.documentElement.dir=(l==='he'?'rtl':'ltr');
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const v=t[el.dataset.i18n];if(v!=null)el.textContent=v;});
+    document.getElementById('langCur').textContent=ABBR[l];
+    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+    document.title={pt:'RASTCAR · Equipamento',es:'RASTCAR · Equipo',en:'RASTCAR · Equipment',he:'RASTCAR · ציוד'}[l]||document.title;
+    try{localStorage.setItem('rc_lang',l);}catch(e){}
+    render();buildMenu();}
+  const langWrap=document.getElementById('lang');
+  langWrap.querySelector('.lang-cur').addEventListener('click',e=>{e.stopPropagation();langWrap.classList.toggle('open');});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{applyLang(b.dataset.lang);langWrap.classList.remove('open');mob.classList.remove('open');syncMenu();}));
+  document.addEventListener('click',()=>langWrap.classList.remove('open'));
+  applyLang(new URLSearchParams(location.search).get('lang')||localStorage.getItem('rc_lang')||'pt');
+
+  addEventListener('pageshow',function(){try{mob.classList.remove('open');document.body.classList.remove('nav-open');}catch(e){}});
+</script>
+</body>
+</html>

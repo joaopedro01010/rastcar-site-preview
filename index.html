@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<title>RASTCAR · Rastreamento e segurança veicular</title>
+<meta name="description" content="Desde 2004 protegendo frotas e veículos em todo o Brasil, com operação em toda a América Latina. Rastreamento em tempo real, bloqueio remoto, cerca virtual e central 24h.">
+<meta name="theme-color" content="#0A0A0A">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rastcar">
+<meta property="og:title" content="Rastcar">
+<meta property="og:description" content="Rastreamento e segurança veicular em tempo real, no Brasil e em toda a América Latina, desde 2004.">
+<meta property="og:image" content="https://www.rastcar.com.br/assets/og-rastcar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="1200">
+<meta property="og:url" content="https://www.rastcar.com.br/">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rastcar">
+<meta name="twitter:description" content="Rastreamento e segurança veicular em tempo real, no Brasil e em toda a América Latina, desde 2004.">
+<meta name="twitter:image" content="https://www.rastcar.com.br/assets/og-rastcar.jpg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Rastcar","description":"Rastreamento e segurança veicular desde 2004. Rastreamento em tempo real, bloqueio remoto, cerca virtual e central 24 horas. Cobertura nacional e na América Latina.","foundingDate":"2004","url":"https://www.rastcar.com.br/","logo":"https://www.rastcar.com.br/assets/favicon.png","telephone":"+551231579090","email":"vendas@rastcar.com.br","taxID":"10.142.559/0001-00","slogan":"Para quem não aceita perder o que construiu","areaServed":[{"@type":"Country","name":"Brasil"},{"@type":"Country","name":"América Latina"}]}
+
+  addEventListener('pageshow',function(){try{mob.classList.remove('open');document.body.classList.remove('nav-open');}catch(e){}});
+</script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{
+    --ink:#0A0A0A;
+    --dark:#0A0A0A;
+    --line:rgba(255,255,255,.16);
+    --soft:rgba(255,255,255,.62);
+    --soft2:rgba(255,255,255,.42);
+    --onmedia:#FFFFFF;
+    --head:'Archivo',system-ui,sans-serif;
+    --body:'Archivo',system-ui,sans-serif;
+    --title:'D-DIN','D-DIN Exp',system-ui,sans-serif;
+    --mono:'Roboto Mono',ui-monospace,'SF Mono',Menlo,monospace;
+    --maxw:1340px;
+    --hdr-h:62px;
+    --tsh:0 1px 18px rgba(0,0,0,.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#000;color:var(--ink);font-family:var(--body);font-size:16px;font-weight:500;line-height:1.55;text-rendering:optimizeLegibility;overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(255,255,255,.25);color:#fff}
+  img{max-width:100%}
+
+  /* ============ HEADER — 100% transparente, sempre ============ */
+  header#hdr{
+    position:absolute;top:0;left:0;width:100%;z-index:200;height:var(--hdr-h);
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+    padding:0 clamp(16px,3vw,40px);background:transparent;
+  }
+  body.nav-open{overflow:hidden}
+
+  .brand{grid-column:2;display:flex;align-items:center;justify-self:center}
+  .brand .wm{height:19px;display:block;filter:drop-shadow(0 1px 10px rgba(0,0,0,.5))}
+
+  .nav-left{grid-column:1;justify-self:start;display:flex;align-items:center;gap:clamp(16px,1.8vw,28px)}
+  .nav-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:clamp(14px,1.6vw,22px)}
+  .navlink{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(255,255,255,.86);text-shadow:var(--tsh);background:none;border:0;cursor:pointer;transition:color .25s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
+  .navlink:hover{color:#fff}
+  .navlink .chev{width:6px;height:6px;border-right:1.4px solid currentColor;border-bottom:1.4px solid currentColor;transform:rotate(45deg) translateY(-1px)}
+
+  /* ---- mega-menu translúcido escuro (estilo "Vehicles" SpaceX) ---- */
+  .mega-wrap{position:static}
+  .mega{position:absolute;left:0;top:var(--hdr-h);width:100%;
+    background:rgba(10,11,13,.5);-webkit-backdrop-filter:blur(30px) saturate(1.2);backdrop-filter:blur(30px) saturate(1.2);
+    border-top:1px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.4);
+    opacity:0;visibility:hidden;transform:translateY(-8px);transition:.26s cubic-bezier(.2,.7,.2,1);z-index:190}
+  .mega-wrap:hover .mega,.mega.open{opacity:1;visibility:visible;transform:none}
+  .mega-inner{max-width:var(--maxw);margin:0 auto;padding:36px clamp(16px,3vw,40px) 44px;
+    display:grid;grid-template-columns:repeat(2,minmax(0,1fr)) auto;gap:0 clamp(34px,6vw,96px)}
+  .mega-col{display:flex;flex-direction:column}
+  .mega-h{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--soft2);margin-bottom:14px}
+  .mega-col a{font-family:var(--title);text-transform:uppercase;letter-spacing:.02em;font-size:16px;color:rgba(255,255,255,.8);padding:9px 0;transition:color .18s}
+  .mega-col a:hover{color:#fff}
+  .mega-end{justify-content:flex-start}
+  .mega-end .all{font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-top:30px;white-space:nowrap}
+
+  /* ---- idioma / cliente / cta ---- */
+  .lang{position:relative}
+  .lang-cur{display:flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:rgba(255,255,255,.86);text-shadow:var(--tsh);
+    font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:color .25s;padding:6px 2px}
+  .lang-cur:hover{color:#fff}
+  .lang-cur svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .menu-pop{position:absolute;top:calc(100% + 12px);right:0;background:rgba(10,11,13,.5);-webkit-backdrop-filter:blur(28px) saturate(1.2);backdrop-filter:blur(28px) saturate(1.2);
+    border:1px solid var(--line);border-radius:9px;padding:6px;box-shadow:0 18px 50px rgba(0,0,0,.4);
+    opacity:0;visibility:hidden;transform:translateY(-6px);transition:.22s;z-index:210}
+  .lang-menu{min-width:152px}
+  .lang.open .lang-menu{opacity:1;visibility:visible;transform:none}
+  .menu-pop button,.menu-pop a{display:block;width:100%;background:none;border:0;cursor:pointer;color:rgba(255,255,255,.82);
+    font-family:var(--head);font-size:13px;letter-spacing:.03em;text-align:left;padding:10px 12px;border-radius:6px;transition:.18s}
+  .menu-pop button:hover,.menu-pop a:hover{background:rgba(255,255,255,.07);color:#fff}
+  .menu-pop button.active{color:#fff}
+
+  .client-wrap{position:relative}
+  .client{display:flex;align-items:center;gap:7px;background:none;border:0;cursor:pointer;font:inherit;color:rgba(255,255,255,.86);text-shadow:var(--tsh);transition:color .3s}
+  .client:hover{color:#fff}
+  .client svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.6}
+  .client span{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.12em;text-transform:uppercase}
+  .client-menu{min-width:244px}
+  .client-wrap.open .client-menu,.client-wrap:hover .client-menu{opacity:1;visibility:visible;transform:none}
+  .client-menu .cm-main b{display:block;font-family:var(--head);text-transform:uppercase;letter-spacing:.04em;font-size:12.5px;color:#fff}
+  .client-menu .cm-main small{display:block;font-size:12px;color:var(--soft);margin-top:3px}
+  .client-menu .cm-label{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft2);padding:13px 12px 5px;border-top:1px solid var(--line);margin-top:5px}
+
+  .btn{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.6);color:#fff;padding:11px 22px;border-radius:2px;transition:all .25s;white-space:nowrap;background:transparent;cursor:pointer;text-shadow:none}
+  .btn:hover{background:#fff;color:var(--ink);border-color:#fff}
+  .btn.solid{background:#fff;color:var(--ink);border-color:#fff}
+  .btn.solid:hover{background:rgba(255,255,255,.86);border-color:rgba(255,255,255,.86)}
+
+  .menu-toggle{display:none;grid-column:3;justify-self:end;background:none;border:0;color:#fff;cursor:pointer;width:24px;height:16px;position:relative;z-index:220;filter:drop-shadow(0 1px 8px rgba(0,0,0,.5))}
+  .menu-toggle span{position:absolute;left:0;width:100%;height:2px;background:currentColor;transition:.3s;border-radius:2px}
+  /* area de toque de 44x44 (minimo acessivel) sem alterar o visual das barras */
+  .menu-toggle::after{content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px}
+  .menu-toggle span:nth-child(1){top:0}.menu-toggle span:nth-child(2){top:7px}.menu-toggle span:nth-child(3){top:14px}
+
+  /* ============ SCENE — full-bleed, sem divisória ============ */
+  .scene{position:relative;height:100vh;height:100svh;min-height:580px;display:flex;padding:0 clamp(20px,5vw,72px);overflow:hidden}
+  .scene .bg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center;filter:brightness(1.03) saturate(1.03)}
+  .scene .bgv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+  /* a Terra e uma esfera: contain em qualquer tela (o preto do video encosta no preto da pagina),
+     assim o planeta nunca fica cortado. No celular o source e a versao quadrada, que preenche
+     bem o retrato; no desktop, a 16:9. */
+  #cobertura{background:#000}
+  #cobertura .bgv{object-fit:contain}
+  .scene .veil{position:absolute;inset:0;z-index:1;background:
+    linear-gradient(90deg,rgba(0,0,0,.5)0%,rgba(0,0,0,.16)42%,transparent 70%),
+    linear-gradient(0deg,rgba(0,0,0,.44)0%,transparent 30%),
+    linear-gradient(180deg,rgba(0,0,0,.34)0%,transparent 16%)}
+  .scene.center .veil{background:linear-gradient(0deg,rgba(0,0,0,.46),transparent 36%),linear-gradient(180deg,rgba(0,0,0,.34),transparent 18%),radial-gradient(120% 92% at 50% 60%,transparent 42%,rgba(0,0,0,.3))}
+  .scene.right .veil,.scene.midright .veil{background:linear-gradient(270deg,rgba(0,0,0,.5)0%,rgba(0,0,0,.14)40%,transparent 70%),linear-gradient(0deg,rgba(0,0,0,.44)0%,transparent 30%),linear-gradient(180deg,rgba(0,0,0,.34)0%,transparent 16%)}
+  /* faixas de blend: topo e base de cada cena escurecem pra "conectar" com a vizinha — sem divisória */
+  .scene::before,.scene::after{content:"";position:absolute;left:0;width:100%;z-index:1;pointer-events:none}
+  .scene::before{top:0;height:13vh;background:linear-gradient(180deg,rgba(0,0,0,.6) 0%,rgba(0,0,0,.28) 30%,transparent 100%)}
+  .scene::after{bottom:0;height:13vh;background:linear-gradient(0deg,rgba(0,0,0,.64) 0%,rgba(0,0,0,.3) 30%,transparent 100%)}
+  .scene .inner{position:relative;z-index:2;width:100%;max-width:var(--maxw);margin:0 auto;
+    display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:clamp(56px,10vh,100px);padding-top:calc(var(--hdr-h) + 20px);color:var(--onmedia)}
+  .scene.center .inner{justify-content:center;align-items:center;text-align:center}
+  .scene.right .inner{align-items:flex-end;text-align:right}
+  .scene.midleft .inner{justify-content:center;align-items:flex-start}
+  .scene.midright .inner{justify-content:center;align-items:flex-end;text-align:right}
+  .scene h1,.scene h2,.scene .lede{color:#fff}
+  .scene h1,.scene h2{text-shadow:0 2px 24px rgba(0,0,0,.42)}
+
+  .eyebrow{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    color:rgba(255,255,255,.82);text-shadow:var(--tsh);margin-bottom:14px;display:flex;align-items:center;gap:11px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:rgba(255,255,255,.6)}
+  .scene.center .eyebrow{justify-content:center}
+  h1,h2{font-family:var(--title);font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:1.04;text-wrap:balance}
+  h1{font-size:clamp(30px,4.2vw,56px)}
+  h2{font-size:clamp(26px,3.4vw,46px)}
+  .lede{font-size:clamp(14.5px,1.05vw,16.5px);font-weight:500;line-height:1.55;color:rgba(255,255,255,.9);text-shadow:0 1px 14px rgba(0,0,0,.4);max-width:46ch;margin-top:16px;text-wrap:pretty}
+  .scene.center .lede{margin-left:auto;margin-right:auto}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .scene.center .cta-row{justify-content:center}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.07s}.reveal.d2{transition-delay:.14s}.reveal.d3{transition-delay:.21s}
+
+  .cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.78);
+    display:flex;flex-direction:column;align-items:center;gap:8px}
+  .cue .ln{width:1px;height:30px;background:linear-gradient(#fff,transparent);animation:cue 2.4s ease-in-out infinite}
+  @keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  .price{display:flex;gap:clamp(24px,5vw,52px);margin-top:30px;flex-wrap:wrap}
+  .price .it .v{font-family:var(--title);font-weight:700;font-size:clamp(26px,3vw,40px);color:#fff}
+  .price .it .v small{font-size:14px;color:rgba(255,255,255,.66);font-weight:500}
+  .price .it .k{font-family:var(--mono);font-weight:500;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.66);margin-top:8px}
+  .fineprint{font-size:12px;color:rgba(255,255,255,.66);margin-top:22px;letter-spacing:.02em}
+
+  /* ---------- RASTREIO — radar HUD monocromático ---------- */
+  #rastreio{align-items:center}
+  #rastreio .console{display:none}
+  /* imagem clara: veu escuro so no canto esquerdo (atras do texto branco) e um toque no rodape do HUD; o resto da imagem fica claro */
+  #rastreio .veil{background:
+    linear-gradient(90deg,rgba(0,0,0,.74)0%,rgba(0,0,0,.52)24%,rgba(0,0,0,.2)46%,transparent 66%),
+    radial-gradient(120% 80% at 8% 62%,rgba(0,0,0,.5),transparent 55%),
+    linear-gradient(0deg,rgba(0,0,0,.32)0%,transparent 24%)}
+  #central .veil{background:radial-gradient(92% 84% at 50% 56%,rgba(0,0,0,.6),transparent 72%),linear-gradient(0deg,rgba(0,0,0,.74),transparent 62%),linear-gradient(180deg,rgba(0,0,0,.42),transparent 20%)}
+  #central .price .it .v,#central .price .it .k,#central .fineprint,#central .lede{text-shadow:0 1px 16px rgba(0,0,0,.72)}
+  #central::after{height:22vh;background:linear-gradient(0deg,rgba(0,0,0,.7) 0%,rgba(0,0,0,.3) 34%,transparent)}
+  .console{position:absolute;inset:0;z-index:1;overflow:hidden;pointer-events:none}
+  .radar{position:absolute;top:50%;right:max(3vw,calc(50% - 650px));transform:translateY(-50%);width:min(50vw,480px);aspect-ratio:1;border-radius:50%}
+  .radar svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .r-ring{fill:none;stroke:rgba(255,255,255,.2);stroke-width:1}
+  .r-ring.dim{stroke:rgba(255,255,255,.08)}
+  .r-cross{stroke:rgba(255,255,255,.1);stroke-width:1}
+  .r-tick{stroke:rgba(255,255,255,.55);stroke-width:1.5}
+  .route{fill:none;stroke:rgba(255,255,255,.92);stroke-width:1.6;stroke-linecap:round;filter:drop-shadow(0 0 5px rgba(255,255,255,.5));stroke-dasharray:5 9;animation:flow 4s linear infinite}
+  @keyframes flow{to{stroke-dashoffset:-140}}
+  .mover{fill:#fff;filter:drop-shadow(0 0 6px #fff)}
+  .sweep{position:absolute;inset:0;border-radius:50%;
+    background:conic-gradient(from 0deg,rgba(255,255,255,.26),rgba(255,255,255,.04)28deg,transparent 70deg,transparent 360deg);
+    -webkit-mask:radial-gradient(closest-side,#000 99%,transparent 100%);mask:radial-gradient(closest-side,#000 99%,transparent 100%);animation:radar 5.5s linear infinite}
+  @keyframes radar{to{transform:rotate(360deg)}}
+  .target{position:absolute;left:53.5%;top:41.5%;width:0;height:0}
+  .target .dot{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 12px 2px rgba(255,255,255,.8)}
+  .target .pulse{position:absolute;left:-4px;top:-4px;width:8px;height:8px;border-radius:50%;border:1.5px solid rgba(255,255,255,.85);animation:tgt 2.4s ease-out infinite}
+  @keyframes tgt{0%{transform:scale(1);opacity:.9}100%{transform:scale(7);opacity:0}}
+  .target .tag{position:absolute;left:28px;top:-7px;font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.9);white-space:nowrap}
+  .hud{position:absolute;z-index:3;font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;color:rgba(255,255,255,.82);pointer-events:none}
+  .hud.live{display:flex;align-items:center;gap:8px;color:#fff}
+  .hud.live i{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px #fff;animation:blink 1.6s step-end infinite}
+  @keyframes blink{50%{opacity:.25}}
+  .hud .row{display:flex;gap:7px;margin-top:4px}.hud .row b{color:#fff;font-weight:500}
+
+  /* ============ FOOTER — minimalista estilo SpaceX ============ */
+  footer{background:transparent;color:var(--soft);padding:clamp(54px,8vh,96px) clamp(20px,5vw,72px) 48px;text-align:center}
+  .foot-inner{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:24px}
+  .socials{display:flex;gap:24px;justify-content:center}
+  .socials a{color:rgba(255,255,255,.66);transition:color .2s}
+  .socials a:hover{color:#fff}
+  .socials svg{width:22px;height:22px;fill:currentColor;display:block}
+  .foot-meta{font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.5);line-height:2.1}
+  .foot-meta a{color:rgba(255,255,255,.72)}.foot-meta a:hover{color:#fff}
+
+  /* ============ RTL ============ */
+  [dir="rtl"] .scene .inner,[dir="rtl"] .lede{text-align:right}
+  [dir="rtl"] .eyebrow{flex-direction:row-reverse}
+  [dir="rtl"] .scene.center .inner,[dir="rtl"] .scene.center .lede{text-align:center}
+  [dir="rtl"] .menu-pop{right:auto;left:0}
+  [dir="rtl"] .mega-rest{border-left:0;border-right:1px solid var(--line);padding-left:0;padding-right:24px}
+
+  /* ============ RESPONSIVE ============ */
+  @media(max-width:1080px){
+    .nav-left .navlink:not(.mega-trigger){display:none}
+    .nav-right .client span{display:none}
+  }
+  @media(max-width:860px){
+    .nav-left,.nav-right{display:none}
+    .menu-toggle{display:block}
+    .mega-inner{grid-template-columns:1fr 1fr}
+    .mega-rest{grid-column:1/-1;border-left:0;border-top:1px solid var(--line);padding:16px 0 0;margin-top:6px}
+    nav#mobnav{position:fixed;inset:0;background:rgba(8,9,11,.96);-webkit-backdrop-filter:blur(22px);backdrop-filter:blur(22px);
+      z-index:195;flex-direction:column;justify-content:center;gap:6px;padding:84px 26px 40px;overflow:auto;display:none}
+    nav#mobnav.open{display:flex}
+    nav#mobnav a,nav#mobnav button{font-family:var(--title);text-transform:uppercase;letter-spacing:.02em;font-size:21px;color:#fff;
+      background:none;border:0;text-align:left;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+    nav#mobnav .mob-sub a{font-family:var(--head);font-size:13.5px;letter-spacing:.04em;color:var(--soft);padding:8px 0;border:0}
+    nav#mobnav .mob-lang{display:flex;gap:10px;margin-top:16px}
+    nav#mobnav .mob-lang button{font-size:14px;border:1px solid var(--line);border-radius:999px;padding:7px 15px}
+    nav#mobnav .btn{margin-top:16px;align-self:flex-start}
+  }
+  @media(min-width:861px){ nav#mobnav{display:none} }
+  @media(max-width:680px){
+    .scene .inner,.scene.right .inner,.scene.midleft .inner,.scene.midright .inner,.scene.center .inner{justify-content:flex-end;align-items:flex-start;text-align:left}
+    .scene .eyebrow,.scene.center .eyebrow{justify-content:flex-start}
+    .scene .lede{max-width:100%}
+    .scene .veil,.scene.center .veil,.scene.right .veil,.scene.midright .veil{background:linear-gradient(0deg,rgba(0,0,0,.64),rgba(0,0,0,.16) 52%,transparent 82%)}
+    #central .price{gap:20px 28px}
+  }
+  @media(max-width:520px){
+    h1{font-size:32px}h2{font-size:27px}
+    .radar{opacity:.42;right:50%;transform:translate(50%,-50%)}
+    .hud{display:none}
+    .foot-base{flex-direction:column;align-items:flex-start}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none}
+    .route,.sweep,.mover,.target .pulse,.hud.live i,.cue .ln{animation:none}
+    .bgv{display:none}
+  }
+
+  /* ===== fallbacks p/ navegadores antigos (cross-device) ===== */
+  @supports not (aspect-ratio:1/1){.card{height:0;padding-bottom:75%}}
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.mega,.menu-pop{background:rgba(10,11,13,.95)}nav#mobnav{background:rgba(8,9,11,.98)}}
+
+  /* ===== menu mobile reformulado (pratico, rolavel, ancorado no topo) ===== */
+  @media(max-width:860px){
+    nav#mobnav{justify-content:flex-start;align-items:stretch;gap:0;padding:calc(var(--hdr-h) + 20px) 26px 40px}
+    nav#mobnav a,nav#mobnav>button{font-family:var(--title);text-transform:uppercase;letter-spacing:.02em;font-size:19px;color:#fff;text-align:left;padding:15px 2px;border-bottom:1px solid var(--line);width:100%}
+    nav#mobnav .mob-sub{display:flex;flex-direction:column;padding:2px 0 6px}
+    nav#mobnav #mobList{display:flex;flex-direction:column}
+    nav#mobnav .mob-sub a{font-family:var(--head);font-size:14.5px;letter-spacing:.03em;text-transform:none;color:var(--soft);padding:11px 0 11px 16px;border-bottom:0}
+    nav#mobnav .mob-lang{display:flex;gap:9px;margin-top:24px;padding:0;border:0}
+    nav#mobnav .mob-lang button{width:auto;font-family:var(--head);font-size:14px;border:1px solid var(--line);border-radius:999px;padding:9px 18px;color:#fff;text-transform:uppercase}
+    nav#mobnav .btn{width:100%;text-align:center;margin-top:22px;background:#fff;color:var(--ink);border-color:#fff;font-size:13px;letter-spacing:.14em;padding:16px;border-bottom:1px solid #fff}
+  }
+  /* hamburguer -> X quando aberto */
+  body.nav-open .menu-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  body.nav-open .menu-toggle span:nth-child(2){opacity:0}
+  body.nav-open .menu-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <nav class="nav-left">
+    <div class="mega-wrap">
+      <a class="navlink mega-trigger" href="equipamentos.html"><span data-i18n="nav.equip">Equipamentos</span><i class="chev"></i></a>
+      <div class="mega" id="mega">
+        <div class="mega-inner">
+          <div class="mega-col">
+            <div class="mega-h" data-i18n="mm.t">Equipamentos Rastcar</div>
+            <a href="produto.html?p=rastreador" data-i18n="mm.p1">Rastreador 4G</a>
+            <a href="produto.html?p=camera" data-i18n="mm.p2">Câmera IA</a>
+            <a href="produto.html?p=isca" data-i18n="mm.p3">Isca oculta</a>
+            <a href="produto.html?p=panico" data-i18n="mm.p4">Botão de pânico</a>
+            <a href="produto.html?p=trava" data-i18n="mm.p5">Trava de baú</a>
+            <a href="produto.html?p=teclado" data-i18n="mm.p6">Teclado</a>
+    <a href="equipamentos.html" data-i18n="mm.all">Ver todos →</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-h" data-i18n="mm.more">Mais equipamentos</div>
+            <a href="produto.html?p=sensor-porta" data-i18n="mm.r1">Sensor de porta</a>
+            <a href="produto.html?p=temperatura" data-i18n="mm.r2">Sensor de temperatura</a>
+            <a href="produto.html?p=telemetria" data-i18n="mm.r3">Telemetria</a>
+            <a href="produto.html?p=app" data-i18n="mm.r4">App e plataforma</a>
+            <a href="produto.html?p=central" data-i18n="mm.r5">Central 24h</a>
+          </div>
+          <div class="mega-col mega-end">
+            <a class="all" href="equipamentos.html" data-i18n="mm.all">Ver todos →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="navlink" href="#cobertura" data-i18n="nav.coverage">Cobertura</a>
+    <a class="navlink" href="#frota" data-i18n="nav.fleet">Frota</a>
+  </nav>
+
+  <a class="brand" href="#top" aria-label="Rastcar">
+    <img class="wm" src="assets/wordmark-white.png" alt="RASTCAR">
+  </a>
+
+  <div class="nav-right">
+    <div class="lang" id="lang">
+      <button class="lang-cur" type="button" aria-haspopup="true" aria-label="Idioma">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg>
+        <span id="langCur">PT</span>
+      </button>
+      <div class="menu-pop lang-menu">
+        <button type="button" data-lang="pt">Português</button>
+        <button type="button" data-lang="es">Español</button>
+        <button type="button" data-lang="en">English</button>
+        <button type="button" data-lang="he" lang="he">עברית</button>
+      </div>
+    </div>
+    <div class="client-wrap" id="clientWrap">
+      <button class="client" type="button" aria-haspopup="true" title="Área do cliente">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="1.5"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
+        <span data-i18n="nav.client">Área do cliente</span>
+      </button>
+      <div class="menu-pop client-menu">
+        <a class="cm-main" href="http://gps7.com.br/gps7/index.php?c=90" target="_blank" rel="noopener">
+          <b data-i18n="cm.platform">Plataforma de rastreamento</b>
+          <small data-i18n="cm.platformS">Acompanhe seu veículo ao vivo</small>
+        </a>
+        <div class="cm-label" data-i18n="cm.via">2ª via de boleto</div>
+        <a href="https://www.sicoob.com.br/web/sicoob/segunda-via-boleto" target="_blank" rel="noopener">Sicoob</a>
+        <a href="https://www.sicredi.com.br/segundaviaboleto/" target="_blank" rel="noopener">Sicredi</a>
+      </div>
+    </div>
+    <a class="btn" data-cta-wa href="https://wa.me/551231579090?text=Quero%20proteger%20meu%20ve%C3%ADculo%20com%20a%20Rastcar" target="_blank" rel="noopener" data-i18n="nav.cta">Falar agora</a>
+  </div>
+
+  <button class="menu-toggle" id="mt" aria-label="Menu"><span></span><span></span><span></span></button>
+</header>
+
+<nav id="mobnav">
+  <a href="equipamentos.html" data-i18n="nav.equip">Equipamentos</a>
+  <div class="mob-sub">
+    <a href="produto.html?p=rastreador" data-i18n="mm.p1">Rastreador 4G</a>
+    <a href="produto.html?p=camera" data-i18n="mm.p2">Câmera IA</a>
+    <a href="produto.html?p=isca" data-i18n="mm.p3">Isca oculta</a>
+    <a href="produto.html?p=panico" data-i18n="mm.p4">Botão de pânico</a>
+    <a href="produto.html?p=trava" data-i18n="mm.p5">Trava de baú</a>
+    <a href="produto.html?p=teclado" data-i18n="mm.p6">Teclado</a>
+    <a href="equipamentos.html" data-i18n="mm.all">Ver todos →</a>
+  </div>
+  <a href="#cobertura" data-i18n="nav.coverage">Cobertura</a>
+  <a href="#frota" data-i18n="nav.fleet">Frota</a>
+  <a href="http://gps7.com.br/gps7/index.php?c=90" target="_blank" rel="noopener" data-i18n="nav.client">Área do cliente</a>
+  <div class="mob-lang">
+    <button type="button" data-lang="pt">PT</button>
+    <button type="button" data-lang="es">ES</button>
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="he" lang="he">עב</button>
+  </div>
+  <a class="btn" data-cta-wa href="https://wa.me/551231579090?text=Quero%20proteger%20meu%20ve%C3%ADculo%20com%20a%20Rastcar" target="_blank" rel="noopener" data-i18n="nav.cta">Falar agora</a>
+</nav>
+
+<!-- 01 · HERO (vídeo) -->
+<section class="scene" id="top">
+  <video class="bgv" autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="assets/cine/poster-hero.jpg">
+    <source src="assets/cine/hero-velar-4k.av1.mp4" type='video/mp4; codecs="av01.0.12M.08"' media="(min-width: 1400px), (min-width: 900px) and (min-resolution: 2dppx)">
+    <source src="assets/cine/hero-velar-1080.av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
+    <source src="assets/cine/hero-velar-loop.mp4" type="video/mp4">
+  </video>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="eyebrow reveal" data-i18n="hero.eyebrow">Rastreamento e segurança veicular · desde 2004</div>
+    <h1 class="reveal d1" data-i18n="hero.h">Para quem não aceita<br>perder o que construiu</h1>
+    <p class="lede reveal d2" data-i18n="hero.lede">Rastreamento em tempo real, bloqueio remoto e central 24 horas. O controle total do seu veículo na palma da mão, no Brasil e em toda a América Latina.</p>
+    <div class="cta-row reveal d3">
+      <a class="btn solid" data-cta-wa href="https://wa.me/551231579090?text=Quero%20um%20or%C3%A7amento%20da%20Rastcar" target="_blank" rel="noopener" data-i18n="hero.cta1">Pedir orçamento</a>
+      <a class="btn" href="#frota" data-i18n="hero.cta2">Ver como funciona</a>
+    </div>
+  </div>
+  <div class="cue"><span data-i18n="hero.cue">Role</span><span class="ln"></span></div>
+</section>
+
+<!-- 02 · FROTA / DADOS (vídeo) -->
+<section class="scene right" id="frota">
+  <video class="bgv lazyv" muted loop playsinline webkit-playsinline preload="none" poster="assets/cine/poster-frota.jpg">
+    <source data-src="assets/cine/frota-cine-4k.av1.mp4" type='video/mp4; codecs="av01.0.12M.08"' media="(min-width: 1400px), (min-width: 900px) and (min-resolution: 2dppx)">
+    <source data-src="assets/cine/frota-cine-1080.av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
+    <source data-src="assets/cine/frota-cine-loop.mp4" type="video/mp4">
+  </video>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="eyebrow reveal" data-i18n="s4.eyebrow">Gestão de frota · telemetria</div>
+    <h2 class="reveal d1" data-i18n="s4.h">Dados. O ativo mais<br>valioso do mundo</h2>
+    <p class="lede reveal d2" data-i18n="s4.lede">Mais de 40 relatórios, telemetria de condução e a operação inteira em um só painel. Você enxerga cada custo, corta o desperdício e mantém a frota sob controle.</p>
+    <div class="cta-row reveal d3">
+      <a class="btn" data-cta-wa href="https://wa.me/551231579090?text=Quero%20rastrear%20minha%20frota%20com%20a%20Rastcar" target="_blank" rel="noopener" data-i18n="s4.cta">Falar sobre frota</a>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · RASTREAMENTO (imagem) -->
+<section class="scene" id="rastreio">
+  <div class="bg" style="background-image:url('assets/cine/rastreio-cine.jpg')"></div>
+  <div class="veil"></div>
+  <div class="console" aria-hidden="true">
+    <div class="radar">
+      <svg viewBox="0 0 600 600">
+        <circle class="r-ring" cx="300" cy="300" r="290"/>
+        <circle class="r-ring dim" cx="300" cy="300" r="218"/>
+        <circle class="r-ring" cx="300" cy="300" r="146"/>
+        <circle class="r-ring dim" cx="300" cy="300" r="74"/>
+        <line class="r-cross" x1="10" y1="300" x2="590" y2="300"/>
+        <line class="r-cross" x1="300" y1="10" x2="300" y2="590"/>
+        <line class="r-tick" x1="300" y1="10" x2="300" y2="26"/>
+        <line class="r-tick" x1="300" y1="574" x2="300" y2="590"/>
+        <line class="r-tick" x1="10" y1="300" x2="26" y2="300"/>
+        <line class="r-tick" x1="574" y1="300" x2="590" y2="300"/>
+        <path id="routepath" class="route" d="M70,360 C170,300 220,230 300,250 S430,180 470,120"/>
+        <circle class="mover" r="4">
+          <animateMotion dur="7s" repeatCount="indefinite" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines="0.4 0 0.2 1">
+            <mpath href="#routepath"/>
+          </animateMotion>
+        </circle>
+      </svg>
+      <div class="sweep"></div>
+      <div class="target">
+        <div class="pulse"></div><div class="dot"></div>
+        <div class="tag" data-i18n="s2.tag">VEÍCULO 01 · ATIVO</div>
+      </div>
+    </div>
+  </div>
+  <div class="inner">
+    <div class="eyebrow reveal" data-i18n="s2.eyebrow">Rastreamento em tempo real</div>
+    <h2 class="reveal d1" data-i18n="s2.h">Onde ele estiver.<br>Agora.</h2>
+    <p class="lede reveal d2" data-i18n="s2.lede">Posição ao vivo no mapa, histórico de cada rota e cerca virtual. Você traça o limite e, no instante em que o veículo cruza, o alerta chega na sua mão.</p>
+  </div>
+</section>
+
+<!-- 04 · COBERTURA (vídeo) -->
+<section class="scene midleft" id="cobertura">
+  <video class="bgv lazyv" muted loop playsinline webkit-playsinline preload="none" poster="assets/cine/poster-cobertura.jpg">
+    <!-- no celular a versao quadrada: a esfera aparece inteira, sem as beiradas cortadas -->
+    <source data-src="assets/cine/earth-mobile.av1.mp4" type='video/mp4; codecs="av01.0.08M.08"' media="(max-width: 899px)">
+    <source data-src="assets/cine/earth-mobile.mp4" type="video/mp4" media="(max-width: 899px)">
+    <source data-src="assets/cine/earth-4k.av1.mp4" type='video/mp4; codecs="av01.0.12M.08"' media="(min-width: 1400px), (min-width: 900px) and (min-resolution: 2dppx)">
+    <source data-src="assets/cine/earth-1080.av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
+    <source data-src="assets/cine/earth-loop.mp4" type="video/mp4">
+  </video>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="eyebrow reveal" data-i18n="s5.eyebrow">Cobertura nacional</div>
+    <h2 class="reveal d1" data-i18n="s5.h">Do Brasil à América Latina.<br>Sem fronteiras</h2>
+    <p class="lede reveal d2" data-i18n="s5.lede">Mais de 20 anos protegendo frotas e veículos em todo o Brasil, com operação em toda a América Latina. Cobertura nacional, sem exceção.</p>
+  </div>
+</section>
+
+<!-- 05b · ALÉM DO ASFALTO (embarcações) -->
+<section class="scene right" id="mar">
+  <div class="bg" style="background-image:url('assets/cine/mar-cine.jpg')"></div>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="eyebrow reveal" data-i18n="s5b.eyebrow">Embarcações · máquinas · frota pesada</div>
+    <h2 class="reveal d1" data-i18n="s5b.h">Nem tudo o que você<br>protege anda em estrada</h2>
+    <p class="lede reveal d2" data-i18n="s5b.lede">Lancha, veleiro, jet ski ou barco de pesca entram no mesmo sistema do carro e da frota: posição em tempo real, cerca virtual e alerta na central. Onde o sinal de telefonia não chega, a versão satelital mantém a embarcação no mapa.</p>
+    <div class="cta-row reveal d3">
+      <a class="btn ghost" href="equipamentos.html" data-i18n="s5b.cta">Ver equipamentos</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- 05 · CONTROLE (imagem) -->
+<section class="scene midright" id="controle">
+  <div class="bg" style="background-image:url('assets/cine/controle-cine.jpg')"></div>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="eyebrow reveal" data-i18n="s3.eyebrow">Bloqueio remoto · cerca virtual</div>
+    <h2 class="reveal d1" data-i18n="s3.h">O controle<br>na sua mão</h2>
+    <p class="lede reveal d2" data-i18n="s3.lede">No furto, você corta o motor a distância. Pelo app você comanda, recebe o alerta e age em segundos, sem depender de ninguém.</p>
+  </div>
+</section>
+
+<!-- 06 · FECHAMENTO / CENTRAL 24H (vídeo) -->
+<section class="scene center" id="central">
+  <video class="bgv lazyv" muted loop playsinline webkit-playsinline preload="none" poster="assets/cine/poster-central.jpg">
+    <source data-src="assets/cine/central-cine-4k.av1.mp4" type='video/mp4; codecs="av01.0.12M.08"' media="(min-width: 1400px), (min-width: 900px) and (min-resolution: 2dppx)">
+    <source data-src="assets/cine/central-cine-1080.av1.mp4" type='video/mp4; codecs="av01.0.08M.08"'>
+    <source data-src="assets/cine/central-cine-loop.mp4" type="video/mp4">
+  </video>
+  <div class="veil"></div>
+  <div class="inner">
+    <div class="eyebrow reveal" data-i18n="s7.eyebrow">Desde 2004 · central 24 horas</div>
+    <h2 class="reveal d1" data-i18n="s7.h">Assuma o controle hoje</h2>
+    <p class="lede reveal d2" data-i18n="s7.lede">Instalação rápida, monitoramento no mesmo dia e suporte de quem protege veículos e frotas há mais de 20 anos, no Brasil e em toda a América Latina.</p>
+    <div class="price reveal d2">
+      <div class="it"><div class="v">20+</div><div class="k" data-i18n="s7.k1">Anos no mercado</div></div>
+      <div class="it"><div class="v">40+</div><div class="k" data-i18n="s7.k2">Relatórios e telemetria</div></div>
+      <div class="it"><div class="v">24<small data-i18n="s7.k3s">h</small></div><div class="k" data-i18n="s7.k3">Central monitorando</div></div>
+    </div>
+    <p class="lede reveal d2" data-i18n="s7.plan" style="max-width:52ch;font-size:clamp(13px,.95vw,15px);opacity:.92">Plano sob medida. O valor varia conforme o pacote ideal para o seu veículo ou frota. Fale com a gente e receba uma proposta personalizada.</p>
+    <div class="cta-row reveal d3">
+      <a class="btn solid" data-cta-wa href="https://wa.me/551231579090?text=Quero%20contratar%20a%20Rastcar" target="_blank" rel="noopener" data-i18n="s7.cta">Quero meu orçamento</a>
+      <a class="btn" href="tel:+551231579090">(12) 3157-9090</a>
+    </div>
+    <div class="fineprint reveal d3" data-i18n="s7.fine">Atendimento no Brasil e em toda a América Latina · CNPJ 10.142.559/0001-00</div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-inner">
+    <a class="brand" href="#top" aria-label="Rastcar" style="justify-self:center"><img class="wm" src="assets/wordmark-white.png" alt="RASTCAR" style="height:20px"></a>
+    <div class="socials">
+      <a href="https://wa.me/551231579090" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.485 3.488"/></svg></a>
+      <a href="https://www.instagram.com/rastcar" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+    </div>
+    <div class="foot-meta">
+      <a href="mailto:vendas@rastcar.com.br">vendas@rastcar.com.br</a> · (12) 3157-9090<br>
+      © 2026 Rastcar · CNPJ 10.142.559/0001-00 · <span data-i18n="f.cob">Cobertura nacional + América Latina</span><br>
+      <span data-i18n="fz.via">2ª via:</span>
+      <a href="https://www.sicoob.com.br/web/sicoob/segunda-via-boleto" target="_blank" rel="noopener">Sicoob</a> ·
+      <a href="https://www.sicredi.com.br/segundaviaboleto/" target="_blank" rel="noopener">Sicredi</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  function playAllBgv(){document.querySelectorAll('video.bgv').forEach(function(v){v.muted=true;var p=v.play();if(p&&p.catch)p.catch(function(){});});}
+  addEventListener('touchstart',playAllBgv,{once:true,passive:true});addEventListener('click',playAllBgv,{once:true});
+
+  // mobile menu overlay
+  const mt=document.getElementById('mt'),mob=document.getElementById('mobnav');
+  function syncMenu(){const open=mob.classList.contains('open');document.body.classList.toggle('nav-open',open);mt.setAttribute('aria-expanded',open?'true':'false');}
+  mt.addEventListener('click',()=>{mob.classList.toggle('open');syncMenu();});
+  mob.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{mob.classList.remove('open');syncMenu();}));
+
+  // scroll reveal
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // lazy-load background videos
+  if(!reduce){
+    const lv=new IntersectionObserver((es)=>{
+      es.forEach(e=>{
+        if(!e.isIntersecting)return; lv.unobserve(e.target);
+        const v=e.target,ss=v.querySelectorAll('source[data-src]');
+        if(ss.length&&!ss[0].src){v.muted=true;v.setAttribute('playsinline','');ss.forEach(s=>{s.src=s.dataset.src});v.load();v.play().catch(()=>{});}
+      });
+    },{rootMargin:'400px'});
+    document.querySelectorAll('video.lazyv').forEach(v=>lv.observe(v));
+  }
+
+  // ---------- i18n (PT / ES / EN / HE) ----------
+  const I18N={
+    pt:{"s5b.eyebrow":"Embarcações · máquinas · frota pesada","s5b.h":"Nem tudo o que você<br>protege anda em estrada","s5b.lede":"Lancha, veleiro, jet ski ou barco de pesca entram no mesmo sistema do carro e da frota: posição em tempo real, cerca virtual e alerta na central. Onde o sinal de telefonia não chega, a versão satelital mantém a embarcação no mapa.","s5b.cta":"Ver equipamentos",
+      "nav.track":"Rastreamento","nav.control":"Controle","nav.fleet":"Frota","nav.coverage":"Cobertura","nav.equip":"Equipamentos","nav.client":"Área do cliente","nav.cta":"Falar agora","cm.platform":"Plataforma de rastreamento","cm.platformS":"Acompanhe seu veículo ao vivo","cm.via":"2ª via de boleto",
+      "mm.t":"Equipamentos Rastcar","mm.all":"Ver todos →","mm.p1":"Rastreador 4G","mm.p1s":"Tempo real, sem ponto cego","mm.p2":"Câmera IA","mm.p2s":"Avisa antes do acidente","mm.p3":"Isca oculta","mm.p3s":"Escondida, sempre transmitindo","mm.p4":"Botão de pânico","mm.p4s":"Um toque, a central assume","mm.p5":"Trava de baú","mm.p5s":"O baú só abre por ordem sua","mm.p6":"Teclado","mm.p6s":"Identifica quem dirigiu","mm.more":"Mais equipamentos","mm.r1":"Sensor de porta","mm.r2":"Sensor de temperatura","mm.r3":"Telemetria","mm.r4":"App e plataforma","mm.r5":"Central 24h",
+      "hero.eyebrow":"Rastreamento e segurança veicular · desde 2004","hero.h":"Para quem não aceita<br>perder o que construiu","hero.lede":"Rastreamento em tempo real, bloqueio remoto e central 24 horas. O controle total do seu veículo na palma da mão, no Brasil e em toda a América Latina.","hero.cta1":"Pedir orçamento","hero.cta2":"Ver como funciona","hero.cue":"Role",
+      "s4.eyebrow":"Gestão de frota · telemetria","s4.h":"Dados. O ativo mais<br>valioso do mundo","s4.lede":"Mais de 40 relatórios, telemetria de condução e a operação inteira em um só painel. Você enxerga cada custo, corta o desperdício e mantém a frota sob controle.","s4.cta":"Falar sobre frota",
+      "s2.eyebrow":"Rastreamento em tempo real","s2.h":"Onde ele estiver.<br>Agora.","s2.lede":"Posição ao vivo no mapa, histórico de cada rota e cerca virtual. Você traça o limite e, no instante em que o veículo cruza, o alerta chega na sua mão.","s2.tag":"VEÍCULO 01 · ATIVO","s2.live":"AO VIVO",
+      "s5.eyebrow":"Cobertura nacional","s5.h":"Do Brasil à América Latina.<br>Sem fronteiras","s5.lede":"Mais de 20 anos protegendo frotas e veículos em todo o Brasil, com operação em toda a América Latina. Cobertura nacional, sem exceção.",
+      "s3.eyebrow":"Bloqueio remoto · cerca virtual","s3.h":"O controle<br>na sua mão","s3.lede":"No furto, você corta o motor a distância. Pelo app você comanda, recebe o alerta e age em segundos, sem depender de ninguém.",
+      "s7.eyebrow":"Instalação · monitoramento · suporte","s7.h":"Assuma o controle hoje","s7.lede":"Instalação rápida, monitoramento no mesmo dia e suporte de quem protege veículos e frotas há mais de 20 anos, no Brasil e em toda a América Latina.","s7.k1":"Anos no mercado","s7.k2":"Relatórios e telemetria","s7.k3":"Central monitorando","s7.k3s":"h","s7.plan":"Plano sob medida. O valor varia conforme o pacote ideal para o seu veículo ou frota. Fale com a gente e receba uma proposta personalizada.","s7.cta":"Quero meu orçamento","s7.fine":"Atendimento no Brasil e em toda a América Latina · CNPJ 10.142.559/0001-00",
+      "f.cob":"Cobertura nacional + América Latina","fz.via":"2ª via:"
+    },
+    es:{"s5b.eyebrow":"Embarcaciones · máquinas · flota pesada","s5b.h":"No todo lo que proteges<br>anda por carretera","s5b.lede":"Lancha, velero, jet ski o barco de pesca entran en el mismo sistema del auto y de la flota: posición en tiempo real, cerca virtual y alerta en la central. Donde no llega la señal de telefonía, la versión satelital mantiene la embarcación en el mapa.","s5b.cta":"Ver equipos",
+      "nav.track":"Rastreo","nav.control":"Control","nav.fleet":"Flota","nav.coverage":"Cobertura","nav.equip":"Equipos","nav.client":"Área del cliente","nav.cta":"Hablar ahora","cm.platform":"Plataforma de rastreo","cm.platformS":"Sigue tu vehículo en vivo","cm.via":"2ª vía de boleto",
+      "mm.t":"Equipos Rastcar","mm.all":"Ver todos →","mm.p1":"Rastreador 4G","mm.p1s":"Tiempo real, sin punto ciego","mm.p2":"Cámara IA","mm.p2s":"Avisa antes del accidente","mm.p3":"Baliza oculta","mm.p3s":"Escondida, siempre transmitiendo","mm.p4":"Botón de pánico","mm.p4s":"Un toque, la central asume","mm.p5":"Traba de baúl","mm.p5s":"El baúl solo abre por tu orden","mm.p6":"Teclado","mm.p6s":"Identifica quién condujo","mm.more":"Más equipos","mm.r1":"Sensor de puerta","mm.r2":"Sensor de temperatura","mm.r3":"Telemetría","mm.r4":"App y plataforma","mm.r5":"Central 24h",
+      "hero.eyebrow":"Rastreo y seguridad vehicular · desde 2004","hero.h":"Para quien no acepta<br>perder lo que construyó","hero.lede":"Rastreo en tiempo real, bloqueo remoto y central 24 horas. El control total de tu vehículo en la palma de tu mano, en Brasil y en toda América Latina.","hero.cta1":"Pedir presupuesto","hero.cta2":"Ver cómo funciona","hero.cue":"Desliza",
+      "s4.eyebrow":"Gestión de flota · telemetría","s4.h":"Datos. El activo más<br>valioso del mundo","s4.lede":"Más de 40 informes, telemetría de conducción y toda la operación en un solo panel. Ves cada costo, cortas el desperdicio y mantienes la flota bajo control.","s4.cta":"Hablar sobre flota",
+      "s2.eyebrow":"Rastreo en tiempo real","s2.h":"Donde esté.<br>Ahora.","s2.lede":"Posición en vivo en el mapa, historial de cada ruta y cerca virtual. Tú trazas el límite y, en el instante en que el vehículo lo cruza, la alerta llega a tu mano.","s2.tag":"VEHÍCULO 01 · ACTIVO","s2.live":"EN VIVO",
+      "s5.eyebrow":"Cobertura nacional","s5.h":"De Brasil a América Latina.<br>Sin fronteras","s5.lede":"Más de 20 años protegiendo flotas y vehículos en todo Brasil, con operación en toda América Latina. Cobertura nacional, sin excepción.",
+      "s3.eyebrow":"Bloqueo remoto · cerca virtual","s3.h":"El control<br>en tu mano","s3.lede":"En un robo, cortas el motor a distancia. Desde la app tú comandas, recibes la alerta y actúas en segundos, sin depender de nadie.",
+      "s7.eyebrow":"Instalación · monitoreo · soporte","s7.h":"Toma el control hoy","s7.lede":"Instalación rápida, monitoreo el mismo día y soporte de quien protege vehículos y flotas hace más de 20 años, en Brasil y en toda América Latina.","s7.k1":"Años en el mercado","s7.k2":"Informes y telemetría","s7.k3":"Central monitoreando","s7.k3s":"h","s7.plan":"Plan a medida. El valor varía según el paquete ideal para tu vehículo o flota. Habla con nosotros y recibe una propuesta personalizada.","s7.cta":"Quiero mi presupuesto","s7.fine":"Atención en Brasil y en toda América Latina · CNPJ 10.142.559/0001-00",
+      "f.cob":"Cobertura nacional + América Latina","fz.via":"2ª vía:"
+    },
+    en:{"s5b.eyebrow":"Vessels · machinery · heavy fleet","s5b.h":"Not everything you protect<br>runs on a road","s5b.lede":"Speedboat, sailboat, jet ski or fishing vessel run on the same system as the car and the fleet: real time position, geofence and alerts at the control center. Where cellular signal ends, the satellite version keeps the vessel on the map.","s5b.cta":"See equipment",
+      "nav.track":"Tracking","nav.control":"Control","nav.fleet":"Fleet","nav.coverage":"Coverage","nav.equip":"Equipment","nav.client":"Client area","nav.cta":"Talk now","cm.platform":"Tracking platform","cm.platformS":"Track your vehicle live","cm.via":"Invoice · 2nd copy",
+      "mm.t":"Rastcar equipment","mm.all":"See all →","mm.p1":"4G Tracker","mm.p1s":"Real time, no blind spot","mm.p2":"AI Camera","mm.p2s":"Warns before the crash","mm.p3":"Hidden beacon","mm.p3s":"Concealed, always transmitting","mm.p4":"Panic button","mm.p4s":"One tap, the center takes over","mm.p5":"Cargo lock","mm.p5s":"The box opens only on your command","mm.p6":"Keypad","mm.p6s":"Identifies who drove","mm.more":"More equipment","mm.r1":"Door sensor","mm.r2":"Temperature sensor","mm.r3":"Telemetry","mm.r4":"App & platform","mm.r5":"24h center",
+      "hero.eyebrow":"Vehicle tracking & security · since 2004","hero.h":"For those who refuse<br>to lose what they built","hero.lede":"Real time tracking, remote immobilization and a 24/7 control center. Full control of your vehicle in the palm of your hand, across Brazil and Latin America.","hero.cta1":"Request a quote","hero.cta2":"See how it works","hero.cue":"Scroll",
+      "s4.eyebrow":"Fleet management · telemetry","s4.h":"Data. The world's most<br>valuable asset","s4.lede":"Over 40 reports, driving telemetry and your entire operation in a single dashboard. You see every cost, cut the waste and keep the fleet under control.","s4.cta":"Talk about fleet",
+      "s2.eyebrow":"Real time tracking","s2.h":"Wherever it is.<br>Right now.","s2.lede":"Live position on the map, history of every route and geofencing. You draw the line, and the moment the vehicle crosses it, the alert hits your hand.","s2.tag":"VEHICLE 01 · ACTIVE","s2.live":"LIVE",
+      "s5.eyebrow":"Nationwide coverage","s5.h":"From Brazil to Latin America.<br>No borders","s5.lede":"Over 20 years protecting fleets and vehicles across Brazil, with operations across Latin America. Nationwide coverage, no exceptions.",
+      "s3.eyebrow":"Remote immobilization · geofence","s3.h":"The control<br>in your hand","s3.lede":"In a theft, you cut the engine from afar. From the app you command, get the alert and act in seconds, depending on no one.",
+      "s7.eyebrow":"Installation · monitoring · support","s7.h":"Take control today","s7.lede":"Fast installation, same day monitoring and support from a company that has protected vehicles and fleets for over 20 years, across Brazil and Latin America.","s7.k1":"Years in the market","s7.k2":"Reports & telemetry","s7.k3":"Monitoring center","s7.k3s":"h","s7.plan":"Tailored plan. Pricing varies with the ideal package for your vehicle or fleet. Talk to us for a personalized quote.","s7.cta":"Get my quote","s7.fine":"Service across Brazil and Latin America · CNPJ 10.142.559/0001-00",
+      "f.cob":"Nationwide coverage + Latin America","fz.via":"2nd copy:"
+    },
+    he:{"s5b.eyebrow":"כלי שיט · מכונות · צי כבד","s5b.h":"לא כל מה שאתם מגנים עליו<br>נוסע על הכביש","s5b.lede":"סירת מנוע, מפרשית, אופנוע ים או סירת דיג נכנסים לאותה מערכת של הרכב והצי: מיקום בזמן אמת, גדר וירטואלית והתראה במוקד. היכן שאין קליטה סלולרית, הגרסה הלוויינית שומרת על כלי השיט על המפה.","s5b.cta":"לצפייה בציוד",
+      "nav.track":"מעקב","nav.control":"שליטה","nav.fleet":"צי","nav.coverage":"כיסוי","nav.equip":"ציוד","nav.client":"אזור לקוחות","nav.cta":"דברו איתנו","cm.platform":"פלטפורמת מעקב","cm.platformS":"עקבו אחר הרכב בשידור חי","cm.via":"עותק שני של החשבונית",
+      "mm.t":"ציוד Rastcar","mm.all":"לכל הציוד →","mm.p1":"משדר 4G","mm.p1s":"זמן אמת, בלי שטח מת","mm.p2":"מצלמת AI","mm.p2s":"מתריעה לפני התאונה","mm.p3":"משדר נסתר","mm.p3s":"מוסתר, תמיד משדר","mm.p4":"לחצן מצוקה","mm.p4s":"נגיעה אחת, המוקד משתלט","mm.p5":"נעילת מטען","mm.p5s":"התא נפתח רק בפקודה שלך","mm.p6":"מקלדת","mm.p6s":"מזהה מי נהג","mm.more":"עוד ציוד","mm.r1":"חיישן דלת","mm.r2":"חיישן טמפרטורה","mm.r3":"טלמטריה","mm.r4":"אפליקציה ופלטפורמה","mm.r5":"מוקד 24 שעות",
+      "hero.eyebrow":"איתור ואבטחת רכב · משנת 2004","hero.h":"למי שלא מוכן<br>לאבד את מה שבנה","hero.lede":"איתור בזמן אמת, חסימה מרחוק ומוקד 24 שעות. שליטה מלאה ברכב שלך בכף ידך, בכל ברזיל ובאמריקה הלטינית.","hero.cta1":"לקבלת הצעת מחיר","hero.cta2":"ראו איך זה עובד","hero.cue":"גלול",
+      "s4.eyebrow":"ניהול צי · טלמטריה","s4.h":"נתונים. הנכס היקר<br>בעולם","s4.lede":"יותר מ-40 דוחות, טלמטריית נהיגה וכל התפעול בלוח אחד. אתם רואים כל עלות, חותכים את הבזבוז ושומרים על הצי בשליטה.","s4.cta":"דברו איתנו על צי",
+      "s2.eyebrow":"איתור בזמן אמת","s2.h":"בכל מקום שהוא.<br>עכשיו.","s2.lede":"מיקום חי על המפה, היסטוריה של כל מסלול וגדר וירטואלית. אתם מתווים את הגבול, וברגע שהרכב חוצה אותו, ההתראה מגיעה לידכם.","s2.tag":"רכב 01 · פעיל","s2.live":"שידור חי",
+      "s5.eyebrow":"כיסוי ארצי","s5.h":"מברזיל לאמריקה הלטינית.<br>בלי גבולות","s5.lede":"יותר מ-20 שנה מגנים על ציים ורכבים בכל ברזיל, עם פעילות גם באמריקה הלטינית. כיסוי ארצי, ללא יוצא מן הכלל.",
+      "s3.eyebrow":"חסימה מרחוק · גדר וירטואלית","s3.h":"השליטה<br>בידיים שלך","s3.lede":"בגניבה, אתם מנתקים את המנוע מרחוק. דרך האפליקציה אתם שולטים, מקבלים את ההתראה ופועלים בשניות, בלי להיות תלויים באף אחד.",
+      "s7.eyebrow":"התקנה · ניטור · תמיכה","s7.h":"קחו שליטה היום","s7.lede":"התקנה מהירה, ניטור באותו יום ותמיכה של מי שמגן על רכבים וצים כבר יותר מ-20 שנה, בברזיל ובכל אמריקה הלטינית.","s7.k1":"שנים בשוק","s7.k2":"דוחות וטלמטריה","s7.k3":"מוקד ניטור","s7.k3s":"ש","s7.plan":"תוכנית בהתאמה אישית. המחיר משתנה לפי החבילה האידיאלית לרכב או לצי שלך. דברו איתנו לקבלת הצעה מותאמת.","s7.cta":"רוצה הצעת מחיר","s7.fine":"שירות בכל ברזיל ובאמריקה הלטינית · CNPJ 10.142.559/0001-00",
+      "f.cob":"כיסוי ארצי + אמריקה הלטינית","fz.via":"עותק שני:"
+    }
+  };
+  const ABBR={pt:"PT",es:"ES",en:"EN",he:"עב"};
+  let curLang=localStorage.getItem('rc_lang')||'pt';
+  function applyLang(lang){
+    curLang=lang;const d=I18N[lang]||I18N.pt;
+    document.documentElement.lang=(lang==='pt'?'pt-BR':lang);
+    document.documentElement.dir=(lang==='he'?'rtl':'ltr');
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const v=d[el.dataset.i18n];if(v!=null)el.innerHTML=v;});
+    const lc=document.getElementById('langCur');if(lc)lc.textContent=ABBR[lang];
+    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+    document.title={pt:'RASTCAR · Rastreamento e segurança veicular',es:'RASTCAR · Rastreo y seguridad vehicular',en:'RASTCAR · Vehicle tracking & security',he:'RASTCAR · איתור ואבטחת רכב'}[lang]||document.title;
+    try{localStorage.setItem('rc_lang',lang);}catch(e){}
+  }
+  const langWrap=document.getElementById('lang');
+  langWrap.querySelector('.lang-cur').addEventListener('click',e=>{e.stopPropagation();langWrap.classList.toggle('open');});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{applyLang(b.dataset.lang);langWrap.classList.remove('open');mob.classList.remove('open');syncMenu();}));
+  document.addEventListener('click',()=>langWrap.classList.remove('open'));
+  applyLang(new URLSearchParams(location.search).get('lang')||curLang);
+
+  // client area dropdown
+  const clientWrap=document.getElementById('clientWrap');
+  clientWrap.querySelector('.client').addEventListener('click',e=>{e.stopPropagation();clientWrap.classList.toggle('open');langWrap.classList.remove('open');});
+  document.addEventListener('click',()=>clientWrap.classList.remove('open'));
+</script>
+</body>
+</html>

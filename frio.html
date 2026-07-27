@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RASTCAR · Sensor de temperatura</title>
+<meta name="description" content="Portal do frio Rastcar: sensor de temperatura para vacinas, medicamentos, câmaras frias e cargas congeladas, com alerta na central 24h.">
+<meta name="theme-color" content="#0A0A0A">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://www.rastcar.com.br/frio.html">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{
+    --ink:#0A0A0A;
+    --line:rgba(255,255,255,.16);
+    --soft:rgba(255,255,255,.62);
+    --head:'Archivo',system-ui,sans-serif;
+    --title:'D-DIN','D-DIN Exp',system-ui,sans-serif;
+    --mono:'Roboto Mono',ui-monospace,'SF Mono',Menlo,monospace;
+    --maxw:1340px;
+    --hdr-h:62px;
+    --ice:#CDEBFF;
+    --alertc:#FF2D4B;
+    --tsh:0 1px 18px rgba(0,0,0,.55);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:#000;color:#fff;font-family:var(--head);font-size:16px;font-weight:500;line-height:1.55;overflow-x:hidden;text-rendering:optimizeLegibility}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%}
+  ::selection{background:rgba(205,235,255,.3);color:#fff}
+
+  /* ============ header minimalista ============ */
+  header#hdr{position:absolute;top:0;left:0;width:100%;z-index:200;height:var(--hdr-h);
+    display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 clamp(16px,3vw,40px)}
+  .backlink{grid-column:1;justify-self:start;font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:rgba(255,255,255,.86);text-shadow:var(--tsh);display:inline-flex;align-items:center;gap:9px}
+  .backlink::before{content:"";width:26px;height:1px;background:currentColor;transform:scaleX(.62);transform-origin:right center;transition:transform .25s}
+  .backlink:hover::before{transform:scaleX(1)}
+  .brand{grid-column:2;justify-self:center}
+  .brand .wm{height:19px;display:block;filter:drop-shadow(0 1px 10px rgba(0,0,0,.5))}
+  .nav-right{grid-column:3;justify-self:end;display:flex;align-items:center;gap:clamp(12px,1.6vw,20px)}
+  .lang{display:flex;gap:4px}
+  .lang button{background:none;border:0;cursor:pointer;color:rgba(255,255,255,.6);font-family:var(--head);
+    font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 7px;transition:color .2s;text-shadow:var(--tsh)}
+  .lang button.active,.lang button:hover{color:#fff}
+  .btn{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    border:1px solid rgba(255,255,255,.6);color:#fff;padding:11px 22px;border-radius:2px;transition:all .25s;
+    white-space:nowrap;background:transparent;cursor:pointer;display:inline-block}
+  .btn:hover{background:#fff;color:var(--ink);border-color:#fff}
+  .btn.solid{background:#fff;color:var(--ink);border-color:#fff}
+  .btn.solid:hover{background:rgba(255,255,255,.86)}
+  .arrowlink{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+    color:#fff;text-shadow:var(--tsh);display:inline-flex;align-items:center;gap:9px;padding:11px 4px;white-space:nowrap}
+  .arrowlink::after{content:"";width:26px;height:1px;background:currentColor;transform:scaleX(.62);transform-origin:left center;transition:transform .25s}
+  .arrowlink:hover::after{transform:scaleX(1)}
+  [dir="rtl"] .arrowlink{flex-direction:row-reverse}
+  [dir="rtl"] .arrowlink::after{transform-origin:right center}
+  [dir="rtl"] .backlink{flex-direction:row-reverse}
+
+  /* ============ tipografia de cena ============ */
+  .eyebrow{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    color:rgba(255,255,255,.82);text-shadow:var(--tsh);margin-bottom:14px;display:flex;align-items:center;gap:11px}
+  .eyebrow::before{content:"";width:22px;height:1px;background:rgba(255,255,255,.6)}
+  h1,h2{font-family:var(--title);font-weight:700;text-transform:uppercase;line-height:.99;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.42)}
+  h1{font-size:clamp(34px,6.2vw,88px);letter-spacing:-.012em}
+  h2{font-size:clamp(28px,4.6vw,64px);letter-spacing:-.008em}
+  .lede{font-size:clamp(14.5px,1.05vw,16.5px);line-height:1.55;color:rgba(255,255,255,.9);
+    text-shadow:0 1px 14px rgba(0,0,0,.4);max-width:46ch;margin-top:16px;text-wrap:pretty}
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .85s cubic-bezier(.2,.7,.2,1),transform .85s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .reveal.d1{transition-delay:.07s}.reveal.d2{transition-delay:.14s}.reveal.d3{transition-delay:.21s}
+  [dir="rtl"] .eyebrow{flex-direction:row-reverse}
+
+  /* ============ S1 · HERO — arraste e congele ============ */
+  #hero h1{font-size:clamp(32px,4.4vw,62px)}
+  .scene{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;padding:calc(var(--hdr-h) + 30px) clamp(20px,5vw,72px) 70px}
+  .scene .bg{position:absolute;inset:-4%;z-index:0;background-size:cover;background-position:center;
+    transition:opacity 1s ease}
+  #hero .bg{animation:kenburns 26s ease-in-out infinite alternate}
+  @keyframes kenburns{from{transform:scale(1) translateY(0)}to{transform:scale(1.09) translateY(-1.6%)}}
+  .scene .veil{position:absolute;inset:0;z-index:1;background:
+    linear-gradient(90deg,rgba(0,0,0,.62)0%,rgba(0,0,0,.2)44%,transparent 72%),
+    linear-gradient(0deg,rgba(0,0,0,.55)0%,transparent 32%),
+    linear-gradient(180deg,rgba(0,0,0,.5)0%,transparent 18%)}
+  canvas.fx{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+  .frost{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:var(--frost,.2);transition:opacity .4s;background:
+    radial-gradient(60% 46% at 0% 0%,rgba(205,235,255,.22),transparent 62%),
+    radial-gradient(60% 46% at 100% 0%,rgba(205,235,255,.17),transparent 62%),
+    radial-gradient(70% 52% at 0% 100%,rgba(205,235,255,.24),transparent 64%),
+    radial-gradient(70% 52% at 100% 100%,rgba(205,235,255,.2),transparent 64%)}
+  .hot{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .45s;
+    background:radial-gradient(110% 90% at 50% 55%,rgba(224,30,55,.3),transparent 66%)}
+  .alert .hot{opacity:1}
+  .inner{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(30px,5vw,80px);align-items:center}
+  [dir="rtl"] .inner{text-align:right}
+  .stage{position:relative;text-align:center;user-select:none;-webkit-user-select:none;touch-action:pan-y;cursor:ew-resize;outline:none}
+  .stage::before{content:"";position:absolute;inset:-10% -8%;z-index:-1;pointer-events:none;background:radial-gradient(62% 62% at 50% 46%,rgba(0,0,0,.5),transparent 72%)}
+  .stage:focus-visible{outline:1px solid rgba(255,255,255,.5);outline-offset:12px;border-radius:8px}
+  /* numero em celulas fixas: cada digito troca no lugar, sem pular largura (D-DIN nao tem tnum) · direction ltr: em hebraico o RTL invertia a ordem das celulas */
+  .big,.m-temp,.a-temp{direction:ltr}
+  .big i,.m-temp i,.a-temp i{font-style:normal;display:inline-block;width:1ch;text-align:center}
+  .big i.s,.m-temp i.s,.a-temp i.s{width:.9ch}
+  .big i.v,.m-temp i.v,.a-temp i.v{width:.48ch}
+  .big i.u,.m-temp i.u,.a-temp i.u{width:auto;margin-left:.34ch}
+  .big{font-family:var(--title);font-weight:700;line-height:.92;letter-spacing:-.02em;
+    font-size:clamp(84px,12.5vw,196px);font-variant-numeric:tabular-nums;text-shadow:0 2px 44px rgba(0,0,0,.55);transition:color .35s}
+  .alert .big{color:var(--alertc)}
+  .zone{font-family:var(--mono);font-size:clamp(12px,1.05vw,14px);letter-spacing:.26em;text-transform:uppercase;color:#fff;text-shadow:0 1px 12px rgba(0,0,0,.9);margin-top:18px;transition:color .3s}
+  .alert .zone{color:var(--alertc)}
+  .range{font-family:var(--mono);font-size:12.5px;letter-spacing:.1em;color:rgba(255,255,255,.92);text-shadow:0 1px 12px rgba(0,0,0,.9);margin-top:8px}
+  .hum{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px;font-family:var(--mono)}
+  .hum .drop{width:16px;height:21px;flex:0 0 auto;filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
+  .hum-v{font-size:14px;font-weight:500;color:#fff;font-variant-numeric:tabular-nums;text-shadow:0 1px 10px rgba(0,0,0,.8)}
+  .hum-l{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.75);text-shadow:0 1px 10px rgba(0,0,0,.8)}
+    .track{position:relative;height:2px;background:rgba(255,255,255,.32);margin:18px auto 0;max-width:420px;border-radius:2px}
+  .track i{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:#fff;
+    transform:translate(-50%,-50%);box-shadow:0 2px 16px rgba(0,0,0,.6);transition:background .3s}
+  .alert .track i{background:var(--alertc)}
+  .hint{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:#fff;text-shadow:0 1px 14px rgba(0,0,0,.9),0 0 26px rgba(0,0,0,.7);margin-top:26px}
+  .hint::before,.hint::after{content:"";width:26px;height:1px;background:rgba(255,255,255,.7)}
+  #hero.alert .stage{animation:shake .5s cubic-bezier(.36,.07,.19,.97)}
+  @keyframes shake{10%,90%{transform:translateX(-1px)}20%,80%{transform:translateX(2px)}30%,50%,70%{transform:translateX(-3px)}40%,60%{transform:translateX(3px)}}
+  .cue{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;
+    font-family:var(--mono);font-size:9.5px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.78);
+    display:flex;flex-direction:column;align-items:center;gap:8px}
+  .cue .ln{width:1px;height:30px;background:linear-gradient(#fff,transparent);animation:cue 2.4s ease-in-out infinite}
+  @keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ============ S2 · MUNDOS — escolha o seu frio ============ */
+  #mundos{padding-bottom:90px}
+  #mundos .bg{opacity:0}
+  #mundos .bg.on{opacity:1}
+  .mundos-wrap{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto}
+  .m-head{max-width:60ch}
+  .m-display{display:flex;align-items:baseline;gap:22px;flex-wrap:wrap;margin-top:34px}
+  .m-temp{font-family:var(--title);font-weight:700;font-size:clamp(64px,9vw,140px);line-height:.92;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;text-shadow:0 2px 44px rgba(0,0,0,.6)}
+  .m-meta{padding-bottom:10px}
+  .m-zone{font-family:var(--mono);font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:#fff}
+  .m-line{font-size:clamp(13.5px,1vw,15.5px);color:rgba(255,255,255,.85);max-width:40ch;margin-top:8px;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+  .worlds{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:44px;perspective:800px}
+  .world{position:relative;text-align:left;background:rgba(10,11,13,.42);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+    border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:18px 18px 16px;cursor:pointer;color:#fff;
+    font-family:inherit;transition:border-color .25s,background .25s,transform .3s cubic-bezier(.2,.7,.2,1);will-change:transform}
+  .world:hover{border-color:rgba(255,255,255,.5)}
+  .world.on{border-color:#fff;background:rgba(16,18,22,.6)}
+  .world .wt{display:block;font-family:var(--title);text-transform:uppercase;font-weight:700;font-size:clamp(14px,1.15vw,17px);letter-spacing:.01em}
+  .world .wr{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:rgba(255,255,255,.66);margin-top:7px}
+  .world .wbar{display:block;height:2px;background:rgba(255,255,255,.16);margin-top:12px;border-radius:2px;overflow:hidden}
+  .world .wbar i{display:block;height:100%;width:100%;background:var(--ice);
+    transform:scaleX(0);transform-origin:left center;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+  .world.on .wbar i{transform:scaleX(1)}
+  [dir="rtl"] .world .wbar i{transform-origin:right center}
+  [dir="rtl"] .world{text-align:right}
+
+  /* ============ S3 · ALERTA — scrollytelling ============ */
+  #alerta{position:relative;height:300svh}
+  #alerta .stick{position:sticky;top:0;height:100svh;overflow:hidden;display:flex;align-items:center;
+    padding:calc(var(--hdr-h) + 20px) clamp(20px,5vw,72px) 60px}
+  #alerta .bgblack{position:absolute;inset:0;background:
+    radial-gradient(120% 90% at 50% 110%,rgba(205,235,255,.07),transparent 60%),#000}
+  #alerta .hot{z-index:1}
+  #alerta .a-inner{position:relative;z-index:3;width:100%;max-width:var(--maxw);margin:0 auto;
+    display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:clamp(30px,5vw,80px);align-items:center}
+  #alerta canvas{width:100%;height:min(46vh,420px);display:block}
+  .a-read{display:flex;align-items:baseline;gap:16px;margin-top:10px}
+  .a-temp{font-family:var(--title);font-weight:700;font-size:clamp(46px,5.4vw,84px);line-height:1;letter-spacing:-.02em;
+    font-variant-numeric:tabular-nums;transition:color .3s}
+  .alert3 .a-temp{color:var(--alertc)}
+  .a-stamp{display:inline-block;font-family:var(--mono);font-size:12px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--alertc);border:1px solid rgba(255,45,75,.7);border-radius:3px;padding:7px 13px;margin-left:6px;
+    opacity:0;transform:scale(1.4);transition:opacity .3s,transform .3s cubic-bezier(.2,.7,.2,1)}
+  .alert3 .a-stamp{opacity:1;transform:none}
+  .steps{margin-top:30px;display:flex;flex-direction:column;gap:13px}
+  .step{display:flex;align-items:baseline;gap:14px;font-size:clamp(14px,1.05vw,16px);color:rgba(255,255,255,.88);
+    opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s cubic-bezier(.2,.7,.2,1)}
+  .step.on{opacity:1;transform:none}
+  .step .tt{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.55);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .step.al .tt,.step.al{color:var(--alertc)}
+  .a-close{font-family:var(--title);text-transform:uppercase;font-weight:700;font-size:clamp(19px,1.9vw,28px);
+    margin-top:30px;opacity:0;transform:translateY(14px);transition:opacity .5s .1s,transform .5s .1s}
+  .a-close.on{opacity:1;transform:none}
+
+  /* ============ S-TERMAL · lente de visao termica ============ */
+  #termal{touch-action:pan-y} /* dedo na horizontal varre a lente; vertical segue rolando a pagina */
+  #termal .lens{position:absolute;inset:0;z-index:2;background-size:cover;background-position:center;pointer-events:none;
+    -webkit-mask-image:radial-gradient(circle var(--lr,190px) at var(--lx,-999px) var(--ly,-999px),#000 0 58%,transparent 78%);
+    mask-image:radial-gradient(circle var(--lr,190px) at var(--lx,-999px) var(--ly,-999px),#000 0 58%,transparent 78%)}
+  #termal .lensring{position:absolute;z-index:3;width:calc(var(--lr,190px)*2);height:calc(var(--lr,190px)*2);
+    border:1px solid rgba(205,235,255,.55);border-radius:50%;transform:translate(-50%,-50%);
+    left:var(--lx,-999px);top:var(--ly,-999px);pointer-events:none;
+    box-shadow:0 0 40px rgba(0,0,0,.45) inset}
+  #termal .hotring{position:absolute;z-index:3;width:30px;height:30px;border:2px solid var(--alertc);border-radius:50%;
+    transform:translate(-50%,-50%);opacity:0;pointer-events:none}
+  #termal.found .hotring{opacity:1;animation:hotpulse 1.6s ease-out infinite}
+  @keyframes hotpulse{0%{box-shadow:0 0 0 0 rgba(255,45,75,.6)}100%{box-shadow:0 0 0 26px rgba(255,45,75,0)}}
+  #termal .hotchip{position:absolute;z-index:4;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+    color:#fff;background:rgba(10,11,13,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border:1px solid rgba(255,45,75,.65);border-radius:8px;padding:9px 13px;white-space:nowrap;
+    opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s;pointer-events:none}
+  #termal .hotchip b{color:var(--alertc);font-weight:600}
+  #termal.found .hotchip{opacity:1;transform:none}
+
+  /* ============ S4 · CTA ============ */
+  #fim{min-height:92svh}
+  #fim .veil{background:
+    radial-gradient(86% 78% at 50% 54%,rgba(0,0,0,.72),rgba(0,0,0,.4) 62%,transparent 82%),
+    linear-gradient(0deg,rgba(0,0,0,.8),transparent 60%),
+    linear-gradient(180deg,rgba(0,0,0,.5),transparent 22%)}
+  #fim .inner{grid-template-columns:1fr;justify-items:center;text-align:center}
+  #fim .lede{margin-left:auto;margin-right:auto}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;justify-content:center}
+  .fineprint{font-size:12px;color:rgba(255,255,255,.66);margin-top:22px;letter-spacing:.02em}
+  .magnet{will-change:transform;transition:transform .18s ease-out}
+
+  footer{padding:40px 20px 46px;text-align:center;font-size:12px;letter-spacing:.06em;color:rgba(255,255,255,.5);line-height:2}
+  footer a{color:rgba(255,255,255,.72)}footer a:hover{color:#fff}
+
+  /* ============ responsive ============ */
+  @media(max-width:960px){
+    .inner,#alerta .a-inner{grid-template-columns:1fr;gap:38px}
+    #alerta .a-inner{gap:16px}
+    #alerta canvas{height:30vh}
+    #alerta{height:260svh}
+    .worlds{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .stage{cursor:grab}
+    #alerta canvas{height:34vh}
+  }
+  @media(max-width:640px){
+    #hdr .btn{display:none}
+    .lang button{padding:6px 5px}
+  }
+  @media(max-width:520px){
+    h1{font-size:34px}h2{font-size:27px}
+    .worlds{gap:9px}
+    .m-display{gap:14px}
+    /* a etiqueta do ponto quente e mais larga que a tela: quebra em linhas ancorada a direita.
+       !important porque o JS posiciona por left/transform inline (ancora de desktop) */
+    #termal .hotchip{white-space:normal;max-width:min(74vw,300px);text-align:right;
+      left:auto!important;right:12px;transform:translateY(-100%)!important}
+  }
+  /* backgrounds (2560 em todas as larguras) */
+  #hero .bg{background-image:image-set(url('assets/cine/frio-sala-2560.webp') type('image/webp'))}
+  #mundos .bg.b1{background-image:image-set(url('assets/cine/frio-vials-2560.webp') type('image/webp'))}
+  #mundos .bg.b2{background-image:image-set(url('assets/cine/frio-sala-2560.webp') type('image/webp'))}
+  #mundos .bg.b3{background-image:image-set(url('assets/cine/frio-truck-2560.webp') type('image/webp'))}
+  #mundos .bg.b4{background-image:image-set(url('assets/cine/frio-freezer-2560.webp') type('image/webp'))}
+  #termal .bg{background-image:image-set(url('assets/cine/frio-sala-2560.webp') type('image/webp'))}
+  #termal .lens{background-image:image-set(url('assets/cine/frio-termal-2560.webp') type('image/webp'))}
+  #fim .bg{background-image:image-set(url('assets/cine/frio-vials-2560.webp') type('image/webp'))}
+  @media(max-width:900px){
+    /* qualidade maxima liberada (Joao, 27/07): mobile usa os mesmos 2560; so o enquadramento muda */
+    #termal .bg,#termal .lens{background-position:86% center}
+  }
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .reveal{opacity:1;transform:none;transition:none}
+    #hero .bg{animation:none}
+    canvas.fx{display:none}
+    .cue .ln{animation:none}
+    #hero.alert .stage{animation:none}
+    .step,.a-close{opacity:1;transform:none}
+  }
+  @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.world{background:rgba(10,11,13,.9)}}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <a class="backlink" href="index.html" data-i18n="fp.back">Voltar</a>
+  <a class="brand" href="index.html" aria-label="Rastcar"><img class="wm" src="assets/wordmark-white.png" alt="RASTCAR"></a>
+  <div class="nav-right">
+    <div class="lang">
+      <button type="button" data-lang="pt">PT</button>
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="he" lang="he">עב</button>
+    </div>
+    <a class="btn" data-cta-wa href="https://wa.me/551231579090?text=Quero%20saber%20do%20sensor%20de%20temperatura" target="_blank" rel="noopener" data-i18n="fp.talk">Falar agora</a>
+  </div>
+</header>
+
+<!-- 01 · HERO — arraste e congele a cena -->
+<section class="scene" id="hero" style="--frost:.2">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <canvas class="fx" id="fx1" aria-hidden="true"></canvas>
+  <div class="frost" aria-hidden="true"></div>
+  <div class="hot" aria-hidden="true"></div>
+  <div class="inner">
+    <div>
+      <div class="eyebrow reveal" data-i18n="fp.s1e">Portal do frio · temperatura e umidade</div>
+      <h1 class="reveal d1" data-i18n="fp.s1h">A temperatura<br>também se monitora</h1>
+      <p class="lede reveal d2" data-i18n="fp.s1l">Cada grau e cada ponto de umidade vigiados, dia e noite, na mesma plataforma do rastreamento. Vacinas, medicamentos, câmaras frias e cargas congeladas.</p>
+    </div>
+    <div class="stage reveal d2" id="stage1">
+      <div class="big" id="t1">+4,2&thinsp;&deg;C</div>
+      <div class="zone" id="z1">Geladeira de vacinas</div>
+      <div class="range" id="r1">2 a 8 &deg;C · faixa das vacinas</div>
+      <div class="hum" id="humBox" dir="ltr">
+        <svg class="drop" viewBox="0 0 20 26" aria-hidden="true">
+          <defs><clipPath id="dropc"><path d="M10 1C10 1 3 11 3 17a7 7 0 0 0 14 0C17 11 10 1 10 1Z"/></clipPath></defs>
+          <g clip-path="url(#dropc)"><rect id="dropFill" x="0" y="12" width="20" height="26" fill="#CDEBFF"/></g>
+          <path d="M10 1C10 1 3 11 3 17a7 7 0 0 0 14 0C17 11 10 1 10 1Z" fill="none" stroke="rgba(205,235,255,.9)" stroke-width="1.5"/>
+        </svg>
+        <span class="hum-v" id="humV">58%</span>
+        <span class="hum-l" data-i18n="fp.hum">umidade relativa</span>
+      </div>
+      <div class="track" aria-hidden="true"><i id="k1" style="left:76%"></i></div>
+      <div class="hint" data-i18n="fp.s1hint">Arraste e congele a cena</div>
+    </div>
+  </div>
+  <div class="cue"><span data-i18n="fp.cue">Role</span><span class="ln"></span></div>
+</section>
+
+<!-- 02 · MUNDOS — escolha o seu frio -->
+<section class="scene" id="mundos">
+  <div class="bg b1 on"></div>
+  <div class="bg b2"></div>
+  <div class="bg b3"></div>
+  <div class="bg b4"></div>
+  <div class="veil"></div>
+  <div class="mundos-wrap">
+    <div class="m-head">
+      <div class="eyebrow reveal" data-i18n="fp.s2e">Do +8 ao −30</div>
+      <h2 class="reveal d1" data-i18n="fp.s2h">Escolha a temperatura</h2>
+    </div>
+    <div class="m-display reveal d2">
+      <div class="m-temp" id="t2">+5,0&thinsp;&deg;C</div>
+      <div class="m-meta">
+        <div class="m-zone" id="z2">Vacinas e medicamentos</div>
+        <p class="m-line" id="l2">A dose que salva não pode oscilar. O sensor vigia cada décimo de grau.</p>
+      </div>
+    </div>
+    <div class="worlds reveal d3" id="worlds" role="tablist"></div>
+  </div>
+</section>
+
+<!-- 02b · TERMAL — lente de visao termica -->
+<section class="scene" id="termal">
+  <div class="bg"></div>
+  <div class="lens" id="lensLayer"></div>
+  <div class="lensring" aria-hidden="true"></div>
+  <div class="veil"></div>
+  <div class="hotring" id="hotRing" aria-hidden="true"></div>
+  <div class="hotchip" id="hotChip"><span data-i18n="ft.found">Ponto quente encontrado · vedação da porta</span> <b dir="ltr">+12&thinsp;&deg;C</b></div>
+  <div class="inner">
+    <div>
+      <div class="eyebrow reveal" data-i18n="ft.e">Visão térmica · encontre o ponto quente</div>
+      <h2 class="reveal d1" data-i18n="ft.h">Enxergue o calor<br>antes do estrago</h2>
+      <p class="lede reveal d2" data-i18n="ft.l">O sensor enxerga o que o olho não vê. Passe a lente pela sala e ache o vazamento de calor.</p>
+      <div class="hint reveal d3" data-i18n="ft.hint" style="margin-top:22px">Passe a lente</div>
+    </div>
+    <div></div>
+  </div>
+</section>
+
+<!-- 03 · ALERTA — scrollytelling -->
+<section id="alerta">
+  <div class="stick" id="stick3">
+    <div class="bgblack"></div>
+    <div class="hot" aria-hidden="true"></div>
+    <div class="a-inner">
+      <div>
+        <div class="eyebrow" data-i18n="fp.s3e">Simulação · fora da faixa</div>
+        <h2 data-i18n="fp.s3h">Quando o grau<br>vira prejuízo</h2>
+        <div class="a-read">
+          <div class="a-temp" id="t3">+4,0&thinsp;&deg;C</div>
+          <span class="a-stamp" id="stamp3" data-i18n="fp.s3a">Alerta</span>
+        </div>
+        <div class="steps">
+          <div class="step" id="st1"><span class="tt">00:00</span><span data-i18n="fp.s3t1">o sensor percebe a subida</span></div>
+          <div class="step al" id="st2"><span class="tt">00:08</span><span data-i18n="fp.s3t2">o alerta chega à central 24h</span></div>
+          <div class="step" id="st3"><span class="tt">00:40</span><span data-i18n="fp.s3t3">você recebe o aviso e age</span></div>
+        </div>
+        <div class="a-close" id="close3" data-i18n="fp.s3c">A vacina não espera. O alerta também não.</div>
+      </div>
+      <canvas id="graph3" aria-hidden="true"></canvas>
+    </div>
+  </div>
+</section>
+
+<!-- 04 · CTA -->
+<section class="scene" id="fim">
+  <div class="bg"></div>
+  <div class="veil"></div>
+  <div class="inner">
+    <div>
+      <div class="eyebrow reveal" style="justify-content:center" data-i18n="fp.s4e">Instalação · plataforma · central</div>
+      <h2 class="reveal d1" data-i18n="fp.s4h">Tenha sua temperatura<br>sob seu controle</h2>
+      <p class="lede reveal d2" data-i18n="fp.s4l">O sensor entra na mesma plataforma do rastreamento: um painel, um histórico e uma central de olho na sua temperatura e na sua umidade.</p>
+      <div class="cta-row reveal d3">
+        <a class="btn solid magnet" data-cta-wa href="https://wa.me/551231579090?text=Quero%20saber%20do%20sensor%20de%20temperatura" target="_blank" rel="noopener" data-i18n="fp.s4cta">Quero meu orçamento</a>
+        <a class="arrowlink" href="equipamentos.html" data-i18n="fp.s4eq">Ver equipamentos</a>
+      </div>
+      <div class="fineprint reveal d3" data-i18n="fp.s4f">Atendimento no Brasil e em toda a América Latina · (12) 3157-9090</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Rastcar · CNPJ 10.142.559/0001-00 · <a href="index.html" data-i18n="fp.home">rastcar.com.br</a>
+</footer>
+
+<script>
+  // ---------------- i18n ----------------
+  const I18N={
+    pt:{"fp.back":"Voltar","fp.talk":"Falar agora","fp.cue":"Role","fp.home":"rastcar.com.br",
+      "fp.s1e":"Portal do frio · temperatura e umidade","fp.s1h":"A temperatura<br>também se monitora",
+      "fp.s1l":"Cada grau e cada ponto de umidade vigiados, dia e noite, na mesma plataforma do rastreamento. Vacinas, medicamentos, câmaras frias e cargas congeladas.",
+      "fp.s1hint":"Arraste e congele a cena","fp.hum":"umidade relativa",
+      "fp.z1":"Fora da faixa","fp.r1":"acima de +8 °C · alerta na central","fp.z2":"Geladeira de vacinas","fp.r2":"2 a 8 °C · faixa das vacinas",
+      "fp.z3":"Câmara fria","fp.r3":"em torno de 0 °C · resfriados","fp.z4":"Carga congelada","fp.r4":"até −18 °C · congelados",
+      "fp.z5":"Freezer profundo","fp.r5":"−18 a −30 °C · ultracongelados",
+      "fp.s2e":"Do +8 ao −30","fp.s2h":"Escolha a temperatura",
+      "fp.w1t":"Vacinas e medicamentos","fp.w1r":"+2 a +8 °C","fp.w1d":"A dose que salva não pode oscilar. O sensor vigia cada décimo de grau.",
+      "fp.w2t":"Câmara fria","fp.w2r":"0 °C","fp.w2d":"Alimentos e insumos resfriados, com o histórico completo de cada hora.",
+      "fp.w3t":"Carga congelada","fp.w3r":"−18 °C","fp.w3d":"Do frigorífico ao destino, o baú viaja sob vigilância.",
+      "fp.w4t":"Freezer profundo","fp.w4r":"−30 °C","fp.w4d":"Onde o termômetro despenca, o registro continua. Sem pausa.",
+      "fp.s3e":"Simulação · fora da faixa","fp.s3h":"Quando o grau<br>vira prejuízo","fp.s3a":"Alerta",
+      "fp.s3t1":"o sensor percebe a subida","fp.s3t2":"o alerta chega à central 24h","fp.s3t3":"você recebe o aviso e age",
+      "fp.s3c":"A vacina não espera. O alerta também não.",
+      "ft.e":"Visão térmica · encontre o ponto quente","ft.h":"Enxergue o calor<br>antes do estrago","ft.l":"O sensor enxerga o que o olho não vê. Passe a lente pela sala e ache o vazamento de calor.","ft.hint":"Passe a lente","ft.found":"Ponto quente encontrado · vedação da porta",
+      "fp.s4e":"Instalação · plataforma · central","fp.s4h":"Tenha sua temperatura<br>sob seu controle",
+      "fp.s4l":"O sensor entra na mesma plataforma do rastreamento: um painel, um histórico e uma central de olho na sua temperatura e na sua umidade.",
+      "fp.s4cta":"Quero meu orçamento","fp.s4eq":"Ver equipamentos","fp.s4f":"Atendimento no Brasil e em toda a América Latina · (12) 3157-9090"},
+    es:{"fp.back":"Volver","fp.talk":"Hablar ahora","fp.cue":"Desliza","fp.home":"rastcar.com.br",
+      "fp.s1e":"Portal del frío · temperatura y humedad","fp.s1h":"La temperatura<br>también se monitorea",
+      "fp.s1l":"Cada grado y cada punto de humedad vigilados, día y noche, en la misma plataforma del rastreo. Vacunas, medicamentos, cámaras frías y cargas congeladas.",
+      "fp.s1hint":"Arrastra y congela la escena","fp.hum":"humedad relativa",
+      "fp.z1":"Fuera del rango","fp.r1":"sobre +8 °C · alerta en la central","fp.z2":"Heladera de vacunas","fp.r2":"2 a 8 °C · rango de vacunas",
+      "fp.z3":"Cámara fría","fp.r3":"en torno a 0 °C · refrigerados","fp.z4":"Carga congelada","fp.r4":"hasta −18 °C · congelados",
+      "fp.z5":"Freezer profundo","fp.r5":"−18 a −30 °C · ultracongelados",
+      "fp.s2e":"Del +8 al −30","fp.s2h":"Elige la temperatura",
+      "fp.w1t":"Vacunas y medicamentos","fp.w1r":"+2 a +8 °C","fp.w1d":"La dosis que salva no puede oscilar. El sensor vigila cada décima de grado.",
+      "fp.w2t":"Cámara fría","fp.w2r":"0 °C","fp.w2d":"Alimentos e insumos refrigerados, con el historial completo de cada hora.",
+      "fp.w3t":"Carga congelada","fp.w3r":"−18 °C","fp.w3d":"Del frigorífico al destino, la caja viaja bajo vigilancia.",
+      "fp.w4t":"Freezer profundo","fp.w4r":"−30 °C","fp.w4d":"Donde el termómetro se desploma, el registro continúa. Sin pausa.",
+      "fp.s3e":"Simulación · fuera del rango","fp.s3h":"Cuando el grado<br>se vuelve pérdida","fp.s3a":"Alerta",
+      "fp.s3t1":"el sensor percibe la subida","fp.s3t2":"la alerta llega a la central 24h","fp.s3t3":"recibes el aviso y actúas",
+      "fp.s3c":"La vacuna no espera. La alerta tampoco.",
+      "ft.e":"Visión térmica · encuentra el punto caliente","ft.h":"Ve el calor<br>antes del daño","ft.l":"El sensor ve lo que el ojo no ve. Pasa la lente por la sala y encuentra la fuga de calor.","ft.hint":"Pasa la lente","ft.found":"Punto caliente encontrado · sello de la puerta",
+      "fp.s4e":"Instalación · plataforma · central","fp.s4h":"Ten tu temperatura<br>bajo tu control",
+      "fp.s4l":"El sensor entra en la misma plataforma del rastreo: un panel, un historial y una central atenta a tu temperatura y tu humedad.",
+      "fp.s4cta":"Quiero mi presupuesto","fp.s4eq":"Ver equipos","fp.s4f":"Atención en Brasil y en toda América Latina · (12) 3157-9090"},
+    en:{"fp.back":"Back","fp.talk":"Talk now","fp.cue":"Scroll","fp.home":"rastcar.com.br",
+      "fp.s1e":"Cold portal · temperature and humidity","fp.s1h":"Temperature gets<br>monitored too",
+      "fp.s1l":"Every degree and every point of humidity watched, day and night, on the same tracking platform. Vaccines, medicines, cold rooms and frozen cargo.",
+      "fp.s1hint":"Drag to freeze the scene","fp.hum":"relative humidity",
+      "fp.z1":"Out of range","fp.r1":"above +8 °C · alert at the center","fp.z2":"Vaccine fridge","fp.r2":"2 to 8 °C · vaccine range",
+      "fp.z3":"Cold room","fp.r3":"around 0 °C · chilled","fp.z4":"Frozen cargo","fp.r4":"down to −18 °C · frozen",
+      "fp.z5":"Deep freezer","fp.r5":"−18 to −30 °C · deep frozen",
+      "fp.s2e":"From +8 to −30","fp.s2h":"Choose the temperature",
+      "fp.w1t":"Vaccines & medicines","fp.w1r":"+2 to +8 °C","fp.w1d":"A life saving dose cannot drift. The sensor watches every tenth of a degree.",
+      "fp.w2t":"Cold room","fp.w2r":"0 °C","fp.w2d":"Chilled food and supplies, with a full record of every hour.",
+      "fp.w3t":"Frozen cargo","fp.w3r":"−18 °C","fp.w3d":"From the plant to the destination, the box travels under watch.",
+      "fp.w4t":"Deep freezer","fp.w4r":"−30 °C","fp.w4d":"Where the thermometer plunges, the record keeps going. No pause.",
+      "fp.s3e":"Simulation · out of range","fp.s3h":"When a degree<br>becomes a loss","fp.s3a":"Alert",
+      "fp.s3t1":"the sensor notices the rise","fp.s3t2":"the alert reaches the 24h center","fp.s3t3":"you get the warning and act",
+      "fp.s3c":"The vaccine will not wait. Neither does the alert.",
+      "ft.e":"Thermal vision · find the hot spot","ft.h":"See the heat<br>before the damage","ft.l":"The sensor sees what the eye cannot. Sweep the lens across the room and find the heat leak.","ft.hint":"Sweep the lens","ft.found":"Hot spot found · door seal",
+      "fp.s4e":"Installation · platform · center","fp.s4h":"Keep your temperature<br>under your control",
+      "fp.s4l":"The sensor joins the same tracking platform: one dashboard, one history and a center watching your temperature and your humidity.",
+      "fp.s4cta":"Get my quote","fp.s4eq":"See equipment","fp.s4f":"Service across Brazil and Latin America · (12) 3157-9090"},
+    he:{"fp.back":"חזרה","fp.talk":"דברו איתנו","fp.cue":"גלול","fp.home":"rastcar.com.br",
+      "fp.s1e":"פורטל הקור · טמפרטורה ולחות","fp.s1h":"גם את הטמפרטורה<br>מנטרים",
+      "fp.s1l":"כל מעלה וכל נקודת לחות תחת השגחה, יום ולילה, באותה פלטפורמת מעקב. חיסונים, תרופות, חדרי קירור ומטענים קפואים.",
+      "fp.s1hint":"גררו והקפיאו את הסצנה","fp.hum":"לחות יחסית",
+      "fp.z1":"מחוץ לטווח","fp.r1":"מעל ‎+8 °C · התראה במוקד","fp.z2":"מקרר חיסונים","fp.r2":"‎2 עד 8 °C · טווח החיסונים",
+      "fp.z3":"חדר קירור","fp.r3":"סביב ‎0 °C · מקורר","fp.z4":"מטען קפוא","fp.r4":"עד ‎−18 °C · קפוא",
+      "fp.z5":"הקפאה עמוקה","fp.r5":"‎−18 עד −30 °C · הקפאה עמוקה",
+      "fp.s2e":"מ‎+8 עד ‎−30","fp.s2h":"בחרו את הטמפרטורה",
+      "fp.w1t":"חיסונים ותרופות","fp.w1r":"‎+2 עד +8 °C","fp.w1d":"מנה שמצילה חיים לא יכולה לסטות. החיישן משגיח על כל עשירית מעלה.",
+      "fp.w2t":"חדר קירור","fp.w2r":"‎0 °C","fp.w2d":"מזון וחומרים מקוררים, עם תיעוד מלא של כל שעה.",
+      "fp.w3t":"מטען קפוא","fp.w3r":"‎−18 °C","fp.w3d":"מהמפעל ליעד, התא נוסע תחת השגחה.",
+      "fp.w4t":"הקפאה עמוקה","fp.w4r":"‎−30 °C","fp.w4d":"היכן שהמדחום צונח, התיעוד ממשיך. בלי הפסקה.",
+      "fp.s3e":"סימולציה · מחוץ לטווח","fp.s3h":"כשמעלה אחת<br>הופכת להפסד","fp.s3a":"התראה",
+      "fp.s3t1":"החיישן מזהה את העלייה","fp.s3t2":"ההתראה מגיעה למוקד 24 שעות","fp.s3t3":"אתם מקבלים את האזהרה ופועלים",
+      "fp.s3c":"החיסון לא מחכה. גם ההתראה לא.",
+      "ft.e":"ראייה תרמית · מצאו את הנקודה החמה","ft.h":"לראות את החום<br>לפני הנזק","ft.l":"החיישן רואה מה שהעין לא. העבירו את העדשה על החדר ומצאו את דליפת החום.","ft.hint":"העבירו את העדשה","ft.found":"נקודה חמה נמצאה · אטם הדלת",
+      "fp.s4e":"התקנה · פלטפורמה · מוקד","fp.s4h":"הטמפרטורה שלכם<br>בשליטה שלכם",
+      "fp.s4l":"החיישן נכנס לאותה פלטפורמת מעקב: לוח אחד, היסטוריה אחת ומוקד ששומר על הטמפרטורה והלחות שלכם.",
+      "fp.s4cta":"רוצה הצעת מחיר","fp.s4eq":"לצפייה בציוד","fp.s4f":"שירות בכל ברזיל ובאמריקה הלטינית · (12) 3157-9090"}
+  };
+  let curLang=localStorage.getItem('rc_lang')||'pt';
+  const dict=()=>I18N[curLang]||I18N.pt;
+  function applyLang(lang){
+    curLang=lang;const d=dict();
+    document.documentElement.lang=(lang==='pt'?'pt-BR':lang);
+    document.documentElement.dir=(lang==='he'?'rtl':'ltr');
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const v=d[el.dataset.i18n];if(v!=null)el.innerHTML=v;});
+    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===lang));
+    document.title={pt:'RASTCAR · Sensor de temperatura',es:'RASTCAR · Sensor de temperatura',en:'RASTCAR · Temperature sensor',he:'RASTCAR · חיישן טמפרטורה'}[lang];
+    try{localStorage.setItem('rc_lang',lang);}catch(e){}
+    buildWorlds(); worldRefresh(); zoneRefresh(true);
+  }
+  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>applyLang(b.dataset.lang)));
+
+  const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const fmt=t=>{const dec=(curLang==='en')?'.':',';const a=Math.abs(t);
+    return (t<0?'−':'+')+(a<10?' ':'')+a.toFixed(1).replace('.',dec)+' °C';};
+  function setTemp(el,t){const dec=(curLang==='en')?'.':',';const a=Math.abs(t);
+    const raw=(t<0?'−':'+') + a.toFixed(1).replace('.',dec);
+    let h='';
+    for(const ch of raw){
+      if(ch==='−'||ch==='+') h+='<i class="s">'+ch+'</i>';
+      else if(ch===','||ch==='.') h+='<i class="v">'+ch+'</i>';
+      else if(ch===' ') h+='<i> </i>';
+      else h+='<i>'+ch+'</i>';
+    }
+    el.innerHTML=h+'<i class="u">°C</i>';}
+
+  // scroll reveal
+  const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.16});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // ---------------- S1 · hero interativo ----------------
+  (function(){
+    const sec=document.getElementById('hero'),stage=document.getElementById('stage1');
+    const cv=document.getElementById('fx1'),ctx=cv.getContext('2d');
+    const eT=document.getElementById('t1'),eZ=document.getElementById('z1'),eR=document.getElementById('r1'),k=document.getElementById('k1');
+    const MIN=-30,MAX=12;let temp=4.2,target=4.2,was=false,last='';
+    let W=0,H=0;function size(){const D=Math.min(devicePixelRatio||1,2);W=sec.clientWidth;H=sec.clientHeight;
+      cv.width=W*D;cv.height=H*D;ctx.setTransform(D,0,0,D,0,0);}size();addEventListener('resize',size);
+    const N=matchMedia('(max-width:700px)').matches?80:170;
+    const P=[];const mk=s=>({x:Math.random(),y:s?Math.random():-.04,r:.7+Math.random()*2,v:.3+Math.random()*.9,ph:Math.random()*6.28,o:.25+Math.random()*.55});
+    for(let i=0;i<N;i++)P.push(mk(true));
+    const mouse={x:-9,y:-9};const trail=[];
+    sec.addEventListener('pointermove',e=>{const b=sec.getBoundingClientRect();
+      mouse.x=(e.clientX-b.left)/W;mouse.y=(e.clientY-b.top)/H;
+      trail.push({x:mouse.x*W,y:mouse.y*H,a:.32});if(trail.length>16)trail.shift();},{passive:true});
+    sec.addEventListener('pointerleave',()=>{mouse.x=-9;mouse.y=-9});
+    let drag=null;
+    stage.addEventListener('pointerdown',e=>{drag={x:e.clientX,t:target};try{stage.setPointerCapture(e.pointerId)}catch(_){}});
+    stage.addEventListener('pointermove',e=>{if(drag)target=Math.max(MIN,Math.min(MAX,drag.t+(e.clientX-drag.x)*0.075));});
+    addEventListener('pointerup',()=>drag=null);
+    stage.tabIndex=0;stage.setAttribute('role','slider');
+    stage.setAttribute('aria-valuemin',MIN);stage.setAttribute('aria-valuemax',MAX);
+    stage.addEventListener('keydown',e=>{
+      if(e.key==='ArrowLeft'||e.key==='ArrowDown'){target=Math.max(MIN,target-1);e.preventDefault();}
+      if(e.key==='ArrowRight'||e.key==='ArrowUp'){target=Math.min(MAX,target+1);e.preventDefault();}});
+    function zoneOf(t){const d=dict();
+      if(t>8)return{z:d['fp.z1'],r:d['fp.r1'],a:true};
+      if(t>=2)return{z:d['fp.z2'],r:d['fp.r2']};
+      if(t>=-5)return{z:d['fp.z3'],r:d['fp.r3']};
+      if(t>=-18)return{z:d['fp.z4'],r:d['fp.r4']};
+      return{z:d['fp.z5'],r:d['fp.r5']};}
+    window.zoneRefresh=function(force){const zn=zoneOf(temp);
+      if(force||eZ.textContent!==zn.z){eZ.textContent=zn.z;eR.textContent=zn.r;}};
+    let vis=false;new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting),{rootMargin:'120px'}).observe(sec);
+    (function tick(){requestAnimationFrame(tick);if(!vis)return;
+      temp+=(target-temp)*.14;
+      const cold=Math.max(0,Math.min(1,(8-temp)/(8-MIN)));
+      const txt=fmt(temp);if(txt!==last){setTemp(eT,temp);last=txt;stage.setAttribute('aria-valuenow',temp.toFixed(0));}
+      const zn=zoneOf(temp);zoneRefresh();
+      k.style.left=((temp-MIN)/(MAX-MIN)*100)+'%';
+      sec.style.setProperty('--frost',(.12+cold*.85).toFixed(3));
+      // umidade viva: respira e acompanha o frio
+      const hb=(45+((temp-MIN)/(MAX-MIN))*20)+Math.sin(performance.now()/1400)*2.2;
+      const hv=document.getElementById('humV'), hf=document.getElementById('dropFill');
+      if(hv){const hr=Math.round(hb);
+        if(hv.textContent!==hr+'%')hv.textContent=hr+'%';
+        hf.setAttribute('y',(26-(hb/100)*26).toFixed(1));}
+      if(zn.a&&!was)sec.classList.add('alert');
+      if(!zn.a&&was)sec.classList.remove('alert');
+      was=!!zn.a;
+      if(still)return;
+      ctx.clearRect(0,0,W,H);
+      const n=Math.floor(N*(.22+cold*.78)),sp=.35+cold*1.75;
+      for(let i=0;i<n;i++){const f=P[i];
+        f.ph+=.012+f.v*.01;f.y+=f.v*sp*.0026;f.x+=Math.sin(f.ph)*.0007;
+        const dx=f.x-mouse.x,dy=f.y-mouse.y,d2=dx*dx+dy*dy;
+        if(d2<.02){const d=Math.sqrt(d2)||.001,p=(0.02-d2)*3.2;f.x+=dx/d*p*.055;f.y+=dy/d*p*.03;}
+        if(f.y>1.04||f.x<-.05||f.x>1.05)Object.assign(f,mk(false));
+        ctx.globalAlpha=f.o*(.5+cold*.5);ctx.fillStyle='#EAF6FF';
+        ctx.beginPath();ctx.arc(f.x*W,f.y*H,f.r,0,6.283);ctx.fill();}
+      for(const t of trail){t.a*=.9;if(t.a<.01)continue;
+        const g=ctx.createRadialGradient(t.x,t.y,0,t.x,t.y,46);
+        g.addColorStop(0,'rgba(200,232,255,'+(t.a*.5)+')');g.addColorStop(1,'rgba(200,232,255,0)');
+        ctx.globalAlpha=1;ctx.fillStyle=g;ctx.beginPath();ctx.arc(t.x,t.y,46,0,6.283);ctx.fill();}
+      ctx.globalAlpha=1;})();
+  })();
+
+  // ---------------- S2 · mundos ----------------
+  const WORLDS=[
+    {bg:'b1',temp:5,  t:'fp.w1t',r:'fp.w1r',d:'fp.w1d'},
+    {bg:'b2',temp:0,  t:'fp.w2t',r:'fp.w2r',d:'fp.w2d'},
+    {bg:'b3',temp:-18,t:'fp.w3t',r:'fp.w3r',d:'fp.w3d'},
+    {bg:'b4',temp:-30,t:'fp.w4t',r:'fp.w4r',d:'fp.w4d'}
+  ];
+  let wIdx=0,wTemp=5,wLast='';
+  function buildWorlds(){
+    const d=dict(),box=document.getElementById('worlds');
+    box.innerHTML=WORLDS.map((w,i)=>
+      '<button type="button" class="world'+(i===wIdx?' on':'')+'" role="tab" aria-selected="'+(i===wIdx)+'" data-w="'+i+'">'+
+      '<span class="wt">'+d[w.t]+'</span><span class="wr" dir="ltr">'+d[w.r]+'</span><span class="wbar"><i></i></span></button>').join('');
+    box.querySelectorAll('.world').forEach(b=>{
+      b.addEventListener('click',()=>selectWorld(+b.dataset.w));
+      b.addEventListener('pointermove',e=>{const r=b.getBoundingClientRect();
+        const rx=((e.clientY-r.top)/r.height-.5)*-8,ry=((e.clientX-r.left)/r.width-.5)*8;
+        b.style.transform='perspective(700px) rotateX('+rx+'deg) rotateY('+ry+'deg)';});
+      b.addEventListener('pointerleave',()=>b.style.transform='');
+    });
+  }
+  function worldRefresh(){const d=dict(),w=WORLDS[wIdx];
+    document.getElementById('z2').textContent=d[w.t];
+    document.getElementById('l2').textContent=d[w.d];}
+  function selectWorld(i){wIdx=i;const w=WORLDS[i];
+    document.querySelectorAll('#mundos .bg').forEach(b=>b.classList.toggle('on',b.classList.contains(w.bg)));
+    document.querySelectorAll('.world').forEach((b,j)=>{b.classList.toggle('on',j===i);b.setAttribute('aria-selected',j===i);});
+    worldRefresh();}
+  buildWorlds();
+  (function(){const eT=document.getElementById('t2');
+    let vis=false;new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting),{rootMargin:'80px'}).observe(document.getElementById('mundos'));
+    (function tick(){requestAnimationFrame(tick);if(!vis)return;
+      wTemp+=(WORLDS[wIdx].temp-wTemp)*.09;
+      const s=fmt(wTemp);if(s!==wLast){setTemp(eT,wTemp);wLast=s;}})();})();
+
+  // ---------------- S3 · alerta scrollytelling ----------------
+  (function(){
+    const sec=document.getElementById('alerta'),stick=document.getElementById('stick3');
+    const cv=document.getElementById('graph3'),ctx=cv.getContext('2d');
+    const eT=document.getElementById('t3');
+    const st1=document.getElementById('st1'),st2=document.getElementById('st2'),st3=document.getElementById('st3'),cl=document.getElementById('close3');
+    let W=0,H=0;function size(){const D=Math.min(devicePixelRatio||1,2);
+      W=cv.clientWidth;H=cv.clientHeight;cv.width=W*D;cv.height=H*D;ctx.setTransform(D,0,0,D,0,0);}
+    size();addEventListener('resize',size);
+    const T0=4,T1=9.4,LIM=8,MINY=3,MAXY=10;
+    function curve(p){ // sobe devagar, acelera no fim
+      const e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;return T0+(T1-T0)*e;}
+    let lastP=-1;
+    function draw(p){
+      const t=curve(p);
+      setTemp(eT,t);
+      const al=t>LIM;
+      stick.classList.toggle('alert3',al);
+      st1.classList.toggle('on',p>.18);
+      st2.classList.toggle('on',al);
+      st3.classList.toggle('on',p>.82);
+      cl.classList.toggle('on',p>.9);
+      if(still&&!W)return;
+      ctx.clearRect(0,0,W,H);
+      const y=v=>H-((v-MINY)/(MAXY-MINY))*H;
+      // linha do limite
+      ctx.strokeStyle='rgba(255,45,75,.55)';ctx.setLineDash([7,7]);ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(0,y(LIM));ctx.lineTo(W,y(LIM));ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='rgba(255,45,75,.8)';ctx.font='11px "Roboto Mono",monospace';
+      ctx.fillText('+8 °C',8,y(LIM)-8);
+      // grade
+      ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;
+      for(let g=MINY;g<=MAXY;g+=1){ctx.beginPath();ctx.moveTo(0,y(g));ctx.lineTo(W,y(g));ctx.stroke();}
+      // curva ate p
+      ctx.lineWidth=2.5;ctx.lineJoin='round';ctx.lineCap='round';
+      ctx.beginPath();
+      const steps=140;let crossed=false;
+      for(let i=0;i<=steps*p;i++){const pp=i/steps,tv=curve(pp),x=pp*W,yy=y(tv);
+        if(i===0)ctx.moveTo(x,yy);else ctx.lineTo(x,yy);
+        if(!crossed&&tv>LIM){crossed=true;
+          ctx.strokeStyle='#fff';ctx.stroke();
+          ctx.beginPath();ctx.moveTo(x,yy);ctx.strokeStyle='#FF2D4B';}}
+      ctx.strokeStyle=crossed?'#FF2D4B':'#fff';ctx.stroke();
+      // ponto atual
+      const px=p*W,py=y(t);
+      ctx.fillStyle=crossed?'#FF2D4B':'#fff';
+      ctx.beginPath();ctx.arc(px,py,5,0,6.283);ctx.fill();
+    }
+    function onScroll(){
+      const r=sec.getBoundingClientRect();
+      const total=r.height-innerHeight;
+      const p=Math.max(0,Math.min(1,-r.top/total));
+      if(Math.abs(p-lastP)>.002){lastP=p;draw(p);}
+    }
+    addEventListener('scroll',onScroll,{passive:true});onScroll();
+  })();
+
+  // ---------------- S4 · botao magnetico ----------------
+  document.querySelectorAll('.magnet').forEach(btn=>{
+    btn.addEventListener('pointermove',e=>{const r=btn.getBoundingClientRect();
+      const dx=(e.clientX-(r.left+r.width/2))/r.width,dy=(e.clientY-(r.top+r.height/2))/r.height;
+      btn.style.transform='translate('+(dx*10)+'px,'+(dy*8)+'px)';});
+    btn.addEventListener('pointerleave',()=>btn.style.transform='');
+  });
+
+
+  // ---------------- S-TERMAL · lente de visao termica ----------------
+  (function(){
+    const sec=document.getElementById('termal'); if(!sec) return;
+    const IMW=4096, IMH=2294, HX=0.875, HY=0.45;   // ponto quente na imagem (vedacao direita)
+    const ring=document.getElementById('hotRing'), chip=document.getElementById('hotChip');
+    let W=0,H=0,rect=null,hot={hx:-1,hy:-1};
+    const P=()=>matchMedia('(max-width:900px)').matches?0.86:0.5;   // bg-position horizontal
+    function cover(){W=sec.clientWidth;H=sec.clientHeight;
+      const sc=Math.max(W/IMW,H/IMH), dw=IMW*sc, dh=IMH*sc;
+      rect={x:(W-dw)*P(), y:(H-dh)/2, w:dw, h:dh};
+      hot={hx:rect.x+HX*rect.w, hy:rect.y+HY*rect.h};
+      ring.style.left=hot.hx+'px'; ring.style.top=hot.hy+'px';
+      chip.style.left=Math.min(W-14,hot.hx-18)+'px';
+      chip.style.top=(hot.hy-30)+'px';
+      chip.style.transform='translate(-100%,-100%)';
+      sec.style.setProperty('--lr', Math.max(120, Math.min(230, W*0.13))+'px');
+    }
+    cover(); addEventListener('resize',cover);
+    const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+    let interacted=false, found=false, t0=performance.now();
+    function setLens(x,y){sec.style.setProperty('--lx',x+'px');sec.style.setProperty('--ly',y+'px');
+      if(!found && Math.hypot(x-hot.hx,y-hot.hy) < Math.max(72,rect.w*0.04)){found=true;sec.classList.add('found');}}
+    /* mouse: a lente segue o cursor. Toque: so uma varredura com intencao HORIZONTAL
+       assume a lente (10px de folga); rolagem vertical nao mexe na lente nem mata o drift. */
+    let tsx=0,tsy=0,sweep=false;
+    sec.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){tsx=e.clientX;tsy=e.clientY;sweep=false;}},{passive:true});
+    sec.addEventListener('pointermove',e=>{const b=sec.getBoundingClientRect();
+      if(e.pointerType==='touch'){
+        if(!sweep){const dx=Math.abs(e.clientX-tsx),dy=Math.abs(e.clientY-tsy);
+          if(dx>10&&dx>dy)sweep=true;else return;}
+      }
+      interacted=true;
+      setLens(e.clientX-b.left, e.clientY-b.top);},{passive:true});
+    if(still){sec.classList.add('found');setLens(hot.hx,hot.hy);return;}
+    let vis=false; new IntersectionObserver(es=>es.forEach(e=>vis=e.isIntersecting),{rootMargin:'60px'}).observe(sec);
+    (function drift(){requestAnimationFrame(drift);
+      if(!vis||interacted)return;
+      const t=(performance.now()-t0)/1000;
+      setLens(W*(0.5+0.34*Math.sin(t*0.5)), H*(0.52+0.22*Math.sin(t*0.83+1.7)));})();
+  })();
+
+
+  applyLang(new URLSearchParams(location.search).get('lang')||curLang);
+</script>
+</body>
+</html>

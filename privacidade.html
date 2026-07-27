@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!--
+  MINUTA · NAO PUBLICAR SEM REVISAO.
+  Este documento e compromisso juridico, nao copy. Antes do deploy, o Joao
+  precisa confirmar (e de preferencia um advogado revisar):
+    1. Prazo de retencao do historico de posicao apos o fim do contrato.
+    2. Se ha compartilhamento com seguradoras e em que condicao.
+    3. Quem e o encarregado (DPO) nomeado. Hoje consta vendas@rastcar.com.br.
+    4. Se a Rastcar usa cookie/analytics no site (hoje o site nao usa nenhum;
+       se isso mudar, a secao 7 precisa mudar junto).
+    5. As versoes ES/EN/HE sao traducao de cortesia do texto em portugues,
+       que e a versao de referencia (a LGPD e lei brasileira). Se o advogado
+       quiser uma clausula dizendo isso na pagina, ela precisa ser redigida
+       por ele: nao inventamos clausula aqui.
+-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RASTCAR · Política de privacidade</title>
+<meta name="description" content="Como a Rastcar trata dados pessoais e dados de localização de veículos, conforme a Lei Geral de Proteção de Dados.">
+<meta name="theme-color" content="#F4F3F1">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://www.rastcar.com.br/privacidade.html">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="icon" type="image/png" sizes="256x256" href="assets/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
+<style>
+  :root{
+    --ink:#0A0A0A;--paper:#F4F3F1;
+    --mut:rgba(10,10,10,.62);--mut2:rgba(10,10,10,.42);--ln:rgba(10,10,10,.12);
+    --head:'Archivo',system-ui,sans-serif;--title:'D-DIN','D-DIN Exp',system-ui,sans-serif;
+    --mono:'Roboto Mono',ui-monospace,Menlo,monospace;
+    --maxw:1340px;--hdr-h:62px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:var(--head);font-size:16px;font-weight:500;line-height:1.6;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{max-width:100%}
+
+  header#hdr{position:relative;height:var(--hdr-h);display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--ln)}
+  header#hdr .wm{height:19px;display:block}
+
+  .lang{position:absolute;top:50%;transform:translateY(-50%);right:clamp(14px,5vw,40px)}
+  [dir="rtl"] .lang{right:auto;left:clamp(14px,5vw,40px)}
+  .lang-cur{display:flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:var(--mut);font-family:var(--head);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;transition:color .25s;padding:6px 2px}
+  .lang-cur:hover{color:var(--ink)}
+  .lang-cur svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.5}
+  .menu-pop{position:absolute;top:calc(100% + 10px);right:0;background:#fff;border:1px solid var(--ln);border-radius:9px;padding:6px;box-shadow:0 18px 50px rgba(10,10,10,.14);opacity:0;visibility:hidden;transform:translateY(-6px);transition:.22s;z-index:210}
+  [dir="rtl"] .menu-pop{right:auto;left:0}
+  .lang-menu{min-width:152px}
+  .lang.open .lang-menu{opacity:1;visibility:visible;transform:none}
+  .menu-pop button{display:block;width:100%;background:none;border:0;cursor:pointer;color:rgba(10,10,10,.72);font-family:var(--head);font-size:13px;letter-spacing:.03em;text-align:left;padding:10px 12px;border-radius:6px;transition:.18s}
+  [dir="rtl"] .menu-pop button{text-align:right}
+  .menu-pop button:hover{background:rgba(10,10,10,.05);color:var(--ink)}
+  .menu-pop button.active{color:var(--ink)}
+
+  .doc{max-width:760px;margin:0 auto;padding:clamp(48px,9vh,96px) clamp(20px,5vw,40px) clamp(60px,10vh,110px)}
+  .doc .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--mut2);margin-bottom:16px}
+  .doc h1{font-family:var(--title);font-weight:700;text-transform:uppercase;letter-spacing:.005em;line-height:1.04;font-size:clamp(30px,4.6vw,52px)}
+  .doc .intro{font-size:clamp(16px,1.2vw,18px);color:var(--mut);margin-top:20px;max-width:60ch}
+  .doc .updated{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mut2);margin-top:26px;padding-top:26px;border-top:1px solid var(--ln)}
+
+  .doc h2{font-family:var(--title);font-weight:700;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(17px,1.6vw,21px);margin:clamp(40px,6vh,62px) 0 14px;display:flex;align-items:baseline;gap:14px}
+  .doc h2 i{font-family:var(--mono);font-style:normal;font-size:11px;letter-spacing:.1em;color:var(--mut2);flex:none}
+  .doc p{margin-top:12px;color:rgba(10,10,10,.82);max-width:66ch}
+  .doc ul{margin:12px 0 0 0;padding:0;list-style:none;max-width:66ch}
+  .doc li{position:relative;padding:11px 0 11px 22px;border-top:1px solid var(--ln);color:rgba(10,10,10,.82)}
+  .doc li:first-child{border-top:0}
+  .doc li::before{content:"";position:absolute;left:2px;top:20px;width:6px;height:1px;background:var(--mut2)}
+  [dir="rtl"] .doc li{padding-left:0;padding-right:22px}
+  [dir="rtl"] .doc li::before{left:auto;right:2px}
+  .doc li b{font-weight:600}
+  .doc .box{margin-top:20px;border:1px solid var(--ln);border-radius:4px;padding:20px 22px;background:rgba(10,10,10,.02)}
+  .doc .box p{margin-top:0}
+  .doc .box p + p{margin-top:10px}
+  .doc a{color:var(--ink);text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--mut2)}
+  .doc a:hover{text-decoration-color:var(--ink)}
+
+  footer{border-top:1px solid var(--ln);padding:clamp(40px,6vh,64px) clamp(20px,5vw,40px) 44px;text-align:center}
+  .foot-inner{max-width:720px;margin:0 auto;display:flex;flex-direction:column;align-items:center;gap:20px}
+  .foot-meta{font-size:12px;letter-spacing:.06em;color:var(--mut2);line-height:2.1}
+  .foot-meta a{color:var(--mut)}.foot-meta a:hover{color:var(--ink)}
+  .back{font-family:var(--head);font-weight:600;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);display:inline-flex;align-items:center;gap:8px}
+  .back:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <a href="index.html" aria-label="Rastcar"><img class="wm" src="assets/wordmark-red.png" alt="RASTCAR"></a>
+  <div class="lang" id="lang">
+    <button class="lang-cur" type="button" aria-haspopup="true" aria-label="Idioma"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15.5 0 18M12 3c-2.6 2.5-2.6 15.5 0 18"/></svg><span id="langCur">PT</span></button>
+    <div class="menu-pop lang-menu">
+      <button type="button" data-lang="pt">Português</button>
+      <button type="button" data-lang="es">Español</button>
+      <button type="button" data-lang="en">English</button>
+      <button type="button" data-lang="he" lang="he">עברית</button>
+    </div>
+  </div>
+</header>
+
+<main class="doc">
+  <div class="eyebrow" data-i18n="pv.eyebrow">Proteção de dados · LGPD</div>
+  <h1 data-i18n="pv.h">Política de privacidade</h1>
+  <p class="intro" data-i18n="pv.intro">A Rastcar monitora a posição de veículos. Isso significa que tratamos dados sensíveis por natureza, e este documento explica exatamente o que coletamos, por que, por quanto tempo e o que você pode exigir de nós a qualquer momento.</p>
+  <p class="updated" data-i18n="pv.updated">Vigente desde 24 de julho de 2026 · Rastcar · CNPJ 10.142.559/0001-00</p>
+
+  <h2><i>01</i> <span data-i18n="pv.s1h">Quem é o controlador</span></h2>
+  <p data-i18n="pv.s1p">A Rastcar, inscrita no CNPJ 10.142.559/0001-00, com sede em Lorena, São Paulo, é a controladora dos dados pessoais descritos nesta política, nos termos da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados).</p>
+
+  <h2><i>02</i> <span data-i18n="pv.s2h">Que dados tratamos</span></h2>
+  <ul>
+    <li data-i18n="pv.s2a"><b>Dados de contato e cadastro.</b> Nome, CPF ou CNPJ, telefone, e-mail e endereço, informados por você na contratação.</li>
+    <li data-i18n="pv.s2b"><b>Dados do veículo.</b> Placa, marca, modelo, chassi e o identificador do equipamento instalado.</li>
+    <li data-i18n="pv.s2c"><b>Dados de localização.</b> Posição geográfica do veículo, histórico de rotas, paradas e velocidade, transmitidos pelo equipamento enquanto o contrato estiver ativo.</li>
+    <li data-i18n="pv.s2d"><b>Dados de telemetria.</b> Comportamento de condução, quilometragem, acionamentos e eventos do veículo, quando o equipamento contratado oferecer esse recurso.</li>
+    <li data-i18n="pv.s2e"><b>Registros de atendimento.</b> Histórico das conversas com a nossa equipe pelos canais oficiais.</li>
+  </ul>
+
+  <h2><i>03</i> <span data-i18n="pv.s3h">Para que usamos</span></h2>
+  <p data-i18n="pv.s3p1">Tratamos esses dados exclusivamente para prestar o serviço contratado: exibir a posição do veículo para você, operar a central de monitoramento, executar bloqueio remoto e cerca virtual quando acionados, emitir relatórios da sua frota, dar suporte técnico e cumprir obrigações legais e fiscais.</p>
+  <p data-i18n="pv.s3p2"><b>Não vendemos dados a ninguém.</b> Não usamos a sua localização para publicidade, perfilamento comercial ou qualquer finalidade estranha ao serviço.</p>
+
+  <h2><i>04</i> <span data-i18n="pv.s4h">Com que base legal</span></h2>
+  <ul>
+    <li data-i18n="pv.s4a"><b>Execução de contrato</b> (art. 7º, V da LGPD) para os dados necessários à prestação do serviço, incluindo localização e telemetria.</li>
+    <li data-i18n="pv.s4b"><b>Cumprimento de obrigação legal</b> (art. 7º, II) para dados fiscais e para atender requisição de autoridade competente.</li>
+    <li data-i18n="pv.s4c"><b>Consentimento</b> (art. 7º, I) para qualquer uso fora do que está descrito no item 03, sempre solicitado de forma separada e revogável.</li>
+  </ul>
+
+  <h2><i>05</i> <span data-i18n="pv.s5h">Com quem compartilhamos</span></h2>
+  <ul>
+    <li data-i18n="pv.s5a"><b>Nossa equipe de monitoramento</b>, no limite necessário para operar a central e responder a um acionamento.</li>
+    <li data-i18n="pv.s5b"><b>Fornecedores de tecnologia</b> que hospedam a plataforma de rastreamento e a infraestrutura de telecomunicações, contratados como operadores e obrigados contratualmente a esta mesma política.</li>
+    <li data-i18n="pv.s5c"><b>Autoridades públicas</b>, quando houver requisição legal, ordem judicial ou necessidade de apurar um crime contra o seu veículo.</li>
+    <li data-i18n="pv.s5d"><b>Terceiros indicados por você</b>, como seguradora ou despachante, apenas mediante o seu pedido expresso.</li>
+  </ul>
+
+  <h2><i>06</i> <span data-i18n="pv.s6h">Por quanto tempo guardamos</span></h2>
+  <p data-i18n="pv.s6p">O histórico de posição e telemetria é mantido enquanto o contrato estiver vigente e por até 12 meses após o seu encerramento, prazo em que ainda pode ser necessário para apurar sinistro, atender autoridade ou defender direitos em processo. Dados de cadastro e fiscais são mantidos pelos prazos exigidos pela legislação tributária e civil. Encerrados esses prazos, os dados são eliminados ou anonimizados.</p>
+
+  <h2><i>07</i> <span data-i18n="pv.s7h">Este site</span></h2>
+  <p data-i18n="pv.s7p">Este site não usa cookies de publicidade, não faz rastreamento de comportamento e não integra ferramentas de analytics de terceiros. A única informação guardada no seu navegador é o idioma escolhido, para que ele seja lembrado na próxima visita. Ela fica apenas no seu dispositivo e não é enviada a lugar nenhum.</p>
+
+  <h2><i>08</i> <span data-i18n="pv.s8h">Seus direitos</span></h2>
+  <p data-i18n="pv.s8p">A LGPD garante a você, a qualquer momento e sem custo, o direito de:</p>
+  <ul>
+    <li data-i18n="pv.s8a">confirmar se tratamos dados seus e obter acesso a eles;</li>
+    <li data-i18n="pv.s8b">corrigir dados incompletos, inexatos ou desatualizados;</li>
+    <li data-i18n="pv.s8c">pedir a anonimização, o bloqueio ou a eliminação de dados desnecessários ou tratados em desconformidade com a lei;</li>
+    <li data-i18n="pv.s8d">pedir a portabilidade dos seus dados a outro fornecedor;</li>
+    <li data-i18n="pv.s8e">revogar um consentimento que tenha dado;</li>
+    <li data-i18n="pv.s8f">saber com quais entidades públicas e privadas compartilhamos seus dados;</li>
+    <li data-i18n="pv.s8g">opor-se a um tratamento feito com base em outra hipótese que não o consentimento.</li>
+  </ul>
+
+  <h2><i>09</i> <span data-i18n="pv.s9h">Segurança</span></h2>
+  <p data-i18n="pv.s9p">O acesso à plataforma é individual e autenticado, e o acesso interno aos dados de localização é restrito às pessoas que precisam dele para operar o serviço. Se ocorrer um incidente de segurança capaz de acarretar risco relevante a você, comunicaremos você e a Autoridade Nacional de Proteção de Dados, conforme o art. 48 da LGPD.</p>
+
+  <h2><i>10</i> <span data-i18n="pv.s10h">Como falar conosco</span></h2>
+  <div class="box">
+    <p data-i18n="pv.s10p1">Para exercer qualquer um dos direitos acima, ou para tirar dúvidas sobre esta política, escreva para <a href="mailto:vendas@rastcar.com.br">vendas@rastcar.com.br</a> ou ligue para <a href="tel:+551231579090">(12) 3157-9090</a>.</p>
+    <p data-i18n="pv.s10p2">Respondemos toda solicitação de titular em até 15 dias. Se você não ficar satisfeito com a resposta, pode apresentar reclamação à Autoridade Nacional de Proteção de Dados.</p>
+  </div>
+
+  <h2><i>11</i> <span data-i18n="pv.s11h">Mudanças nesta política</span></h2>
+  <p data-i18n="pv.s11p">Se esta política mudar, a nova versão passa a valer a partir da data indicada no topo desta página. Alterações relevantes serão comunicadas pelos canais que você já usa para falar conosco.</p>
+</main>
+
+<footer>
+  <div class="foot-inner">
+    <a class="back" href="index.html" data-i18n="pv.back">← Voltar ao site</a>
+    <div class="foot-meta">
+      <a href="mailto:vendas@rastcar.com.br">vendas@rastcar.com.br</a> · (12) 3157-9090<br>
+      © 2026 Rastcar · CNPJ 10.142.559/0001-00 · <span data-i18n="f.cob">Cobertura nacional + América Latina</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // i18n (PT / ES / EN / HE) - mesmo mecanismo das demais paginas: dicionario por
+  // lingua, data-i18n, ?lang= na URL e memoria da escolha em localStorage rc_lang.
+  const I18N={
+    pt:{"pv.eyebrow":"Proteção de dados · LGPD","pv.h":"Política de privacidade","pv.intro":"A Rastcar monitora a posição de veículos. Isso significa que tratamos dados sensíveis por natureza, e este documento explica exatamente o que coletamos, por que, por quanto tempo e o que você pode exigir de nós a qualquer momento.","pv.updated":"Vigente desde 24 de julho de 2026 · Rastcar · CNPJ 10.142.559/0001-00","pv.s1h":"Quem é o controlador","pv.s1p":"A Rastcar, inscrita no CNPJ 10.142.559/0001-00, com sede em Lorena, São Paulo, é a controladora dos dados pessoais descritos nesta política, nos termos da Lei nº 13.709/2018 (Lei Geral de Proteção de Dados).","pv.s2h":"Que dados tratamos","pv.s2a":"<b>Dados de contato e cadastro.</b> Nome, CPF ou CNPJ, telefone, e-mail e endereço, informados por você na contratação.","pv.s2b":"<b>Dados do veículo.</b> Placa, marca, modelo, chassi e o identificador do equipamento instalado.","pv.s2c":"<b>Dados de localização.</b> Posição geográfica do veículo, histórico de rotas, paradas e velocidade, transmitidos pelo equipamento enquanto o contrato estiver ativo.","pv.s2d":"<b>Dados de telemetria.</b> Comportamento de condução, quilometragem, acionamentos e eventos do veículo, quando o equipamento contratado oferecer esse recurso.","pv.s2e":"<b>Registros de atendimento.</b> Histórico das conversas com a nossa equipe pelos canais oficiais.","pv.s3h":"Para que usamos","pv.s3p1":"Tratamos esses dados exclusivamente para prestar o serviço contratado: exibir a posição do veículo para você, operar a central de monitoramento, executar bloqueio remoto e cerca virtual quando acionados, emitir relatórios da sua frota, dar suporte técnico e cumprir obrigações legais e fiscais.","pv.s3p2":"<b>Não vendemos dados a ninguém.</b> Não usamos a sua localização para publicidade, perfilamento comercial ou qualquer finalidade estranha ao serviço.","pv.s4h":"Com que base legal","pv.s4a":"<b>Execução de contrato</b> (art. 7º, V da LGPD) para os dados necessários à prestação do serviço, incluindo localização e telemetria.","pv.s4b":"<b>Cumprimento de obrigação legal</b> (art. 7º, II) para dados fiscais e para atender requisição de autoridade competente.","pv.s4c":"<b>Consentimento</b> (art. 7º, I) para qualquer uso fora do que está descrito no item 03, sempre solicitado de forma separada e revogável.","pv.s5h":"Com quem compartilhamos","pv.s5a":"<b>Nossa equipe de monitoramento</b>, no limite necessário para operar a central e responder a um acionamento.","pv.s5b":"<b>Fornecedores de tecnologia</b> que hospedam a plataforma de rastreamento e a infraestrutura de telecomunicações, contratados como operadores e obrigados contratualmente a esta mesma política.","pv.s5c":"<b>Autoridades públicas</b>, quando houver requisição legal, ordem judicial ou necessidade de apurar um crime contra o seu veículo.","pv.s5d":"<b>Terceiros indicados por você</b>, como seguradora ou despachante, apenas mediante o seu pedido expresso.","pv.s6h":"Por quanto tempo guardamos","pv.s6p":"O histórico de posição e telemetria é mantido enquanto o contrato estiver vigente e por até 12 meses após o seu encerramento, prazo em que ainda pode ser necessário para apurar sinistro, atender autoridade ou defender direitos em processo. Dados de cadastro e fiscais são mantidos pelos prazos exigidos pela legislação tributária e civil. Encerrados esses prazos, os dados são eliminados ou anonimizados.","pv.s7h":"Este site","pv.s7p":"Este site não usa cookies de publicidade, não faz rastreamento de comportamento e não integra ferramentas de analytics de terceiros. A única informação guardada no seu navegador é o idioma escolhido, para que ele seja lembrado na próxima visita. Ela fica apenas no seu dispositivo e não é enviada a lugar nenhum.","pv.s8h":"Seus direitos","pv.s8p":"A LGPD garante a você, a qualquer momento e sem custo, o direito de:","pv.s8a":"confirmar se tratamos dados seus e obter acesso a eles;","pv.s8b":"corrigir dados incompletos, inexatos ou desatualizados;","pv.s8c":"pedir a anonimização, o bloqueio ou a eliminação de dados desnecessários ou tratados em desconformidade com a lei;","pv.s8d":"pedir a portabilidade dos seus dados a outro fornecedor;","pv.s8e":"revogar um consentimento que tenha dado;","pv.s8f":"saber com quais entidades públicas e privadas compartilhamos seus dados;","pv.s8g":"opor-se a um tratamento feito com base em outra hipótese que não o consentimento.","pv.s9h":"Segurança","pv.s9p":"O acesso à plataforma é individual e autenticado, e o acesso interno aos dados de localização é restrito às pessoas que precisam dele para operar o serviço. Se ocorrer um incidente de segurança capaz de acarretar risco relevante a você, comunicaremos você e a Autoridade Nacional de Proteção de Dados, conforme o art. 48 da LGPD.","pv.s10h":"Como falar conosco","pv.s10p1":"Para exercer qualquer um dos direitos acima, ou para tirar dúvidas sobre esta política, escreva para <a href=\"mailto:vendas@rastcar.com.br\">vendas@rastcar.com.br</a> ou ligue para <a href=\"tel:+551231579090\">(12) 3157-9090</a>.","pv.s10p2":"Respondemos toda solicitação de titular em até 15 dias. Se você não ficar satisfeito com a resposta, pode apresentar reclamação à Autoridade Nacional de Proteção de Dados.","pv.s11h":"Mudanças nesta política","pv.s11p":"Se esta política mudar, a nova versão passa a valer a partir da data indicada no topo desta página. Alterações relevantes serão comunicadas pelos canais que você já usa para falar conosco.","pv.back":"← Voltar ao site","f.cob":"Cobertura nacional + América Latina"},
+    es:{"pv.eyebrow":"Protección de datos · LGPD","pv.h":"Política de privacidad","pv.intro":"Rastcar monitorea la posición de vehículos. Eso significa que tratamos datos sensibles por naturaleza, y este documento explica exactamente qué recogemos, por qué, por cuánto tiempo y qué puedes exigirnos en cualquier momento.","pv.updated":"Vigente desde el 24 de julio de 2026 · Rastcar · CNPJ 10.142.559/0001-00","pv.s1h":"Quién es el controlador","pv.s1p":"Rastcar, inscrita en el CNPJ 10.142.559/0001-00, con sede en Lorena, São Paulo, es la controladora de los datos personales descritos en esta política, en los términos de la Ley nº 13.709/2018 (Ley General de Protección de Datos de Brasil).","pv.s2h":"Qué datos tratamos","pv.s2a":"<b>Datos de contacto y registro.</b> Nombre, CPF o CNPJ, teléfono, e-mail y dirección, informados por ti en la contratación.","pv.s2b":"<b>Datos del vehículo.</b> Patente, marca, modelo, chasis y el identificador del equipo instalado.","pv.s2c":"<b>Datos de localización.</b> Posición geográfica del vehículo, historial de rutas, paradas y velocidad, transmitidos por el equipo mientras el contrato esté vigente.","pv.s2d":"<b>Datos de telemetría.</b> Comportamiento de conducción, kilometraje, accionamientos y eventos del vehículo, cuando el equipo contratado ofrezca ese recurso.","pv.s2e":"<b>Registros de atención.</b> Historial de las conversaciones con nuestro equipo por los canales oficiales.","pv.s3h":"Para qué los usamos","pv.s3p1":"Tratamos esos datos exclusivamente para prestar el servicio contratado: mostrarte la posición del vehículo, operar la central de monitoreo, ejecutar bloqueo remoto y cerca virtual cuando sean accionados, emitir informes de tu flota, dar soporte técnico y cumplir obligaciones legales y fiscales.","pv.s3p2":"<b>No vendemos datos a nadie.</b> No usamos tu localización para publicidad, perfilamiento comercial ni ninguna finalidad ajena al servicio.","pv.s4h":"Con qué base legal","pv.s4a":"<b>Ejecución de contrato</b> (art. 7º, V de la LGPD) para los datos necesarios para la prestación del servicio, incluidos localización y telemetría.","pv.s4b":"<b>Cumplimiento de obligación legal</b> (art. 7º, II) para datos fiscales y para atender un requerimiento de autoridad competente.","pv.s4c":"<b>Consentimiento</b> (art. 7º, I) para cualquier uso fuera de lo descrito en el punto 03, siempre solicitado de forma separada y revocable.","pv.s5h":"Con quién compartimos","pv.s5a":"<b>Nuestro equipo de monitoreo</b>, en la medida necesaria para operar la central y responder a un accionamiento.","pv.s5b":"<b>Proveedores de tecnología</b> que alojan la plataforma de rastreo y la infraestructura de telecomunicaciones, contratados como operadores y obligados contractualmente a esta misma política.","pv.s5c":"<b>Autoridades públicas</b>, cuando haya requerimiento legal, orden judicial o necesidad de investigar un delito contra tu vehículo.","pv.s5d":"<b>Terceros indicados por ti</b>, como aseguradora o gestor, solo mediante tu pedido expreso.","pv.s6h":"Por cuánto tiempo los guardamos","pv.s6p":"El historial de posición y telemetría se mantiene mientras el contrato esté vigente y hasta 12 meses después de su término, plazo en el que aún puede ser necesario para investigar un siniestro, atender a una autoridad o defender derechos en un proceso. Los datos de registro y fiscales se mantienen por los plazos exigidos por la legislación tributaria y civil. Cumplidos esos plazos, los datos son eliminados o anonimizados.","pv.s7h":"Este sitio","pv.s7p":"Este sitio no usa cookies de publicidad, no hace rastreo de comportamiento y no integra herramientas de analytics de terceros. La única información guardada en tu navegador es el idioma elegido, para que sea recordado en la próxima visita. Queda solo en tu dispositivo y no se envía a ningún lugar.","pv.s8h":"Tus derechos","pv.s8p":"La LGPD te garantiza, en cualquier momento y sin costo, el derecho de:","pv.s8a":"confirmar si tratamos datos tuyos y obtener acceso a ellos;","pv.s8b":"corregir datos incompletos, inexactos o desactualizados;","pv.s8c":"pedir la anonimización, el bloqueo o la eliminación de datos innecesarios o tratados en desacuerdo con la ley;","pv.s8d":"pedir la portabilidad de tus datos a otro proveedor;","pv.s8e":"revocar un consentimiento que hayas dado;","pv.s8f":"saber con qué entidades públicas y privadas compartimos tus datos;","pv.s8g":"oponerte a un tratamiento hecho con base en otra hipótesis que no sea el consentimiento.","pv.s9h":"Seguridad","pv.s9p":"El acceso a la plataforma es individual y autenticado, y el acceso interno a los datos de localización está restringido a las personas que lo necesitan para operar el servicio. Si ocurre un incidente de seguridad capaz de acarrear un riesgo relevante para ti, te comunicaremos a ti y a la Autoridad Nacional de Protección de Datos, conforme al art. 48 de la LGPD.","pv.s10h":"Cómo hablar con nosotros","pv.s10p1":"Para ejercer cualquiera de los derechos anteriores, o para resolver dudas sobre esta política, escribe a <a href=\"mailto:vendas@rastcar.com.br\">vendas@rastcar.com.br</a> o llama al <a href=\"tel:+551231579090\">(12) 3157-9090</a>.","pv.s10p2":"Respondemos toda solicitud de titular en hasta 15 días. Si no quedas satisfecho con la respuesta, puedes presentar una reclamación ante la Autoridad Nacional de Protección de Datos.","pv.s11h":"Cambios en esta política","pv.s11p":"Si esta política cambia, la nueva versión pasa a valer a partir de la fecha indicada en la parte superior de esta página. Los cambios relevantes serán comunicados por los canales que ya usas para hablar con nosotros.","pv.back":"← Volver al sitio","f.cob":"Cobertura nacional + América Latina"},
+    en:{"pv.eyebrow":"Data protection · LGPD","pv.h":"Privacy policy","pv.intro":"Rastcar monitors the position of vehicles. That means we handle data that is sensitive by nature, and this document explains exactly what we collect, why, for how long and what you can demand from us at any time.","pv.updated":"In force since 24 July 2026 · Rastcar · CNPJ 10.142.559/0001-00","pv.s1h":"Who the controller is","pv.s1p":"Rastcar, registered under CNPJ 10.142.559/0001-00, headquartered in Lorena, São Paulo, is the controller of the personal data described in this policy, under Brazilian Law nº 13.709/2018 (the General Data Protection Law).","pv.s2h":"What data we handle","pv.s2a":"<b>Contact and account data.</b> Name, CPF or CNPJ, phone, e-mail and address, provided by you when you sign the contract.","pv.s2b":"<b>Vehicle data.</b> Licence plate, make, model, chassis and the identifier of the installed equipment.","pv.s2c":"<b>Location data.</b> The vehicle's geographic position, route history, stops and speed, transmitted by the equipment while the contract is active.","pv.s2d":"<b>Telemetry data.</b> Driving behaviour, mileage, activations and vehicle events, when the contracted equipment offers that feature.","pv.s2e":"<b>Support records.</b> History of the conversations with our team through the official channels.","pv.s3h":"What we use it for","pv.s3p1":"We handle this data exclusively to deliver the contracted service: showing you the position of the vehicle, running the monitoring center, executing remote immobilization and geofencing when triggered, issuing reports on your fleet, providing technical support and complying with legal and tax obligations.","pv.s3p2":"<b>We do not sell data to anyone.</b> We do not use your location for advertising, commercial profiling or any purpose unrelated to the service.","pv.s4h":"On what legal basis","pv.s4a":"<b>Performance of a contract</b> (art. 7, V of the LGPD) for the data required to deliver the service, including location and telemetry.","pv.s4b":"<b>Compliance with a legal obligation</b> (art. 7, II) for tax data and to answer a request from a competent authority.","pv.s4c":"<b>Consent</b> (art. 7, I) for any use beyond what is described in item 03, always requested separately and revocable.","pv.s5h":"Who we share it with","pv.s5a":"<b>Our monitoring team</b>, only as far as needed to run the center and respond to an alert.","pv.s5b":"<b>Technology suppliers</b> that host the tracking platform and the telecom infrastructure, engaged as processors and contractually bound to this same policy.","pv.s5c":"<b>Public authorities</b>, when there is a legal request, a court order or the need to investigate a crime against your vehicle.","pv.s5d":"<b>Third parties named by you</b>, such as an insurer or a broker, only at your express request.","pv.s6h":"How long we keep it","pv.s6p":"Position and telemetry history is kept while the contract is in force and for up to 12 months after it ends, a period in which it may still be needed to investigate a claim, answer an authority or defend rights in a proceeding. Account and tax data are kept for the periods required by tax and civil law. Once those periods end, the data is deleted or anonymized.","pv.s7h":"This website","pv.s7p":"This website uses no advertising cookies, does no behavioural tracking and integrates no third party analytics tools. The only information stored in your browser is the language you chose, so that it is remembered on your next visit. It stays on your device only and is never sent anywhere.","pv.s8h":"Your rights","pv.s8p":"The LGPD grants you, at any time and free of charge, the right to:","pv.s8a":"confirm whether we handle data about you and obtain access to it;","pv.s8b":"correct incomplete, inaccurate or outdated data;","pv.s8c":"request the anonymization, blocking or deletion of data that is unnecessary or handled in breach of the law;","pv.s8d":"request the portability of your data to another supplier;","pv.s8e":"withdraw a consent you have given;","pv.s8f":"know which public and private entities we share your data with;","pv.s8g":"object to processing carried out on a basis other than consent.","pv.s9h":"Security","pv.s9p":"Access to the platform is individual and authenticated, and internal access to location data is restricted to the people who need it to run the service. If a security incident occurs that may bring relevant risk to you, we will notify you and the Brazilian National Data Protection Authority, under art. 48 of the LGPD.","pv.s10h":"How to talk to us","pv.s10p1":"To exercise any of the rights above, or to ask a question about this policy, write to <a href=\"mailto:vendas@rastcar.com.br\">vendas@rastcar.com.br</a> or call <a href=\"tel:+551231579090\">(12) 3157-9090</a>.","pv.s10p2":"We answer every data subject request within 15 days. If you are not satisfied with the answer, you may file a complaint with the Brazilian National Data Protection Authority.","pv.s11h":"Changes to this policy","pv.s11p":"If this policy changes, the new version applies from the date shown at the top of this page. Relevant changes will be announced through the channels you already use to talk to us.","pv.back":"← Back to the site","f.cob":"Nationwide coverage + Latin America"},
+    he:{"pv.eyebrow":"הגנת מידע · LGPD","pv.h":"מדיניות פרטיות","pv.intro":"Rastcar עוקבת אחר מיקום של רכבים. משמעות הדבר היא שאנחנו מטפלים במידע רגיש מטבעו, והמסמך הזה מסביר בדיוק מה אנחנו אוספים, למה, לכמה זמן ומה אתם רשאים לדרוש מאיתנו בכל רגע.","pv.updated":"בתוקף מיום 24 ביולי 2026 · Rastcar · CNPJ 10.142.559/0001-00","pv.s1h":"מיהו בעל השליטה במידע","pv.s1p":"Rastcar, הרשומה תחת CNPJ 10.142.559/0001-00, שמשרדה בעיר Lorena, São Paulo, היא בעלת השליטה במידע האישי המתואר במדיניות זו, בהתאם לחוק הברזילאי מספר 13.709/2018 (החוק הכללי להגנת מידע, LGPD).","pv.s2h":"באיזה מידע אנחנו מטפלים","pv.s2a":"<b>פרטי קשר ורישום.</b> שם, CPF או CNPJ, טלפון, דואר אלקטרוני וכתובת, שנמסרו על ידכם בעת ההתקשרות.","pv.s2b":"<b>פרטי הרכב.</b> מספר רישוי, יצרן, דגם, מספר שלדה והמזהה של הציוד שהותקן.","pv.s2c":"<b>נתוני מיקום.</b> המיקום הגאוגרפי של הרכב, היסטוריית מסלולים, עצירות ומהירות, המשודרים על ידי הציוד כל עוד ההסכם בתוקף.","pv.s2d":"<b>נתוני טלמטריה.</b> התנהגות נהיגה, קילומטראז', הפעלות ואירועים ברכב, כאשר הציוד שנרכש מציע יכולת זו.","pv.s2e":"<b>רישומי שירות.</b> היסטוריית השיחות עם הצוות שלנו בערוצים הרשמיים.","pv.s3h":"למה אנחנו משתמשים בו","pv.s3p1":"אנחנו מטפלים במידע הזה אך ורק כדי לספק את השירות שנרכש: להציג לכם את מיקום הרכב, להפעיל את מוקד הניטור, לבצע חסימה מרחוק וגדר וירטואלית כאשר הן מופעלות, להפיק דוחות על הצי שלכם, לתת תמיכה טכנית ולעמוד בחובות חוקיות ובחובות מס.","pv.s3p2":"<b>אנחנו לא מוכרים מידע לאף אחד.</b> אנחנו לא משתמשים במיקום שלכם לפרסום, לפרופיל מסחרי או לכל מטרה שאינה קשורה לשירות.","pv.s4h":"על איזה בסיס חוקי","pv.s4a":"<b>ביצוע הסכם</b> (סעיף 7, V ל־LGPD) עבור המידע הדרוש לאספקת השירות, לרבות מיקום וטלמטריה.","pv.s4b":"<b>עמידה בחובה חוקית</b> (סעיף 7, II) עבור נתוני מס ולמענה לדרישת רשות מוסמכת.","pv.s4c":"<b>הסכמה</b> (סעיף 7, I) לכל שימוש מעבר למתואר בסעיף 03, תמיד בבקשה נפרדת וניתנת לביטול.","pv.s5h":"עם מי אנחנו משתפים","pv.s5a":"<b>צוות הניטור שלנו</b>, במידה הדרושה בלבד להפעלת המוקד ולמענה לאירוע.","pv.s5b":"<b>ספקי טכנולוגיה</b> המארחים את פלטפורמת המעקב ואת תשתית התקשורת, המועסקים כמעבדי מידע ומחויבים חוזית לאותה מדיניות.","pv.s5c":"<b>רשויות ציבוריות</b>, כאשר קיימת דרישה חוקית, צו שיפוטי או צורך בחקירת עבירה נגד הרכב שלכם.","pv.s5d":"<b>צדדים שלישיים שציינתם</b>, כגון חברת ביטוח או סוכן, רק לפי בקשתכם המפורשת.","pv.s6h":"לכמה זמן אנחנו שומרים","pv.s6p":"היסטוריית המיקום והטלמטריה נשמרת כל עוד ההסכם בתוקף ועד 12 חודשים לאחר סיומו, תקופה שבה היא עשויה עדיין להידרש לבירור אירוע, למענה לרשות או להגנה על זכויות בהליך משפטי. נתוני רישום ונתוני מס נשמרים לתקופות הנדרשות בחקיקת המס ובחקיקה האזרחית. בתום התקופות הללו המידע נמחק או עובר אנונימיזציה.","pv.s7h":"האתר הזה","pv.s7p":"האתר הזה אינו משתמש בעוגיות פרסום, אינו מבצע מעקב התנהגות ואינו משלב כלי אנליטיקה של צד שלישי. המידע היחיד שנשמר בדפדפן שלכם הוא השפה שבחרתם, כדי שתיזכר בביקור הבא. הוא נשאר רק במכשיר שלכם ואינו נשלח לשום מקום.","pv.s8h":"הזכויות שלכם","pv.s8p":"ה־LGPD מעניק לכם, בכל רגע וללא עלות, את הזכות:","pv.s8a":"לוודא אם אנחנו מטפלים במידע עליכם ולקבל אליו גישה;","pv.s8b":"לתקן מידע חלקי, שגוי או לא מעודכן;","pv.s8c":"לבקש אנונימיזציה, חסימה או מחיקה של מידע מיותר או שטופל בניגוד לחוק;","pv.s8d":"לבקש את ניידות המידע שלכם לספק אחר;","pv.s8e":"לבטל הסכמה שנתתם;","pv.s8f":"לדעת עם אילו גופים ציבוריים ופרטיים אנחנו משתפים את המידע שלכם;","pv.s8g":"להתנגד לטיפול המבוסס על עילה אחרת שאינה הסכמה.","pv.s9h":"אבטחה","pv.s9p":"הגישה לפלטפורמה היא אישית ומאומתת, והגישה הפנימית לנתוני המיקום מוגבלת לאנשים הזקוקים לה להפעלת השירות. אם יתרחש אירוע אבטחה שעלול להסב לכם סיכון משמעותי, נודיע לכם ולרשות הלאומית להגנת מידע של ברזיל, בהתאם לסעיף 48 ל־LGPD.","pv.s10h":"איך לדבר איתנו","pv.s10p1":"למימוש כל אחת מהזכויות שלמעלה, או לשאלות על מדיניות זו, כתבו אל <a href=\"mailto:vendas@rastcar.com.br\">vendas@rastcar.com.br</a> או התקשרו אל <a href=\"tel:+551231579090\">(12) 3157-9090</a>.","pv.s10p2":"אנחנו עונים לכל פנייה של בעל מידע בתוך 15 ימים. אם התשובה אינה מספקת אתכם, תוכלו להגיש תלונה לרשות הלאומית להגנת מידע של ברזיל.","pv.s11h":"שינויים במדיניות זו","pv.s11p":"אם מדיניות זו תשתנה, הגרסה החדשה תחול מהתאריך המצוין בראש העמוד. שינויים מהותיים יימסרו בערוצים שבהם אתם כבר משתמשים כדי לדבר איתנו.","pv.back":"← חזרה לאתר","f.cob":"כיסוי ארצי + אמריקה הלטינית"}
+  };
+  const ABBR={pt:"PT",es:"ES",en:"EN",he:"עב"};
+  const TITLE={pt:'RASTCAR · Política de privacidade',es:'RASTCAR · Política de privacidad',en:'RASTCAR · Privacy policy',he:'RASTCAR · מדיניות פרטיות'};
+  function applyLang(l){
+    const d=I18N[l]||I18N.pt;
+    document.documentElement.lang=(l==='pt'?'pt-BR':l);
+    document.documentElement.dir=(l==='he'?'rtl':'ltr');
+    document.querySelectorAll('[data-i18n]').forEach(el=>{const v=d[el.dataset.i18n];if(v!=null)el.innerHTML=v;});
+    document.getElementById('langCur').textContent=ABBR[l];
+    document.querySelectorAll('[data-lang]').forEach(b=>b.classList.toggle('active',b.dataset.lang===l));
+    document.title=TITLE[l]||document.title;
+    try{localStorage.setItem('rc_lang',l);}catch(e){}
+  }
+  const langWrap=document.getElementById('lang');
+  langWrap.querySelector('.lang-cur').addEventListener('click',e=>{e.stopPropagation();langWrap.classList.toggle('open');});
+  document.querySelectorAll('[data-lang]').forEach(b=>b.addEventListener('click',()=>{applyLang(b.dataset.lang);langWrap.classList.remove('open');}));
+  document.addEventListener('click',()=>langWrap.classList.remove('open'));
+  applyLang(new URLSearchParams(location.search).get('lang')||localStorage.getItem('rc_lang')||'pt');
+</script>
+
+</body>
+</html>
